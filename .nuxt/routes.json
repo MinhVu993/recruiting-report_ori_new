@@ -2,109 +2,103 @@
   {
     "name": "create-candidate",
     "path": "/create-candidate",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/create-candidate.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\create-candidate.vue",
     "chunkName": "pages/create-candidate"
   },
   {
     "name": "demand",
     "path": "/demand",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/demand.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\demand.vue",
     "chunkName": "pages/demand"
   },
   {
     "name": "deptcontrol",
     "path": "/deptcontrol",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/deptcontrol.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\deptcontrol.vue",
     "chunkName": "pages/deptcontrol"
   },
   {
     "name": "intern",
     "path": "/intern",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/intern.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\intern.vue",
     "chunkName": "pages/intern"
-  },
-  {
-    "name": "poh",
-    "path": "/poh",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/poh.vue",
-    "chunkName": "pages/poh"
   },
   {
     "name": "recruiting-report",
     "path": "/recruiting-report",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/recruiting-report.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\recruiting-report.vue",
     "chunkName": "pages/recruiting-report"
   },
   {
     "name": "resign",
     "path": "/resign",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/resign.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\resign.vue",
     "chunkName": "pages/resign"
   },
   {
     "name": "resign-report",
     "path": "/resign-report",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/resign-report.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\resign-report.vue",
     "chunkName": "pages/resign-report"
   },
   {
     "name": "template-print-1",
     "path": "/template-print/1",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/template-print/1.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\1.vue",
     "chunkName": "pages/template-print/1"
   },
   {
     "name": "template-print-2-cn",
     "path": "/template-print/2-cn",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/template-print/2-cn.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\2-cn.vue",
     "chunkName": "pages/template-print/2-cn"
   },
   {
     "name": "template-print-2-sf",
     "path": "/template-print/2-sf",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/template-print/2-sf.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\2-sf.vue",
     "chunkName": "pages/template-print/2-sf"
   },
   {
     "name": "template-print-3",
     "path": "/template-print/3",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/template-print/3.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\3.vue",
     "chunkName": "pages/template-print/3"
   },
   {
     "name": "template-print-4",
     "path": "/template-print/4",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/template-print/4.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\4.vue",
     "chunkName": "pages/template-print/4"
   },
   {
     "name": "template-print-5",
     "path": "/template-print/5",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/template-print/5.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\5.vue",
     "chunkName": "pages/template-print/5"
   },
   {
     "name": "template-print-bqt",
     "path": "/template-print/bqt",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/template-print/bqt.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\bqt.vue",
     "chunkName": "pages/template-print/bqt"
   },
   {
     "name": "template-print-hires",
     "path": "/template-print/hires",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/template-print/hires.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\hires.vue",
     "chunkName": "pages/template-print/hires"
   },
   {
     "name": "template-print-resign",
     "path": "/template-print/resign",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/template-print/resign.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\resign.vue",
     "chunkName": "pages/template-print/resign"
   },
   {
     "name": "index",
     "path": "/",
-    "component": "/media/gmo021-admin/VMBK/build/HR/recruiting-report_ori/pages/index.vue",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\index.vue",
     "chunkName": "pages/index"
   }
 ]

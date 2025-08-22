@@ -4,24 +4,23 @@ import { normalizeURL, decode } from 'ufo'
 import { interopDefault } from './utils'
 import scrollBehavior from './router.scrollBehavior.js'
 
-const _4c67c150 = () => interopDefault(import('../pages/create-candidate.vue' /* webpackChunkName: "pages/create-candidate" */))
-const _3b7df0b1 = () => interopDefault(import('../pages/demand.vue' /* webpackChunkName: "pages/demand" */))
-const _548e2582 = () => interopDefault(import('../pages/deptcontrol.vue' /* webpackChunkName: "pages/deptcontrol" */))
-const _2d12fc10 = () => interopDefault(import('../pages/intern.vue' /* webpackChunkName: "pages/intern" */))
-const _58c04c5a = () => interopDefault(import('../pages/poh.vue' /* webpackChunkName: "pages/poh" */))
-const _15ee1547 = () => interopDefault(import('../pages/recruiting-report.vue' /* webpackChunkName: "pages/recruiting-report" */))
-const _bad3f354 = () => interopDefault(import('../pages/resign.vue' /* webpackChunkName: "pages/resign" */))
-const _1a8d543b = () => interopDefault(import('../pages/resign-report.vue' /* webpackChunkName: "pages/resign-report" */))
-const _2ef2d362 = () => interopDefault(import('../pages/template-print/1.vue' /* webpackChunkName: "pages/template-print/1" */))
-const _f40c4876 = () => interopDefault(import('../pages/template-print/2-cn.vue' /* webpackChunkName: "pages/template-print/2-cn" */))
-const _be52aca6 = () => interopDefault(import('../pages/template-print/2-sf.vue' /* webpackChunkName: "pages/template-print/2-sf" */))
-const _2f0f0264 = () => interopDefault(import('../pages/template-print/3.vue' /* webpackChunkName: "pages/template-print/3" */))
-const _2f1d19e5 = () => interopDefault(import('../pages/template-print/4.vue' /* webpackChunkName: "pages/template-print/4" */))
-const _2f2b3166 = () => interopDefault(import('../pages/template-print/5.vue' /* webpackChunkName: "pages/template-print/5" */))
-const _60953614 = () => interopDefault(import('../pages/template-print/bqt.vue' /* webpackChunkName: "pages/template-print/bqt" */))
-const _3375f0a0 = () => interopDefault(import('../pages/template-print/hires.vue' /* webpackChunkName: "pages/template-print/hires" */))
-const _468dbb8f = () => interopDefault(import('../pages/template-print/resign.vue' /* webpackChunkName: "pages/template-print/resign" */))
-const _7f8e4f5c = () => interopDefault(import('../pages/index.vue' /* webpackChunkName: "pages/index" */))
+const _15efc9b0 = () => interopDefault(import('..\\pages\\create-candidate.vue' /* webpackChunkName: "pages/create-candidate" */))
+const _18ea2909 = () => interopDefault(import('..\\pages\\demand.vue' /* webpackChunkName: "pages/demand" */))
+const _202f642a = () => interopDefault(import('..\\pages\\deptcontrol.vue' /* webpackChunkName: "pages/deptcontrol" */))
+const _723a8b60 = () => interopDefault(import('..\\pages\\intern.vue' /* webpackChunkName: "pages/intern" */))
+const _5e3fb5ef = () => interopDefault(import('..\\pages\\recruiting-report.vue' /* webpackChunkName: "pages/recruiting-report" */))
+const _fffb82a4 = () => interopDefault(import('..\\pages\\resign.vue' /* webpackChunkName: "pages/resign" */))
+const _fa4cee3a = () => interopDefault(import('..\\pages\\resign-report.vue' /* webpackChunkName: "pages/resign-report" */))
+const _e4c8ceee = () => interopDefault(import('..\\pages\\template-print\\1.vue' /* webpackChunkName: "pages/template-print/1" */))
+const _1ff0b13e = () => interopDefault(import('..\\pages\\template-print\\2-cn.vue' /* webpackChunkName: "pages/template-print/2-cn" */))
+const _3acd7f26 = () => interopDefault(import('..\\pages\\template-print\\2-sf.vue' /* webpackChunkName: "pages/template-print/2-sf" */))
+const _e49070ea = () => interopDefault(import('..\\pages\\template-print\\3.vue' /* webpackChunkName: "pages/template-print/3" */))
+const _e47441e8 = () => interopDefault(import('..\\pages\\template-print\\4.vue' /* webpackChunkName: "pages/template-print/4" */))
+const _e45812e6 = () => interopDefault(import('..\\pages\\template-print\\5.vue' /* webpackChunkName: "pages/template-print/5" */))
+const _27417c5d = () => interopDefault(import('..\\pages\\template-print\\bqt.vue' /* webpackChunkName: "pages/template-print/bqt" */))
+const _e9ae3d52 = () => interopDefault(import('..\\pages\\template-print\\hires.vue' /* webpackChunkName: "pages/template-print/hires" */))
+const _3e2516c8 = () => interopDefault(import('..\\pages\\template-print\\resign.vue' /* webpackChunkName: "pages/template-print/resign" */))
+const _1be4a7f8 = () => interopDefault(import('..\\pages\\index.vue' /* webpackChunkName: "pages/index" */))
 
 const emptyFn = () => {}
 
@@ -36,75 +35,71 @@ export const routerOptions = {
 
   routes: [{
     path: "/create-candidate",
-    component: _4c67c150,
+    component: _15efc9b0,
     name: "create-candidate"
   }, {
     path: "/demand",
-    component: _3b7df0b1,
+    component: _18ea2909,
     name: "demand"
   }, {
     path: "/deptcontrol",
-    component: _548e2582,
+    component: _202f642a,
     name: "deptcontrol"
   }, {
     path: "/intern",
-    component: _2d12fc10,
+    component: _723a8b60,
     name: "intern"
   }, {
-    path: "/poh",
-    component: _58c04c5a,
-    name: "poh"
-  }, {
     path: "/recruiting-report",
-    component: _15ee1547,
+    component: _5e3fb5ef,
     name: "recruiting-report"
   }, {
     path: "/resign",
-    component: _bad3f354,
+    component: _fffb82a4,
     name: "resign"
   }, {
     path: "/resign-report",
-    component: _1a8d543b,
+    component: _fa4cee3a,
     name: "resign-report"
   }, {
     path: "/template-print/1",
-    component: _2ef2d362,
+    component: _e4c8ceee,
     name: "template-print-1"
   }, {
     path: "/template-print/2-cn",
-    component: _f40c4876,
+    component: _1ff0b13e,
     name: "template-print-2-cn"
   }, {
     path: "/template-print/2-sf",
-    component: _be52aca6,
+    component: _3acd7f26,
     name: "template-print-2-sf"
   }, {
     path: "/template-print/3",
-    component: _2f0f0264,
+    component: _e49070ea,
     name: "template-print-3"
   }, {
     path: "/template-print/4",
-    component: _2f1d19e5,
+    component: _e47441e8,
     name: "template-print-4"
   }, {
     path: "/template-print/5",
-    component: _2f2b3166,
+    component: _e45812e6,
     name: "template-print-5"
   }, {
     path: "/template-print/bqt",
-    component: _60953614,
+    component: _27417c5d,
     name: "template-print-bqt"
   }, {
     path: "/template-print/hires",
-    component: _3375f0a0,
+    component: _e9ae3d52,
     name: "template-print-hires"
   }, {
     path: "/template-print/resign",
-    component: _468dbb8f,
+    component: _3e2516c8,
     name: "template-print-resign"
   }, {
     path: "/",
-    component: _7f8e4f5c,
+    component: _1be4a7f8,
     name: "index"
   }],
 

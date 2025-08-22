@@ -228,6 +228,9 @@
 import dayjs from "dayjs";
 import * as XLSX from 'xlsx';
 export default {
+       head: {
+        title: 'Resign Report'
+    },
     data() {
         return {
             api: 'http://gmo021.cansportsvg.com/api/vg-recuitingReport/',

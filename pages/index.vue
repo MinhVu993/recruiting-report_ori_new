@@ -65,68 +65,71 @@
                                         <template>
                                             <v-tooltip bottom>
                                                 <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn block color="indigo" class="mb-2" dark small v-bind="attrs" v-on="on" @click="navigateJobapp(item)">
-                                                        <v-icon left>mdi-file-document-outline</v-icon>
-                                                        {{ $t("Appication form") }}
-                                                    </v-btn>
-                                                </template>
-                                                <span>{{ $t("Appication form") }}</span>
-                                            </v-tooltip>
-                                            <v-tooltip bottom>
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-btn block color="red darken-1" dark small class="mb-2" v-bind="attrs"
-                                                    v-on="on" @click="navigateToResignForm(item)">
-                                                    <v-icon left>mdi-logout</v-icon>
-                                                    {{ $t("Return to company record") }}
+                                                    <v-btn block color="indigo" class="mb-2" dark small
+                                                    v-bind="attrs" v-on="on" @click="navigateJobapp(item)">
+                                                    <v-icon left>mdi-file-document-outline</v-icon>
+                                                    {{ $t("Appication form") }}
                                                 </v-btn>
                                             </template>
-                                            <span>{{ $t("Return to company record") }}</span>
+                                            <span>{{ $t("Appication form") }}</span>
                                         </v-tooltip>
                                         <v-tooltip bottom>
                                             <template v-slot:activator="{ on, attrs }">
-                                                <v-btn block color="teal" small dark class="mb-2" v-bind="attrs"
-                                                v-on="on" @click="navigateSf(item)">
-                                                <v-icon left>mdi-account-tie</v-icon>
-                                                {{ $t("Interview record (Leader/staff)") }}
+                                                <v-btn block color="red darken-1" dark small class="mb-2"
+                                                v-bind="attrs" v-on="on"
+                                                @click="navigateToResignForm(item)">
+                                                <v-icon left>mdi-logout</v-icon>
+                                                {{ $t("Return to company record") }}
                                             </v-btn>
                                         </template>
-                                        <span>{{ $t("Interview record (Leader/staff)") }}</span>
+                                        <span>{{ $t("Return to company record") }}</span>
                                     </v-tooltip>
                                     <v-tooltip bottom>
                                         <template v-slot:activator="{ on, attrs }">
-                                            <v-btn block color="blue darken-1" small dark class="mb-2" v-bind="attrs"
-                                            v-on="on" @click="navigateToSelectionRecordForm(item)">
-                                            <v-icon left>mdi-account-group</v-icon>
-                                            {{ $t("Interview record for worker") }}
+                                            <v-btn block color="teal" small dark class="mb-2" v-bind="attrs"
+                                            v-on="on" @click="navigateSf(item)">
+                                            <v-icon left>mdi-account-tie</v-icon>
+                                            {{ $t("Interview record (Leader/staff)") }}
                                         </v-btn>
                                     </template>
-                                    <span>{{ $t("Interview record for worker") }}</span>
+                                    <span>{{ $t("Interview record (Leader/staff)") }}</span>
                                 </v-tooltip>
                                 <v-tooltip bottom>
                                     <template v-slot:activator="{ on, attrs }">
-                                        <v-btn block color="deep-orange" small dark class="mb-2" v-bind="attrs"
-                                        v-on="on" @click="navigateToInterviewForm">
-                                        <v-icon left>mdi-account-question</v-icon>
-                                        {{ $t("Interview appointment letter") }}
+                                        <v-btn block color="blue darken-1" small dark class="mb-2"
+                                        v-bind="attrs" v-on="on"
+                                        @click="navigateToSelectionRecordForm(item)">
+                                        <v-icon left>mdi-account-group</v-icon>
+                                        {{ $t("Interview record for worker") }}
                                     </v-btn>
                                 </template>
-                                <span>{{ $t("Interview appointment letter") }}</span>
+                                <span>{{ $t("Interview record for worker") }}</span>
                             </v-tooltip>
                             <v-tooltip bottom>
                                 <template v-slot:activator="{ on, attrs }">
-                                    <v-btn block color="green darken-1" small dark class="mb-2" v-bind="attrs" v-on="on"
-                                    @click="navigateToJobOfferLetter(item)">
-                                    <v-icon left>mdi-hand-pointing-up</v-icon>
-                                    {{ $t("Invitation letter for orientation day") }}
+                                    <v-btn block color="deep-orange" small dark class="mb-2"
+                                    v-bind="attrs" v-on="on" @click="navigateToInterviewForm">
+                                    <v-icon left>mdi-account-question</v-icon>
+                                    {{ $t("Interview appointment letter") }}
                                 </v-btn>
                             </template>
-                            <span>{{ $t("Invitation letter for orientation day") }}</span>
+                            <span>{{ $t("Interview appointment letter") }}</span>
                         </v-tooltip>
-                    </template>
-                </v-list-item-content>
-            </v-list-item>
-        </v-list>
-    </v-menu>
+                        <v-tooltip bottom>
+                            <template v-slot:activator="{ on, attrs }">
+                                <v-btn block color="green darken-1" small dark class="mb-2"
+                                v-bind="attrs" v-on="on" @click="navigateToJobOfferLetter(item)">
+                                <v-icon left>mdi-hand-pointing-up</v-icon>
+                                {{ $t("Invitation letter for orientation day") }}
+                            </v-btn>
+                        </template>
+                        <span>{{ $t("Invitation letter for orientation day") }}</span>
+                    </v-tooltip>
+                </template>
+            </v-list-item-content>
+        </v-list-item>
+    </v-list>
+</v-menu>
 </template>
 <template v-slot:[`header.select`]>
     <div class="checkbox-center">
@@ -164,10 +167,17 @@
 <template v-slot:[`item.reg`]="{ item }">
     <div class="checkbox-center">
         <v-checkbox v-model="item.reg" :true-value="'yes'" :false-value="'no'" dense
-        hide-details color="error" @change="updateReg(item)">
+        hide-details color="error" @change="updateReg(item)" :disabled="item.reg === 'yes'">
     </v-checkbox>
 </div>
 </template>
+<template v-slot:[`item.position`]="{ item }">
+  {{ getPositionText(item.position) }}
+</template>
+<template v-slot:[`item.sub_position`]="{ item }">
+  {{ getSubPositionText(item.sub_position) }}
+</template>
+
 <template #[`header.key_in_date`]>
     <DsFilter :name="$t('Key in')" :in-items="filterItems.key_in_date"
     @changed="updateFilter('key_in_date', $event)" />
@@ -358,6 +368,25 @@
         </v-card-actions>
     </v-card>
 </v-dialog>
+<v-dialog v-model="duplicateDialog" max-width="550">
+    <v-card>
+        <v-card-title class="text-h5" style="background-color: #ff9800; color: white">
+            <v-icon color="white" left>mdi-alert</v-icon>
+            {{ $t("Duplicate Warning") }}
+            <v-spacer></v-spacer>
+            <v-icon @click="duplicateDialog = false" color="white">mdi-close</v-icon>
+        </v-card-title>
+        <v-card-text class="pt-4">
+            <p v-html="duplicateMessage"></p>
+        </v-card-text>
+        <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="primary" text @click="duplicateDialog = false">
+                {{ $t("Close") }}
+            </v-btn>
+        </v-card-actions>
+    </v-card>
+</v-dialog>
 </v-row>
 </template>
 <script>
@@ -367,29 +396,32 @@ import Swal from "sweetalert2";
 import * as XLSX from 'xlsx';
 export default {
     components: { DSFilter },
+    head: {
+        title: 'Candidate Listing'
+    },
     data() {
         return {
             today: dayjs().format('YYYY-MM-DD'),
             loading: true,
             api: 'http://gmo021.cansportsvg.com/api/vg-recuitingReport/',
             headers: [
-            { text: '', value: 'select', sortable: false, align: 'center', width: '50px' },
-            { text: this.$t('Key in'), value: "key_in_date", align: 'center' },
-            { text: this.$t('Name'), value: "candidate_name", align: 'center' },
-            { text: this.$t('Birth day'), value: "dateofbirth", align: 'center' },
-            { text: this.$t('Sex'), value: "gender", align: 'center' },
-            { text: this.$t('ID no'), value: "emp_id", align: 'center' },
-            { text: this.$t('Position'), value: "position", align: 'center' },
-            { text: this.$t('Dept applied'), value: "apply_dp", align: 'center' },
-            { text: this.$t('Unit'), value: "tmp_departid", align: 'center' },
-            { text: this.$t('HR acc'), value: "hr_ac_qu", align: 'center' },
-            { text: this.$t('Dept acc'), value: "dp_ac_qu", align: 'center' },
-            { text: this.$t('Reg'), value: "reg", align: 'center' },
-            { text: this.$t('Expected'), value: "ex_en_date", align: 'center' },
-            { text: this.$t('Actually date'), value: "act_en_date", align: 'center' },
-            { text: this.$t('Empno HRM'), value: "newEmpno", align: 'center' },
-            { text: this.$t('Note'), value: "note", align: 'center' },
-            // { text: this.$t('Action'), value: "action", align: 'center' },
+            { text: '', value: 'select', sortable: false, },
+            { text: this.$t('Key in'), value: "key_in_date",  },
+            { text: this.$t('Name'), value: "candidate_name",align: "center"  },
+            { text: this.$t('Birth day'), value: "dateofbirth",  },
+            { text: this.$t('Sex'), value: "gender",  },
+            { text: this.$t('ID no'), value: "emp_id",  },
+            { text: this.$t('Position'), value: "position",  },
+            { text: this.$t('Dept applied'), value: "apply_dp",  },
+            { text: this.$t('Unit'), value: "tmp_departid",  },
+            { text: this.$t('HR acc'), value: "hr_ac_qu",  },
+            { text: this.$t('Dept acc'), value: "dp_ac_qu",  },
+            { text: this.$t('Reg'), value: "reg",  },
+            { text: this.$t('Expected'), value: "ex_en_date",  },
+            { text: this.$t('Actually date'), value: "act_en_date",  },
+            { text: this.$t('Empno HRM'), value: "newEmpno",  },
+            { text: this.$t('Note'), value: "note",  },
+            // { text: this.$t('Action'), value: "action",  },
             ],
             selectedItems: [],
             selectAll: false,
@@ -429,9 +461,175 @@ export default {
             selectedNote: '',
             selectedLanguage: 'vi',
             resignData: [],
+            cccd: '',             
+            oldId: '',             
+            name: '',              
+            dateBirth: '',         
+            gender: '0',          
+            address: '',           
+            sub_address: '',      
+            selectedDatecccd: '',  
+            inVG: '',              
+            empno_old: '',         
+            id: '',
+            parse_cccd: '',
+            isSaving: false,
+            duplicateDialog: false,
+            duplicateMessage: '',
         }
     },
     methods: {
+        getPositionText(position) {
+            return this.$t(`position.${position}`) || position;
+        },
+        getSubPositionText(subPosition) {
+            return this.$t(`sub_position.${subPosition}`) || subPosition;
+        },
+        async checkEmpno() {
+            try {
+                let totalCount = 0;
+                const resCCCD = await this.$axios.get(this.api + 'checkCccd/' + this.cccd);
+                if (resCCCD.status === 200) {
+                    totalCount += resCCCD.data.count;
+                    this.empno_old = resCCCD.data.EMPNO;
+                }
+                if (this.oldId && this.oldId.trim() !== '') {
+                    const resOldId = await this.$axios.get(this.api + 'checkCccd/' + this.oldId);
+                    if (resOldId.status === 200) {
+                        totalCount += resOldId.data.count;
+                        if (!this.empno_old) {
+                            this.empno_old = resOldId.data.EMPNO;
+                        }
+                    }
+                }
+                this.inVG = totalCount;
+            } catch (error) {
+                console.error('Error checking CCCD:', error);
+                this.$notify({
+                    title: 'Error',
+                    text: 'Failed to check CCCD',
+                    type: 'error'
+                });
+            }
+        },
+        async  parseCCCDQRCode(qrData) {
+            try {
+                if (!qrData || typeof qrData !== 'string') {
+                    throw new Error('Invalid input: QR data must be a non-empty string');
+                }
+                const parts = qrData.split('|').map(part => part.trim());
+                const requiredFields = ['CCCD', 'Old ID', 'Full Name', 'Birth Date', 'Gender', 'Address', 'Issue Date'];
+                
+                if (parts.length < requiredFields.length) {
+                    throw new Error(`Invalid QR format: Expected ${requiredFields.length} fields, got ${parts.length}`);
+                }
+                
+                const [cccdNumber, oldId, fullName, birthDate, gender, address, issueDate] = parts;
+                if (!/^\d{12}$/.test(cccdNumber)) {
+                    throw new Error('Invalid CCCD format: Must be 12 digits');
+                }
+                const parseDateField = (dateStr, fieldName) => {
+                    if (!dateStr || dateStr.length !== 8) {
+                        throw new Error(`Invalid ${fieldName} format: Must be DDMMYYYY`);
+                    }
+                    const day = dateStr.substring(0, 2);
+                    const month = dateStr.substring(2, 4);
+                    const year = dateStr.substring(4, 8);
+                    
+                    const dateObj = new Date(year, month - 1, day);
+                    if (isNaN(dateObj.getTime())) {
+                        throw new Error(`Invalid ${fieldName}: Not a valid date`);
+                    }
+                    
+                    return `${year}-${month}-${day}`;
+                };
+                
+                this.cccd = cccdNumber;
+                this.oldId = oldId;
+                this.name = fullName.toUpperCase();
+                this.dateBirth = parseDateField(birthDate, 'birth date');
+                this.gender = /^nam$/i.test(gender.trim()) ? '0' : '1';
+                this.address = address.toUpperCase();
+                this.sub_address = this.address;
+                if (issueDate) {
+                    this.selectedDatecccd = parseDateField(issueDate, 'issue date');
+                }
+                await this.checkEmpno();
+                
+            } catch (error) {
+                this.$notify({
+                    title: 'Error',
+                    text: error.message || 'Invalid QR code format',
+                    type: 'error'
+                });
+                this.cccd = '';
+                this.oldId = '';
+            }
+        },
+        async saveDb() {
+            // Check if candidate already exists
+            const existingCandidate = this.dataCadidates.find(candidate => 
+            candidate.emp_id === this.cccd && candidate.key_in_date === this.today
+            );
+            
+            if (existingCandidate && !this.id) {
+                this.duplicateMessage = `Candidate with ID <strong style="font-size: 1.2em; color: #e65100;">${this.cccd}</strong> already exists for today (${this.today})`;
+                this.duplicateDialog = true;
+                return;
+            }
+            
+            let params = {
+                id: this.id,
+                key_in_date: this.today,
+                emp_id: this.cccd,
+                datecccd: this.selectedDatecccd,
+                candidate_name: this.name,
+                dateofbirth: this.dateBirth,
+                gender: this.gender,
+                regAddress: this.address,
+                commAddress: this.sub_address,
+                vg_work_times: this.inVG,
+                old_empno: this.empno_old,
+                emp_id_old: this.oldId,
+            }
+            try {
+                const res = await this.$axios.post(this.api + 'savedb', params);
+                if (res.status === 200) {
+                    this.$notify({
+                        title: 'Success',
+                        text: this.id ? 'Data updated successfully' : 'Data saved successfully',
+                        type: 'success'
+                    });
+                    this.resetForm();
+                    // this.$router.replace({
+                    //     path: this.$route.path,
+                    //     query: {}
+                    // });
+                    this.getAllData();
+                }
+            } catch (error) {
+                console.error('Error saving data:', error);
+                this.$notify({
+                    title: 'Error',
+                    text: 'Failed to save data',
+                    type: 'error'
+                });
+            } finally {
+                this.loading = false;
+            }
+        },
+        // reset form
+        resetForm() {
+            this.id = '';
+            this.name = '';
+            this.gender = '0';
+            this.dateBirth = '';
+            this.cccd = '';
+            this.inVG = '';
+            this.empno_old = '';
+            this.address = '';
+            this.sub_address = '';
+        },
         toggleSelectAll() {
             if (this.selectedItems.length !== this.filteredData.length) {
                 this.selectedItems = this.filteredData.map(item => item.id);
@@ -559,13 +757,13 @@ export default {
             'TMP_DUTYID', 'TMP_CATEGORYID', 'TMP_LEVELID', 'TMP_RANKID', 'ONBOARDDATE', 'TMP_COUNTRYID',
             'BIRTHDATE', 'SEX', 'MARRAGE', 'TMP_OTHER_BIRTHPLAID', 'TMP_PROVINCID', 'TMP_EDUBGID',
             'REGTEL', 'REGADDRESS', 'COMMTEL', 'COMMADDRESS', 'TMP_SITEID', 'TMP_WORKAREAID',
-            'TMP_ETHNICID', 'ISDIRECT', 'CONT_DATE', 'TMP_C_ADDRID','TMP_RELIGIONID'
+            'TMP_ETHNICID', 'ISDIRECT', 'CONT_DATE', 'TMP_C_ADDRID', 'TMP_RELIGIONID'
             ],
             [
             '自訂序號', '員工工號', '姓名(本地文)', '姓名(英文)', '身分證號', '參數設定', '帳務部門',
             '職務', '職類', '職等', '職級', '預計到職日', '國籍', '生日', '性別', '婚姻',
             '其他出生地', '省份', '學歷', '戶籍電話', '戶籍住址', '通訊電話', '通訊地址',
-            '廠別', '工作區域', '族群身份', 'D/I/O', '身份證簽證日期', '身分證簽發地址編號','宗教'
+            '廠別', '工作區域', '族群身份', 'D/I/O', '身份證簽證日期', '身分證簽發地址編號', '宗教'
             ],
             [
             '欄位說明', '', '', '', '', '', '', '', '', '', '', '', '', '',
@@ -652,8 +850,7 @@ export default {
             const fileName = `HUM1-1 Import file_${dayjs().format('YYYY-MM-DD')}.xlsx`;
             XLSX.writeFile(wb, fileName);
         },
-        printFaceRecog()
-        {
+        printFaceRecog() {
             const data = Array.isArray(this.filteredData) ? this.filteredData : [];
             if (data.length === 0) {
                 this.$notify({
@@ -1295,8 +1492,7 @@ export default {
             });
             window.open(routeData.href, '_blank');
         },
-        navigateSf()
-        {
+        navigateSf() {
             if (this.selectedItems.length === 0) {
                 this.$notify({
                     title: this.$t("error"),
@@ -1314,8 +1510,7 @@ export default {
             });
             window.open(routeData.href, '_blank');
         },
-        navigateJobapp()
-        {
+        navigateJobapp() {
             if (this.selectedItems.length === 0) {
                 this.$notify({
                     title: this.$t("error"),
@@ -1340,9 +1535,32 @@ export default {
             this.getLastEmpno();
             this.getAllDuty();
             this.getAllSourceRecruiting();
+            
+            // Lưu reference để remove sau này
+            this._scannerHandler = async (event) => {
+                const allowedOrigins = [
+                'http://gmo021.cansportsvg.com:3043',
+                'https://gmo021.cansportsvg.com',
+                'http://gmo021.cansportsvg.com'
+                ];
+                if (allowedOrigins.includes(event.origin)) {
+                    if (event.data && event.data.type === 'SCANNER_DATA_RECEIVED' && event.data.data) {
+                        if (this.isSaving) return;
+                        this.isSaving = true;
+                        await this.parseCCCDQRCode(event.data.data);
+                        await this.saveDb();
+                        setTimeout(() => { this.isSaving = false; }, 1000);
+                    }
+                }
+            };
+            window.addEventListener('message', this._scannerHandler);
         } else {
             this.$router.push('/');
-            
+        }
+    },
+    beforeDestroy() {
+        if (this._scannerHandler) {
+            window.removeEventListener('message', this._scannerHandler);
         }
     },
     watch: {
@@ -1353,17 +1571,7 @@ export default {
             },
             deep: true
         },
-        filteredData: {
-            handler() {
-                // When filtered data changes, ensure selectAll is updated correctly
-                if (this.filteredData.length) {
-                    this.selectAll = this.selectedItems.length === this.filteredData.length;
-                } else {
-                    this.selectAll = false;
-                }
-            },
-            deep: true
-        },
+        
         '$route.query': {
             handler() {
                 this.handleQueryParams();
@@ -1518,8 +1726,7 @@ export default {
 }
 
 .data-table {
-    border-radius: 8px;
-    overflow: hidden;
+    border-radius: 5px;
 }
 
 .candidate-link {
@@ -1567,13 +1774,11 @@ export default {
     position: sticky;
     top: 0;
     z-index: 1;
-    text-transform: uppercase;
+    white-space: nowrap;
 }
-
 .v-data-table ::v-deep tbody tr:hover {
     background-color: #f3fd99 !important;
 }
-
 .date-field {
     width: 82px;
     min-width: 82px;
@@ -1613,6 +1818,12 @@ export default {
 .v-data-table ::v-deep .select .v-input__slot {
     margin-bottom: 0;
 }
+.v-data-table ::v-deep thead th,
+.v-data-table ::v-deep tbody td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 </style>
 <i18n>
     {
@@ -1630,7 +1841,7 @@ export default {
             "Key in": "Key In",
             "Name": "Name",
             "Birth day": "Birth Day",
-            "Sex": "Sex",
+            "Sex": "Gender",
             "ID no": "ID No.",
             "Position": "Position",
             "Dept applied": "Dept Applied",
@@ -1661,7 +1872,23 @@ export default {
             "Interview appointment letter":"Interview appointment letter",
             "Invitation letter for orientation day":"Invitation letter for orientation day",
             "action":"Action",
-            "Face Recognition": "Face Recognition"
+            "Face Recognition": "Face Recognition",
+            "Duplicate Warning": "Duplicate Warning",
+            "position": {
+                "Worker": "Worker",
+                "Staff": "Staff",
+                "Staff (lang)": "Staff (lang)",
+                "Leader": "Leader",
+                "Translator": "Translator",
+                "Engineer": "Engineer"
+            },
+            "sub_position": {
+                "HR Assistant": "HR Assistant",
+                "Prod assistant": "Production Assistant",
+                "Maintenance": "Maintenance",
+                "Technical": "Technical",
+                "Officer": "Officer"
+            }
         },
         "vi": {
             "set new empno": "Cấu hình MST",
@@ -1708,7 +1935,23 @@ export default {
             "Interview appointment letter":"Giấy hẹn phỏng vấn",
             "Invitation letter for orientation day":"Thư mời nhận việc",
             "action":"Hành động",
-            "Face Recognition": "Nhận diện khuôn mặt"
+            "Face Recognition": "Nhận diện khuôn mặt",
+            "Duplicate Warning": "Cảnh báo trùng lặp",
+            "position": {
+                "Worker": "Công nhân",
+                "Staff": "Nhân viên",
+                "Staff (lang)": "Nhân viên (ngôn ngữ)",
+                "Leader": "Cán bộ",
+                "Translator": "Phiên dịch",
+                "Engineer": "Kỹ sư"
+            },
+            "sub_position": {
+                "HR Assistant": "Trợ lý nhân sự",
+                "Prod assistant": "Trợ lý sản xuất",
+                "Maintenance": "Bảo trì",
+                "Technical": "Kỹ thuật",
+                "Officer": "Nhân viên"
+            }
         },
         "cn": {
             "set new empno": "设置新员工编号",
@@ -1756,7 +1999,23 @@ export default {
             "Interview appointment letter":"INF",
             "Invitation letter for orientation day":"面試通知單",
             "action":"操作",
-            "Face Recognition": "人脸识别"
+            "Face Recognition": "人脸识别",
+            "Duplicate Warning": "重复警告",
+            "position": {
+                "Worker": "工人",
+                "Staff": "職員",
+                "Staff (lang)": "語言職員",
+                "Leader": "干部",
+                "Translator": "翻譯員",
+                "Engineer": "工程师"
+            },
+            "sub_position": {
+                "HR Assistant": "人事助理",
+                "Prod assistant": "生產助理",
+                "Maintenance": "維修",
+                "Technical": "技術",
+                "Officer": "科员"
+            }
         }
     }
 </i18n>

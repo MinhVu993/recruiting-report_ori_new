@@ -44,9 +44,9 @@
             "Empno HRM": "Empno HRM",
             "HRM Dep.": "HRM Dep.",
             "Trial Period": "Trial Period",
-            "Select Parameter": "Select Parameter",
-            "Select Ethnicity": "Select Ethnicity",
-            "Select Rank": "Select Rank",
+            "Parameter": "Parameter",
+            "Ethnicity": "Ethnicity",
+            "Rank": "Rank",
             "Job Level": "Job Level",
             "Factory Code": "Factory Code",
             "Work Area": "Work Area",
@@ -90,7 +90,7 @@
             "Ex Company": "Ex Company",
             "Ex Position": "Ex Position",
             "Candidate reject reason": "Candidate reject reason",
-            "Department reject reason ": "Department reject reason ",
+            "Department reject reason": "Department reject reason",
             "Change on board": "Change on board",
             "Category ID": "Category ID",
             "View resignation history": "View resignation history",
@@ -104,7 +104,18 @@
             "Emp No. HRM": "Emp No. HRM",
             "Work Experience part time": "Work Experience part time",
             "Email adress": "Email address",
-            "Select Religious": "Select Religious"
+            "Religious": "Religious",
+            "You have unsaved changes. Do you want to override the current data?": "You have unsaved changes. Do you want to override the current data?",
+            "Yes": "Yes",
+            "No": "No",
+            "Edit": "Edit",
+            "Save Changes": "Save Changes",
+            "Personal information updated successfully": "Personal information updated successfully",
+            "Failed to update personal information": "Failed to update personal information",
+            "Candidate reply": "Candidate reply",
+            "Candidate reply date": "Candidate reply date",
+            "Delete": "Delete",
+            "Back": "Back"
         },
         "vi": {
             "Personal Information": "Thông tin cá nhân",
@@ -150,14 +161,14 @@
             "Empno HRM": "Mã nhân viên HRM",
             "HRM Dep.": "Bộ phận HRM",
             "Trial Period": "Thời gian thử việc",
-            "Select Parameter": "Chọn tham số",
-            "Select Ethnicity": "Chọn dân tộc",
-            "Select Rank": "Chọn cấp bậc",
+            "Parameter": "Tham số",
+            "Ethnicity": "Dân tộc",
+            "Rank": "Cấp bậc",
             "Job Level": "Cấp độ công việc",
             "Factory Code": "Mã nhà máy",
             "Work Area": "Khu vực làm việc",
             "D/I": "D/I",
-            "Marital Status": "Tình trạng hôn nhân",
+            "Marital Status": "Hôn nhân",
             "Education": "Trình độ học vấn",
             "Birth Province": "Tỉnh/TP sinh",
             "Province": "Tỉnh/TP",
@@ -196,7 +207,7 @@
             "Ex Company": "Công ty đã làm việc",
             "Ex Position": "Vị trí đã làm việc",
             "Candidate reject reason": "Lý do từ chối ứng viên",
-            "Department reject reason ": "Lý do bộ phận từ chối ",
+            "Department reject reason": "Lý do bộ phận từ chối",
             "Change on board": "Thay đổi ngày vào làm",
             "Category ID": "Mã loại",
             "View resignation history": "Xem lịch sử nghỉ việc",
@@ -210,7 +221,18 @@
             "Emp No. HRM": "Mã nhân viên HRM",
             "Work Experience part time": "Kinh nghiệm làm việc bán thời gian",
             "Email adress": "Địa chỉ email",
-            "Select Religious": "Chọn tôn giáo"
+            "Religious": "Tôn giáo",
+            "You have unsaved changes. Do you want to override the current data?": "Bạn có dữ liệu chưa lưu. Bạn có muốn ghi đè dữ liệu hiện tại không?", 
+            "Yes": "Có",
+            "No": "Không",
+            "Edit": "Chỉnh sửa",
+            "Save Changes": "Lưu thay đổi",
+            "Personal information updated successfully": "Cập nhật thông tin cá nhân thành công",
+            "Failed to update personal information": "Cập nhật thông tin cá nhân thất bại",
+            "Candidate reply": "Phản hồi của ứng viên",
+            "Candidate reply date": "Ngày phản hồi của ứng viên",
+            "Delete": "Xóa",
+            "Back": "Quay lại"
         },
         "cn": {
             "Personal Information": "个人信息",
@@ -257,8 +279,8 @@
             "HRM Dep.": "HRM部门",
             "Trial Period": "试用期",
             "Select Parameter": "选择参数",
-            "Select Ethnicity": "选择民族",
-            "Select Rank": "选择职级",
+            "Ethnicity": "选择民族",
+            "Rank": "选择职级",
             "Job Level": "职位等级",
             "Factory Code": "工厂代码",
             "Work Area": "工作区域",
@@ -302,7 +324,7 @@
             "Ex Company": "前公司",
             "Ex Position": "前职位",
             "Candidate reject reason": "候选人拒绝原因",
-            "Department reject reason ": "部门拒绝原因",
+            "Department reject reason": "部门拒绝原因",
             "Change on board": "更改入职日期",
             "Category ID": "类别 ID",
             "View resignation history": "查看辞职历史",
@@ -316,7 +338,18 @@
             "Emp No. HRM": "HRM工号",
             "Work Experience part time": "兼职工作经验",
             "Email adress": "电子邮件地址",
-            "Select Religious": "选择宗教"
+            "Religious": "选择宗教",
+            "You have unsaved changes. Do you want to override the current data?": "您有未保存的更改。您要覆盖当前数据吗？",
+            "Yes": "是",
+            "No": "否",
+            "Edit": "编辑",
+            "Save Changes": "保存更改",
+            "Personal information updated successfully": "个人信息更新成功",
+            "Failed to update personal information": "更新个人信息失败",
+            "Candidate reply": "候选人回复",
+            "Candidate reply date": "候选人回复日期",
+            "Delete": "删除",
+            "Back": "返回"
         }
     }
 </i18n>
@@ -327,127 +360,134 @@
             <!-- Personal Information Section -->
             <v-col cols="12">
                 <v-card class="pa-4 mb-2" elevation="2">
-                    <div class="section-header">
+                    <div class="section-header d-flex align-center">
                         <v-icon color="primary" class="mr-2">mdi-account</v-icon>
                         <span class="text-h6">[{{ $t('Personal Information') }}]</span>
-                        <span class="text-caption error--text ml-2">
+                        <span class="text-caption error--text ml-2" v-if="!hasExistingData">
                             <v-icon small color="error">mdi-alert</v-icon>
                             {{ $t('Please enter your ID number to check information.') }}
                         </span>
-                    </div>
-                    <!-- Basic Information -->
-                    <v-row dense>
-                        <v-col cols="2">
-                            <div class="d-flex align-center">
-                                <v-text-field v-model="cccd" :label="$t('ID Number')" outlined dense hide-details
-                                @change="checkEmpno" maxlength="12" @input="validateCccd"
-                                :rules="[rules.required, rules.number, rules.length]" class="mr-2"></v-text-field>
-                                <v-icon color="teal" @click="checkEmpno">mdi-card-account-details</v-icon>
-                            </div>
-                        </v-col>
-                        <v-col cols="2">
-                            <v-text-field v-model="selectedDatecccd" :label="$t('ID Issue Date')" outlined dense
-                            hide-details v-mask="'####-##-##'" prepend-inner-icon="mdi-calendar"
-                            placeholder="YYYY-MM-DD"></v-text-field>
-                        </v-col>
-                        <v-col cols="4">
-                            <v-text-field ref="nameField" v-model="name" :label="$t('Name')" outlined dense
-                            :error-messages="nameError" :error="!!nameError" hide-details="auto"
-                            @click="focusNameField" @input="validateName"></v-text-field>
-                        </v-col>
-                        <v-col cols="2">
-                            <v-text-field v-model="dateBirth" :label="$t('Birth day')" outlined dense hide-details
-                            v-mask="'####-##-##'" prepend-inner-icon="mdi-calendar"
-                            placeholder="YYYY-MM-DD"></v-text-field>
-                        </v-col>
-                        <v-col cols="2">
-                            <v-radio-group v-model="gender" row dense hide-details class="mt-0">
-                                <label class="mr-2 grey--text">{{ $t('Gender:') }}</label>
-                                <v-radio :label="$t('Male')" value="0" class="mr-2"></v-radio>
-                                <v-radio :label="$t('Female')" value="1"></v-radio>
-                            </v-radio-group>
-                        </v-col>
-                    </v-row>
-                    <!-- Contact Information -->
-                    <v-row dense class="mt-1">
-                        <v-col cols="3">
-                            <v-text-field v-model="address" :label="$t('Place residence address')" outlined dense
-                            hide-details></v-text-field>
-                        </v-col>
-                        <v-col cols="3">
-                            <v-text-field v-model="sub_address" :label="$t('Alternative Address')" outlined dense
-                            hide-details></v-text-field>
-                        </v-col>
-                        <v-col cols="2">
-                            <v-text-field v-model="tel" :label="$t('Phone Number')" outlined dense
-                            hide-details></v-text-field>
-                        </v-col>
-                        
-                        <v-col cols="2">
-                            <v-text-field v-model="sub_tel" :label="$t('Alternative Phone Number')" outlined dense
-                            hide-details></v-text-field>
-                        </v-col>
-                        <!-- email -->
-                        <v-col cols="2">
-                            <v-text-field v-model="email" :label="$t('Email adress')" outlined dense
-                            hide-details></v-text-field>
-                        </v-col>
-                    </v-row>
-                    
-                    <v-row dense class="mt-1">
-                        <v-col cols="2">
-                            <v-combobox v-model="edu" :items="item_edu" :item-value="code" item-text="name"
-                            :label="$t('Education')" dense outlined hide-details></v-combobox>
-                        </v-col>
-                        <v-col cols="2">
-                            <v-textarea v-model="school_gra" :label="$t('Graduate School')" outlined dense auto-grow
-                            rows="1" hide-details></v-textarea>
-                        </v-col>
-                        <v-col cols="2">
-                            <v-text-field v-model="work_exp" :label="$t('Work Experience')" outlined dense
-                            hide-details></v-text-field>
-                        </v-col>
-                        <v-col cols="2">
-                            <v-text-field v-model="work_exp_pt" :label="$t('Work Experience part time')" outlined dense
-                            hide-details></v-text-field>
-                        </v-col>
-                        <v-col cols="2">
-                            <v-text-field v-model="ex_company" :label="$t('Ex Company')" outlined dense
-                            hide-details></v-text-field>
-                        </v-col>
-                        <v-col cols="2">
-                            <v-text-field v-model="ex_position" :label="$t('Ex Position')" outlined dense
-                            hide-details></v-text-field>
-                        </v-col>
-                    </v-row>
-                </v-card>
-            </v-col>
-            <v-col cols="12">
-                <v-card class="pa-4 mb-2" elevation="2">
-                    <div class="section-header">
-                        <v-icon color="primary" class="mr-2">mdi-account</v-icon>
-                        <span class="text-h6">[{{ $t('Demand information') }}]</span>
-                    </div>
-                    <v-row dense>
-                        <v-col cols="2">
-                            <v-combobox v-model="dept_apply" :items="item_dept_apply" item-text="deptName_temp"
-                            return-object :label="$t('Department')" dense outlined hide-details>
-                        </v-combobox>
+                        <v-spacer></v-spacer>
+                        <v-btn v-if="hasExistingData" color="warning" small @click="isEditMode = !isEditMode"
+                        class="ml-2">
+                        <v-icon left>mdi-pencil</v-icon>
+                        {{ $t('Edit') }}
+                    </v-btn>
+                </div>
+                
+                <!-- Basic Information -->
+                <v-row dense>
+                    <v-col cols="2">
+                        <div class="d-flex align-center">
+                            <v-text-field v-model="cccd" :label="$t('ID Number')" outlined dense hide-details
+                            @change="checkEmpno" maxlength="12" @input="validateCccd"
+                            :rules="[rules.required, rules.number, rules.length]" class="mr-2"
+                            :disabled="hasExistingData && !isEditMode"></v-text-field>
+                            <!-- <v-icon color="teal" @click="qrScanDialog = true" v-if="!hasExistingData || isEditMode">
+                                mdi-card-account-details
+                            </v-icon> -->
+                        </div>
                     </v-col>
-                    <v-col cols="1" v-show="dept_apply">
-                        <v-btn @click="getDataDemandByDept()" color="warning" dark>
-                            <v-icon>mdi-plus</v-icon>
-                            {{ $t('Select Demand') }}
-                        </v-btn>
+                    <v-col cols="2">
+                        <v-text-field v-model="selectedDatecccd" :label="$t('ID Issue Date')" outlined dense
+                        hide-details v-mask="'####-##-##'" prepend-inner-icon="mdi-calendar"
+                        placeholder="YYYY-MM-DD" :disabled="hasExistingData && !isEditMode"></v-text-field>
                     </v-col>
-                    <v-col cols="1">
-                        <v-text-field v-model="dm_id" :label="$t('Demand ID')" outlined dense disabled class="ml-3"
-                        hide-details></v-text-field>
+                    <v-col cols="4">
+                        <v-text-field ref="nameField" v-model="name" :label="$t('Name')" outlined dense
+                        :error-messages="nameError" :error="!!nameError" hide-details="auto"
+                        @input="validateName" :disabled="hasExistingData && !isEditMode"></v-text-field>
                     </v-col>
-                    <v-col cols="1">
-                        <v-combobox v-model="loc_apply" :items="item_loc_apply" :label="$t('Position')" dense
-                        outlined hide-details clearable>
-                    </v-combobox>
+                    <v-col cols="2">
+                        <v-text-field v-model="dateBirth" :label="$t('Birth day')" outlined dense hide-details
+                        v-mask="'####-##-##'" prepend-inner-icon="mdi-calendar" placeholder="YYYY-MM-DD"
+                        :disabled="hasExistingData && !isEditMode"></v-text-field>
+                    </v-col>
+                    <v-col cols="2">
+                        <v-radio-group v-model="gender" row dense hide-details class="mt-0"
+                        :disabled="hasExistingData && !isEditMode">
+                        <label class="mr-2 grey--text">{{ $t('Gender:') }}</label>
+                        <v-radio :label="$t('Male')" value="0" class="mr-2"></v-radio>
+                        <v-radio :label="$t('Female')" value="1"></v-radio>
+                    </v-radio-group>
+                </v-col>
+            </v-row>
+            
+            <!-- Contact Information -->
+            <v-row dense class="mt-1">
+                <v-col cols="3">
+                    <v-text-field v-model="address" :label="$t('Place residence address')" outlined dense
+                    hide-details :disabled="hasExistingData && !isEditMode"></v-text-field>
+                </v-col>
+                <v-col cols="3">
+                    <v-text-field v-model="sub_address" :label="$t('Alternative Address')" outlined dense
+                    hide-details :disabled="hasExistingData && !isEditMode"></v-text-field>
+                </v-col>
+                <v-col cols="2">
+                    <v-text-field v-model="tel" :label="$t('Phone Number')" outlined dense
+                    hide-details></v-text-field>
+                </v-col>
+                
+                <v-col cols="2">
+                    <v-text-field v-model="sub_tel" :label="$t('Alternative Phone Number')" outlined dense
+                    hide-details></v-text-field>
+                </v-col>
+                <!-- email -->
+                <v-col cols="2">
+                    <v-text-field v-model="email" :label="$t('Email adress')" outlined dense
+                    hide-details></v-text-field>
+                </v-col>
+            </v-row>
+            
+            <v-row dense class="mt-1">
+                <v-col cols="2">
+                    <v-autocomplete v-model="edu" :items="item_edu" item-value="code" item-text="name" :label="$t('Education')" dense outlined hide-details return-object clearable ></v-autocomplete>
+                </v-col>
+                <v-col cols="2">
+                    <v-textarea v-model="school_gra" :label="$t('Graduate School')" outlined dense auto-grow
+                    rows="1" hide-details></v-textarea>
+                </v-col>
+                <v-col cols="2">
+                    <v-text-field v-model="work_exp" :label="$t('Work Experience')" outlined dense
+                    hide-details></v-text-field>
+                </v-col>
+                <v-col cols="2">
+                    <v-text-field v-model="work_exp_pt" :label="$t('Work Experience part time')" outlined dense
+                    hide-details></v-text-field>
+                </v-col>
+                <v-col cols="2">
+                    <v-text-field v-model="ex_company" :label="$t('Ex Company')" outlined dense
+                    hide-details></v-text-field>
+                </v-col>
+                <v-col cols="2">
+                    <v-text-field v-model="ex_position" :label="$t('Ex Position')" outlined dense
+                    hide-details></v-text-field>
+                </v-col>
+            </v-row>
+        </v-card>
+    </v-col>
+    <v-col cols="12">
+        <v-card class="pa-4 mb-2" elevation="2">
+            <div class="section-header">
+                <v-icon color="primary" class="mr-2">mdi-account</v-icon>
+                <span class="text-h6">[{{ $t('Demand information') }}]</span>
+            </div>
+            <v-row dense>
+                <v-col cols="2">
+                    <v-autocomplete v-model="dept_apply" :items="item_dept_apply" item-text="deptName_temp" return-object :label="$t('Department')" dense outlined hide-details clearable ></v-autocomplete>
+                </v-col>
+                <v-col cols="1" v-show="dept_apply">
+                    <v-btn @click="getDataDemandByDept()" color="warning" dark>
+                        <v-icon>mdi-plus</v-icon>
+                        {{ $t('Select Demand') }}
+                    </v-btn>
+                </v-col>
+                <v-col cols="1">
+                    <v-text-field v-model="dm_id" :label="$t('Demand ID')" outlined dense disabled class="ml-3"
+                    hide-details></v-text-field>
+                </v-col>
+                <v-col cols="1">
+                    <v-autocomplete v-model="loc_apply" :items="item_loc_apply" :label="$t('Position')" dense outlined hide-details clearable ></v-autocomplete>
                 </v-col>
                 <v-col cols="2">
                     <v-text-field v-model="dm_Subpos" :label="$t('Sub position')" outlined dense
@@ -465,10 +505,19 @@
             <v-row dense>
                 <v-col cols="4">
                     <div style="display: flex; align-items: center;">
-                        <v-combobox v-model="source_recruit" :items="item_source_recruit" :item-value="code"
-                        :item-text="item => item.name[this.$i18n.locale]" :label="$t('Recruitment Source')"
-                        dense outlined hide-details>
-                    </v-combobox>
+                        <v-autocomplete 
+                        v-model="source_recruit"
+                        :items="item_source_recruit"
+                        item-value="code"
+                        :item-text="item => item.name[this.$i18n.locale] || Object.values(item.name)[0]"
+                        :label="$t('Recruitment Source')"
+                        return-object
+                        dense 
+                        outlined 
+                        hide-details
+                        clearable
+                        >
+                    </v-autocomplete>
                     <v-tooltip bottom>
                         <template v-slot:activator="{ on, attrs }">
                             <v-btn @click="dialogSourceRecuiting = true" fab x-small color="error" dark
@@ -481,41 +530,40 @@
             </div>
         </v-col>
         <v-col cols="2">
-            <v-combobox v-model="bus_info" :items="item_bus_info" :label="$t('Bus Company')" dense outlined
-            hide-details>
-        </v-combobox>
-    </v-col>
-    <v-col cols="2">
-        <v-menu v-model="dateMenu" :close-on-content-click="true" transition="scale-transition">
-            <template v-slot:activator="{ on, attrs }">
-                <v-text-field v-model="date_cv" :label="$t('CV Received Date')" readonly
-                v-bind="attrs" v-on="on" outlined dense hide-details
-                prepend-inner-icon="mdi-calendar" clearable @click:clear="date_cv = null">
-            </v-text-field>
-        </template>
-        <v-date-picker v-model="date_cv" @input="dateMenu = false" header-color="teal"
-        :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale">
-    </v-date-picker>
-</v-menu>
+            <v-autocomplete v-model="bus_info" :items="item_bus_info" :label="$t('Bus Company')" dense outlined hide-details clearable ></v-autocomplete>
+        </v-col>
+        <v-col cols="2">
+            <v-menu v-model="dateMenu" :close-on-content-click="true" transition="scale-transition">
+                <template v-slot:activator="{ on, attrs }">
+                    <v-text-field v-model="date_cv" :label="$t('CV Received Date')" readonly
+                    v-bind="attrs" v-on="on" outlined dense hide-details
+                    prepend-inner-icon="mdi-calendar" clearable @click:clear="date_cv = null">
+                </v-text-field>
+            </template>
+            <v-date-picker v-model="date_cv" @input="dateMenu = false" header-color="teal"
+            :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale">
+        </v-date-picker>
+    </v-menu>
 </v-col>
 <v-col cols="2">
     <div class="d-flex align-center">
-        <v-text-field v-model="inVG" :label="$t('Worked at VG')" outlined dense hide-details>
-        </v-text-field>
-        <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-                <v-btn fab x-small color="success" dark @click="showResignDialog"
-                style="margin-left: 8px;" v-bind="attrs" v-on="on">
-                <v-icon>mdi-history</v-icon>
-            </v-btn>
-        </template>
-        <span>{{ $t('View resignation history') }}</span>
-    </v-tooltip>
+        <v-text-field v-model="inVG" :label="$t('Worked at VG')" outlined dense hide-details
+        :disabled="hasExistingData && !isEditMode">
+    </v-text-field>
+    <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+            <v-btn fab x-small color="success" dark @click="showResignDialog"
+            style="margin-left: 8px;" v-bind="attrs" v-on="on">
+            <v-icon>mdi-history</v-icon>
+        </v-btn>
+    </template>
+    <span>{{ $t('View resignation history') }}</span>
+</v-tooltip>
 </div>
 </v-col>
 <v-col cols="2">
     <v-text-field v-model="empno_old" :label="$t('Old Employee No')" outlined dense
-    hide-details>
+    :disabled="hasExistingData && !isEditMode" hide-details>
 </v-text-field>
 </v-col>
 </v-row>
@@ -557,20 +605,19 @@
 </v-checkbox>
 </v-col>
 <v-col cols="7">
-    <v-textarea v-model="reason" :label="$t('HR reject reason')" outlined dense hide-details auto-grow
-    rows="1">
+    <v-textarea v-model="reason" :label="$t('HR reject reason')" outlined dense hide-details
+    auto-grow rows="1">
 </v-textarea>
 </v-col>
 </v-row>
 <!-- Previous Employment -->
 <v-row dense class="mt-2">
     <v-col cols="2">
-        <v-combobox v-model="comp_return" :items="item_comp_return" :label="$t('Previous Company')"
-        dense outlined hide-details>
-    </v-combobox>
-</v-col>
-<v-col cols="10">
-    <v-textarea v-model="remark" :label="$t('Note')" outlined dense hide-details rows="1" auto-grow>
+        <v-autocomplete v-model="comp_return" :items="item_comp_return" :label="$t('Previous Company')" dense outlined hide-details clearable ></v-autocomplete>
+    </v-col>
+    <v-col cols="10">
+        <v-textarea v-model="remark" :label="$t('Note')" outlined dense hide-details rows="1"
+        auto-grow>
     </v-textarea>
 </v-col>
 </v-row>
@@ -612,8 +659,8 @@ header-color="teal" :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale">
 </v-checkbox>
 </v-col>
 <v-col cols="5">
-    <v-textarea v-model="dept_reason" :label="$t('Department reject reason')" outlined dense auto-grow
-    hide-details rows="1">
+    <v-textarea v-model="dept_reason" :label="$t('Department reject reason')" outlined dense
+    auto-grow hide-details rows="1">
 </v-textarea>
 </v-col>
 <v-col cols="2">
@@ -643,8 +690,8 @@ header-color="teal" :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale">
 </v-menu>
 </v-col>
 <v-col cols="1">
-    <v-checkbox v-model="reply_check" :label="$t('Candidate reply')" class="mt-1" color="red" value="yes"
-    hide-details>
+    <v-checkbox v-model="reply_check" :label="$t('Candidate reply')" class="mt-1" color="red"
+    value="yes" hide-details>
 </v-checkbox>
 </v-col>
 <v-col cols="2">
@@ -662,8 +709,8 @@ header-color="teal" :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale">
 </v-menu>
 </v-col>
 <v-col cols="7">
-    <v-textarea v-model="candidate_reason" :label="$t('Candidate reject reason')" outlined dense auto-grow
-    hide-details rows="1">
+    <v-textarea v-model="candidate_reason" :label="$t('Candidate reject reason')" outlined dense
+    auto-grow hide-details rows="1">
 </v-textarea>
 </v-col>
 
@@ -715,80 +762,54 @@ header-color="teal" :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale">
                 hide-details></v-text-field>
             </v-col>
             <v-col cols="2">
-                <v-combobox v-model="newDept" :items="item_newDept" item-text="name" item-value="code"
-                :label="$t('HRM Dep.')" dense outlined hide-details></v-combobox>
+                <v-autocomplete v-model="newDept" :items="item_newDept" item-text="name" item-value="code" :label="$t('HRM Dep.')" dense outlined hide-details return-object clearable ></v-autocomplete>
             </v-col>
             <v-col cols="2">
-                <v-combobox v-model="position" :items="item_position" :item-value="code"
+                <v-autocomplete v-model="position" :items="item_position" :item-value="code" :item-text="item => item.name[this.$i18n.locale] || Object.values(item.name)[0]" :label="$t('Position')" dense outlined hide-details clearable ></v-autocomplete>
+            </v-col>
+            <v-col cols="2">
+                <v-autocomplete v-model="deputy" :items="item_deputy" :label="$t('Rank')" dense outlined hide-details clearable ></v-autocomplete>
+            </v-col>
+            <v-col cols="2">
+                <v-autocomplete v-model="level" :items="item_level" :label="$t('Job Level')" dense outlined hide-details clearable ></v-autocomplete>
+            </v-col>
+            <v-col cols="2">
+                <v-autocomplete v-model="parameters" :items="item_parameters" :label="$t('Parameter')" dense outlined hide-details clearable ></v-autocomplete>
+            </v-col>
+            <v-col cols="1">
+                <v-autocomplete v-model="time_trial" :items="item_time_trial" :label="$t('Trial Period')" dense outlined hide-details clearable ></v-autocomplete>
+            </v-col>
+            <v-col cols="1">
+                <v-autocomplete v-model="direct" :items="item_direct" item-value="id" item-text="name" :label="$t('D/I')" dense outlined hide-details return-object clearable ></v-autocomplete>
+            </v-col>
+            <v-col cols="1">
+                <v-autocomplete v-model="dantoc" :items="item_dantoc" item-value="code" item-text="name" :label="$t('Ethnicity')" dense outlined hide-details return-object clearable ></v-autocomplete>
+            </v-col>
+            <v-col cols="1">
+                <v-autocomplete v-model="religious" :items="item_religious" :item-value="'code'"
                 :item-text="item => item.name[this.$i18n.locale] || Object.values(item.name)[0]"
-                :label="$t('Position')" dense outlined hide-details></v-combobox>
-            </v-col>
-            <v-col cols="2">
-                <v-combobox v-model="deputy" :items="item_deputy" :label="$t('Select Rank')" dense outlined
-                hide-details></v-combobox>
-            </v-col>
-            <v-col cols="2">
-                <v-combobox v-model="level" :items="item_level" :label="$t('Job Level')" dense outlined
-                hide-details></v-combobox>
-            </v-col>
-            <v-col cols="2">
-                <v-combobox v-model="parameters" :items="item_parameters" :label="$t('Select Parameter')"
-                dense outlined hide-details></v-combobox>
+                :label="$t('Religious')" dense outlined hide-details return-object
+                clearable></v-autocomplete>
             </v-col>
             <v-col cols="1">
-                <v-combobox v-model="time_trial" :items="item_time_trial" :label="$t('Trial Period')" dense
-                outlined hide-details></v-combobox>
+                <v-autocomplete v-model="married" :items="item_married" item-text="name" item-value="code" :label="$t('Marital Status')" dense outlined hide-details return-object clearable ></v-autocomplete>
             </v-col>
             <v-col cols="1">
-                <v-combobox v-model="direct" :items="item_direct" item-value="id" item-text="name"
-                :label="$t('D/I')" dense outlined hide-details></v-combobox>
-            </v-col>
-            <v-col cols="1">
-                <v-combobox v-model="dantoc" :items="item_dantoc" :item-value="code" item-text="name"
-                :label="$t('Select Ethnicity')" dense outlined hide-details></v-combobox>
-            </v-col>
-            <v-col cols="1">
-                <v-autocomplete
-                v-model="religious"
-                :items="item_religious"
-                :item-value="'code'"
-                :item-text="item => item.name[this.$i18n.locale] || Object.values(item.name)[0]"
-                :label="$t('Select Religious')"
-                dense
-                outlined
-                hide-details
-                return-object
-                clearable
-                ></v-autocomplete>
-            </v-col>
-            <v-col cols="1">
-                <v-combobox v-model="married" :items="item_married" item-text="name" item-value="code"
-                :label="$t('Marital Status')" dense outlined hide-details></v-combobox>
-            </v-col>
-            <v-col cols="1">
-                <v-combobox v-model="nation" :items="item_nation" :label="$t('Country Code')" dense outlined
-                hide-details></v-combobox>
+                <v-autocomplete v-model="nation" :items="item_nation" :label="$t('Country Code')" dense outlined
+                hide-details></v-autocomplete>
             </v-col>
             <v-col cols="2">
-                <v-combobox v-model="nationality" :items="item_nationality" :label="$t('Nationality Code')"
-                dense outlined hide-details></v-combobox>
+                <v-autocomplete v-model="nationality" :items="item_nationality" :label="$t('Nationality Code')"
+                dense outlined hide-details></v-autocomplete>
             </v-col>
             <v-col cols="2">
-                <v-combobox v-model="birth_province" :items="item_birth_province" item-text="name"
-                item-value="code" :label="$t('Birth Province')" dense outlined
-                hide-details></v-combobox>
+                <v-autocomplete v-model="birth_province" :items="item_birth_province" item-text="name" item-value="code" :label="$t('Birth Province')" dense outlined hide-details return-object ></v-autocomplete>
             </v-col>
             <v-col cols="2">
-                <v-combobox v-model="province" :items="item_province" item-text="name" item-value="code"
-                :label="$t('Province')" dense outlined hide-details></v-combobox>
+                <v-autocomplete v-model="province" :items="item_province" item-text="name" item-value="code" :label="$t('Province')" dense outlined hide-details return-object ></v-autocomplete>
             </v-col>
-            <!-- <v-col cols="2">
-                <v-text-field v-model="tmp_categoryid" :label="$t('Category ID')" outlined dense
-                hide-details>
-            </v-text-field>
-        </v-col> -->
-    </v-row>
-</v-card>
+        </v-row>
+    </v-card>
 </v-col>
 <v-col cols="12" class="d-flex justify-end">
     <v-btn color="error" @click="deleteData" class="mr-3" :loading="loading">
@@ -899,7 +920,7 @@ header-color="teal" :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale">
     </v-data-table>
 </v-col>
 </v-row>
-</v-card-text>
+</v-card-text>  
 </v-card>
 </v-dialog>
 <v-dialog v-model="dialogDemand" width="1400px">
@@ -1159,11 +1180,45 @@ header-color="teal" :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale">
         </v-card-actions>
     </v-card>
 </v-dialog>
+<v-dialog v-model="qrScanDialog" persistent max-width="600">
+    <v-card>
+        <v-card-title class="text-subtitle-1 white--text px-4 py-2" style="background-color: #01a6be;">
+            <v-icon size="20" color="white" class="mr-2">mdi-qrcode-scan</v-icon>
+            {{ $t('QR Code Scanner') }}
+            <v-spacer></v-spacer>
+            <v-btn icon x-small @click="closeQrDialog">
+                <v-icon size="18" color="white">mdi-close</v-icon>
+            </v-btn>
+        </v-card-title>
+        <v-card-text class="pa-4">
+            <v-textarea v-model="parse_cccd" ref="cccdField" outlined dense hide-details
+            placeholder="Scan QR code..." class="mt-1" autofocus rows="2"
+            @keyup.enter="parseCCCDQRCode(parse_cccd)"></v-textarea>
+        </v-card-text>
+    </v-card>
+</v-dialog>
+
+<!-- Add new confirmation dialog -->
+<v-dialog v-model="modifyConfirmDialog" max-width="400">
+    <v-card>
+        <v-card-title class="text-h5">{{ $t('Warning') }}</v-card-title>
+        <v-card-text>{{ $t('You have unsaved changes. Do you want to override the current data?')
+        }}</v-card-text>
+        <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="grey darken-1" text @click="cancelModify">{{ $t('No') }}</v-btn>
+            <v-btn color="blue darken-1" text @click="confirmModify">{{ $t('Yes') }}</v-btn>
+        </v-card-actions>
+    </v-card>
+</v-dialog>
 </v-app>
 </template>
 <script>
 import dayjs from "dayjs";
 export default {
+    head: {
+        title: 'Create candidate'
+    },
     data() {
         return {
             loading: false,
@@ -1201,7 +1256,7 @@ export default {
             sub_tel: '',
             sub_address: '',
             nation: 'VN',
-            nationality: 'Việt Nam',
+            nationality: '',
             empno_hrm: '',
             newDept: '',
             position: '',
@@ -1216,8 +1271,8 @@ export default {
             direct: '',
             married: '',
             edu: '',
-            birth_province: 'Tây Ninh',
-            province: 'Tây Ninh',
+            birth_province: '',
+            province: '',
             bus_info: '',
             school_gra: '',
             change_date: '',
@@ -1235,7 +1290,7 @@ export default {
             item_dantoc: [],
             item_religious: [],
             item_deputy: ['1000A', '2000A', '3000A', '4000A', '5000A', '6000A', '7000A', '8000A', '9000A'],
-            item_level: [1, 2, 3, 4, 5, 6, 7, 8, 9],
+            item_level: ['1','2','3','4','5','6','7','8','9'],
             item_code_mc: ['VG'],
             item_loc_work: ['VG'],
             item_direct: [],
@@ -1332,6 +1387,15 @@ export default {
             replydate: false,
             subItems: [],
             pos: [],
+            qrScanDialog: false,
+            parse_cccd: '',
+            hasUnsavedChanges: false,
+            modifyConfirmDialog: false,
+            pendingQRData: null,
+            isEditMode: false,
+            hasExistingData: false,
+            originalData: null,
+            hasScannedOnce: false, // <--- thêm cờ kiểm soát lần quét đầu tiên
         }
     },
     watch: {
@@ -1340,6 +1404,7 @@ export default {
         },
         address(newVal) {
             this.sub_address = newVal;
+            this.hasUnsavedChanges = true;
         },
         dept_apply: {
             handler(newVal) {
@@ -1355,7 +1420,6 @@ export default {
         loc_apply: {
             handler(newVal) {
                 if (newVal) {
-                    // Find the matching position from item_position based on loc_apply
                     const matchingPosition = this.item_position.find(pos =>
                     this.positionMapping[newVal]?.includes(pos.name[this.$i18n.locale] || pos.name)
                     );
@@ -1385,7 +1449,13 @@ export default {
                 this.updateTrialPeriod();
             },
             immediate: true
-        }
+        },
+        name() { this.hasUnsavedChanges = true; },
+        cccd() { this.hasUnsavedChanges = true; },
+        dateBirth() { this.hasUnsavedChanges = true; },
+        gender() { this.hasUnsavedChanges = true; },
+        // address() { this.hasUnsavedChanges = true; },
+        selectedDatecccd() { this.hasUnsavedChanges = true; },
     },
     methods: {
         async getReasons() {
@@ -1561,7 +1631,7 @@ export default {
                         code: item.sub_division,
                         name: item.sub_division,
                         id: item.id,
-                        fid: item.fid 
+                        fid: item.fid
                     });
                 }
             });
@@ -1594,7 +1664,7 @@ export default {
             }
             
             const deptCode = this.dept_apply.code;
-            let subDepts = this.allDepartments[deptCode] ;
+            let subDepts = this.allDepartments[deptCode];
             
             this.item_newDept = subDepts;
             
@@ -1706,7 +1776,7 @@ export default {
                         };
                     }
                     try {
-                        code = JSON.parse(x.religious_no); 
+                        code = JSON.parse(x.religious_no);
                     } catch (e) {
                         code = x.religious_no;
                     }
@@ -1851,6 +1921,7 @@ export default {
                 dateofbirth: this.dateBirth,
                 gender: this.gender,
                 emp_id: this.cccd,
+                emp_id_old: this.oldId,
                 position: this.loc_apply,
                 apply_dp: this.dept_apply?.name || '', // Thay đổi để lưu id của department
                 hr_iv_date: this.date_hr_inter,
@@ -1862,7 +1933,7 @@ export default {
                 reg: this.inWorker,
                 ex_en_date: this.inDateWork,
                 act_en_date: this.inDateAccWork,
-                recru_source: this.source_recruit?.code, // Add fallback to null
+                recru_source: this.source_recruit?.code, 
                 brou_com_bus: this.interview_bus,
                 regedForBus: this.reg_bus,
                 vg_work_times: this.inVG,
@@ -2005,6 +2076,8 @@ export default {
             this.email = '';
             this.reply_check = '';
             this.reply_date = '';
+            this.focusCccdField();
+            this.hasUnsavedChanges = false;
         },
         async getAllByQuery() {
             try {
@@ -2012,7 +2085,10 @@ export default {
                 
                 const res = await this.$axios.get(this.api + 'getDataById/' + this.id);
                 if (res.status === 200) {
+                    this.hasExistingData = true;
                     let data = res.data;
+                    
+                    
                     const matchingDept = this.item_dept_apply.find(dept => dept.name === data.apply_dp);
                     if (matchingDept) {
                         this.dept_apply = matchingDept;
@@ -2079,6 +2155,7 @@ export default {
                     this.dantoc = this.item_dantoc.find(x => String(x.code) === String(data.ethnic));
                     this.religious = this.item_religious.find(x => String(x.code) === String(data.religious));
                     this.level = data.tmp_levelid;
+                    console.log('Level gán là:', this.level);
                     this.deputy = data.tmp_rankid;
                     this.code_mc = data.tmp_siteid;
                     this.loc_work = data.tmp_workareaid;
@@ -2103,6 +2180,16 @@ export default {
                     this.email = data.email;
                     this.reply_check = data.reply_check;
                     this.reply_date = data.reply_date;
+                    this.hasUnsavedChanges = false; // Reset lại trạng thái sau khi load dữ liệu
+                    this.originalData = {
+                        cccd: this.cccd,
+                        name: this.name,
+                        dateBirth: this.dateBirth,
+                        gender: this.gender,
+                        address: this.address,
+                        sub_address: this.sub_address,
+                        selectedDatecccd: this.selectedDatecccd
+                    };
                     
                 }
                 
@@ -2112,78 +2199,75 @@ export default {
         },
         async checkEmpno() {
             try {
-                const res = await this.$axios.get(this.api + 'checkCccd/' + this.cccd);
-                if (res.status === 200) {
-                    this.inVG = res.data.count;
-                    this.empno_old = res.data.EMPNO;
-                    this.getDataResign();
-                    if (this.inVG > 0) {
-                        await this.getAllDataCandidate();
-                        if (this.dataCadidates && Object.keys(this.dataCadidates).length > 0) {
-                            const data = this.dataCadidates;
-                            
-                            this.dept_apply = this.item_dept_apply.find(dept => {
-                                return String(dept.id) === String(data.apply_dp);
-                            });
-                            await this.$nextTick();
-                            // this.newDept = this.item_newDept.find(x => String(x.code) === String(data.tmp_departid));
-                            this.name = data.candidate_name;
-                            this.gender = data.gender;
-                            this.dateBirth = this.formatDate(data.dateofbirth);
-                            // this.loc_apply = data.position;
-                            // this.date_hr_inter = this.formatDate(data.hr_iv_date);
-                            // this.date_hr_review = this.formatDate(data.hr_ac_date);
-                            // this.date_dept_inter = this.formatDate(data.dp_iv_date);
-                            // this.date_dept_review = this.formatDate(data.dp_ac_date);
-                            // this.hrAcc = data.hr_ac_qu;
-                            // this.deptACC = data.dp_ac_qu;
-                            // this.inWorker = data.reg;
-                            // this.inDateWork = this.formatDate(data.ex_en_date);
-                            // this.inDateAccWork = this.formatDate(data.act_en_date);
-                            // this.source_recruit = this.item_source_recruit.find(x => String(x.code) === String(data.recru_source));
-                            // this.interview_bus = data.brou_com_bus;
-                            // this.reg_bus = data.regedForBus;
-                            // this.empno_old = data.old_empno;
-                            // this.comp_return = data.re_vg_from;
-                            // this.date_cv = this.formatDate(data.cv_received_at);
-                            // this.date_salary = this.formatDate(data.salary_signed_at);
-                            // this.remark = data.note;
-                            this.school_gra = data.school;
-                            // this.dm_id = data.emp_demandid;
-                            // this.dm_Subpos = data.sub_position;
-                            this.tel = data.regTel;
-                            this.address = data.regAddress;
-                            this.sub_tel = data.commTel;
-                            this.sub_address = data.commAddress;
-                            this.nation = data.countryid;
-                            // this.empno_hrm = data.newEmpno;
-                            // this.parameters = data.tmp_idyclass;
-                            // this.position = this.item_position.find(x => String(x.code) === String(data.tmp_dutyid));
-                            this.dantoc = this.item_dantoc.find(x => String(x.code) === String(data.tmp_ca));
-                            this.religious = this.item_religious.find(x => String(x.code) === String(data.religious));
-                            // this.level = data.tmp_levelid;
-                            // this.deputy = data.tmp_rankid;
-                            // this.code_mc = data.tmp_siteid;
-                            // this.loc_work = data.tmp_workareaid;
-                            // this.direct = this.item_direct.find(x => String(x.code) === String(data.isdirect));
-                            // this.nationality = data.national;
-                            this.married = this.item_married.find(x => String(x.code) === String(data.marrage));
-                            // this.birth_province = this.item_birth_province.find(x => String(x.code) === String(data.birth_province));
-                            // this.province = this.item_province.find(x => String(x.code) === String(data.province));
-                            this.edu = this.item_edu.find(x => String(x.code) === String(data.edu));
-                            // this.time_trial = data.probation;
-                            // this.bus_info = data.bus_info;
-                            this.selectedDatecccd = this.formatDate(data.datecccd);
-                            // this.reason = data.reason;
-                            // this.change_date = this.formatDate(data.change_en_date);
-                            this.work_exp = data.work_exp;
-                            this.ex_company = data.ex_company;
-                            this.ex_position = data.ex_position;
+                let totalCount = 0;
+                
+                const resCCCD = await this.$axios.get(this.api + 'checkCccd/' + this.cccd);
+                if (resCCCD.status === 200) {
+                    totalCount += resCCCD.data.count;
+                    this.empno_old = resCCCD.data.EMPNO;
+                }
+                
+                if (this.oldId && this.oldId.trim() !== '') {
+                    const resOldId = await this.$axios.get(this.api + 'checkCccd/' + this.oldId);
+                    if (resOldId.status === 200) {
+                        totalCount += resOldId.data.count;
+                        if (!this.empno_old) {
+                            this.empno_old = resOldId.data.EMPNO;
                         }
                     }
-                    else {
+                }
+                
+                this.inVG = totalCount;
+                await this.getDataResign();
+                if (this.inVG > 0) {
+                    if (this.dataCadidates && Object.keys(this.dataCadidates).length > 0) {
+                        const data = this.dataCadidates;
+                        
+                        this.dept_apply = this.item_dept_apply.find(dept => {
+                            return String(dept.id) === String(data.apply_dp);
+                        });
+                        await this.$nextTick();
+                        this.name = data.candidate_name;
+                        this.gender = data.gender;
+                        this.dateBirth = this.formatDate(data.dateofbirth);
+                        this.cccd = data.emp_id;
+                        this.loc_apply = data.position;
+                        this.date_hr_inter = data.hr_iv_date;
+                        this.date_hr_review = data.hr_ac_date;
+                        this.date_dept_inter = data.dp_iv_date;
+                        this.date_dept_review = data.dp_ac_date;
+                        this.inWorker = data.reg;
+                        this.inDateWork = data.ex_en_date;
+                        this.inDateAccWork = data.act_en_date;
+                        this.date_cv = data.cv_received_at;
+                        this.date_salary = data.salary_signed_at;
+                        this.selectedDatecccd = data.datecccd;
+                        this.change_date = data.change_en_date;
+                        this.source_recruit = this.item_source_recruit.find(x => String(x.code) === String(data.recru_source));
+                        this.interview_bus = data.brou_com_bus;
+                        this.reg_bus = data.regedForBus;
+                        this.inVG = data.vg_work_times;
+                        this.empno_old = data.old_empno;
+                        this.comp_return = data.re_vg_from;
+                        this.remark = data.note;
+                        this.school_gra = data.school;
+                        this.tel = data.regTel;
+                        this.address = data.regAddress;
+                        this.sub_tel = data.commTel;
+                        this.sub_address = data.commAddress;
+                        this.nation = data.countryid;
+                        this.dantoc = this.item_dantoc.find(x => String(x.code) === String(data.tmp_ca));
+                        this.religious = this.item_religious.find(x => String(x.code) === String(data.religious));
+                        this.married = this.item_married.find(x => String(x.code) === String(data.marrage));
+                        this.edu = this.item_edu.find(x => String(x.code) === String(data.edu));
+                        this.selectedDatecccd = this.formatDate(data.datecccd);
+                        this.work_exp = data.work_exp;
+                        this.ex_company = data.ex_company;
+                        this.ex_position = data.ex_position;
                     }
                 }
+                this.focusCccdField();
+                
             } catch (error) {
                 console.error('Error checking CCCD:', error);
                 this.$notify({
@@ -2242,6 +2326,26 @@ export default {
             this.input_source.vi = data.name.vi;
             this.input_source.en = data.name.en;
             this.input_source.cn = data.name.cn;
+        },
+        focusCccdField() {
+            if (this.$refs.cccdField) {
+                this.$refs.cccdField.focus();
+                
+                document.addEventListener('click', () => {
+                    setTimeout(() => {
+                        if (this.$refs.cccdField) {
+                            this.$refs.cccdField.focus();
+                        }
+                    }, 100);
+                }, { once: true });
+            } else {
+                // If the ref doesn't exist yet, try again after a short delay
+                setTimeout(() => {
+                    if (this.$refs.cccdField) {
+                        this.$refs.cccdField.focus();
+                    }
+                }, 100);
+            }
         },
         focusNameField() {
             this.$refs.nameField.focus();
@@ -2311,16 +2415,19 @@ export default {
                 emp_id: this.cccd,
             };
             try {
-                const response = await this.$axios.post(this.api + 'GetDataByCCCDResign', params);
+                let response = await this.$axios.post(this.api + 'GetDataByCCCDResign', params);
+                if ((!response.data || response.data.length === 0) && this.oldId && this.oldId.trim() !== '') {
+                    params.emp_id = this.oldId;
+                    response = await this.$axios.post(this.api + 'GetDataByCCCDResign', params);
+                }
                 this.resignData = response.data;
-                
             } catch (error) {
                 console.error("Error fetching employee data:", error);
-            } finally {
             }
         },
-        showResignDialog() {
-            if (this.resignData && Object.keys(this.resignData).length > 0) {
+        async showResignDialog() {
+            await this.getDataResign();
+            if (this.resignData) {
                 this.resignDialog = true;
             } else {
                 this.$notify({
@@ -2363,7 +2470,7 @@ export default {
             try {
                 this.loading = true;
                 this.confirmDialog = false;
-                const res = await this.$axios.get(this.api + 'deleteDataById/' + this.id);
+                const res = await this.$axios.get(this.api + 'changeStatus/' + this.id);
                 if (res.status === 200) {
                     this.$notify({
                         title: 'Success',
@@ -2399,12 +2506,6 @@ export default {
             const directD = this.item_direct.find(d => d.name === 'D');
             const directI = this.item_direct.find(d => d.name === 'I');
             
-            // console.log('deptDetails:', deptDetails);
-            // console.log('positionCode:', positionCode);
-            // console.log('directD:', directD);
-            // console.log('directI:', directI);
-            
-            // Set direct dựa trên điều kiện
             if (deptDetails?.fid === 'D' && positionCode === 'C02') {
                 this.direct = directD;
             } else {
@@ -2412,26 +2513,169 @@ export default {
             }
         },
         updateTrialPeriod() {
-            // For position C02, set to 6
+            this.time_trial = '';
+            
+            // Nếu là Worker (C02) thì luôn là 6 ngày thử việc
             if (this.position?.code === 'C02') {
                 this.time_trial = 6;
                 return;
             }
             
-            // For other positions, check education level
+            // Nếu có mã học vấn, xét theo trình độ học vấn
             if (this.edu?.code) {
                 const eduCode = parseInt(this.edu.code);
                 
-                // For education codes 001-006
+                // Từ code 1-6: Tiểu học đến THPT - 30 ngày thử việc  
                 if (eduCode >= 1 && eduCode <= 6) {
                     this.time_trial = 30;
                 }
-                // For education codes 007-010 
+                // Từ code 7-10: Cao đẳng trở lên - 60 ngày thử việc
                 else if (eduCode >= 7 && eduCode <= 10) {
                     this.time_trial = 60;
                 }
             }
-        }
+        },
+        parseCCCDQRCode(qrData) {
+            try {
+                if (!qrData || typeof qrData !== 'string') {
+                    throw new Error('Invalid input: QR data must be a non-empty string');
+                }
+                const parts = qrData.split('|').map(part => part.trim());
+                const requiredFields = ['CCCD', 'Old ID', 'Full Name', 'Birth Date', 'Gender', 'Address', 'Issue Date'];
+                
+                if (parts.length < requiredFields.length) {
+                    throw new Error(`Invalid QR format: Expected ${requiredFields.length} fields, got ${parts.length}`);
+                }
+                
+                const [cccdNumber, oldId, fullName, birthDate, gender, address, issueDate] = parts;
+                if (!/^\d{12}$/.test(cccdNumber)) {
+                    throw new Error('Invalid CCCD format: Must be 12 digits');
+                }
+                const parseDateField = (dateStr, fieldName) => {
+                    if (!dateStr || dateStr.length !== 8) {
+                        throw new Error(`Invalid ${fieldName} format: Must be DDMMYYYY`);
+                    }
+                    
+                    const day = dateStr.substring(0, 2);
+                    const month = dateStr.substring(2, 4);
+                    const year = dateStr.substring(4, 8);
+                    
+                    // Validate date components
+                    const dateObj = new Date(year, month - 1, day);
+                    if (isNaN(dateObj.getTime())) {
+                        throw new Error(`Invalid ${fieldName}: Not a valid date`);
+                    }
+                    
+                    return `${year}-${month}-${day}`;
+                };
+                
+                // Update component data with validation
+                this.cccd = cccdNumber;
+                this.oldId = oldId;
+                this.name = fullName.toUpperCase();
+                this.dateBirth = parseDateField(birthDate, 'birth date');
+                this.gender = /^nam$/i.test(gender.trim()) ? '0' : '1';
+                this.address = address.toUpperCase();
+                this.sub_address = this.address;
+                
+                if (issueDate) {
+                    this.selectedDatecccd = parseDateField(issueDate, 'issue date');
+                }
+                this.closeQrDialog();
+                this.checkEmpno();
+                this.hasScannedOnce = true; // <--- đánh dấu đã quét ít nhất 1 lần
+            } catch (error) {
+                this.$notify({
+                    title: 'Error',
+                    text: error.message || 'Invalid QR code format',
+                    type: 'error'
+                });
+                this.cccd = '';
+                this.oldId = '';
+            }
+        },
+        
+        closeQrDialog() {
+            this.qrScanDialog = false;
+        },
+        cancelModify() {
+            this.modifyConfirmDialog = false;
+            this.pendingQRData = null;
+        },
+        
+        confirmModify() {
+            this.modifyConfirmDialog = false;
+            if (this.pendingQRData) {
+                this.parseCCCDQRCode(this.pendingQRData);
+                this.pendingQRData = null;
+            }
+        },
+        toggleEditMode() {
+            if (this.isEditMode) {
+                // Save changes
+                this.savePersonalInfo();
+            } else {
+                // Enter edit mode
+                this.originalData = {
+                    cccd: this.cccd,
+                    name: this.name,
+                    dateBirth: this.dateBirth,
+                    gender: this.gender,
+                    address: this.address,
+                    sub_address: this.sub_address,
+                    selectedDatecccd: this.selectedDatecccd
+                };
+            }
+            this.isEditMode = !this.isEditMode;
+        },
+        
+        async savePersonalInfo() {
+            try {
+                // Validate personal info fields
+                this.validateName();
+                if (this.nameError) {
+                    this.$notify({
+                        title: 'Error',
+                        text: this.$t('Name is required'),
+                        type: 'error'
+                    });
+                    return;
+                }
+                
+                const params = {
+                    id: this.id,
+                    emp_id: this.cccd,
+                    candidate_name: this.name,
+                    dateofbirth: this.dateBirth,
+                    gender: this.gender,
+                    regAddress: this.address,
+                    commAddress: this.sub_address,
+                    datecccd: this.selectedDatecccd
+                };
+                
+                const response = await this.$axios.post(this.api + 'updatePersonalInfo', params);
+                
+                if (response.status === 200) {
+                    this.$notify({
+                        title: 'Success',
+                        text: this.$t('Personal information updated successfully'),
+                        type: 'success'
+                    });
+                    this.originalData = null;
+                }
+            } catch (error) {
+                console.error('Error saving personal info:', error);
+                this.$notify({
+                    title: 'Error',
+                    text: this.$t('Failed to update personal information'),
+                    type: 'error'
+                });
+                // Restore original data on error
+                if (this.originalData) {
+                    Object.assign(this, this.originalData);
+                }
+            }
+        },
     },
     mounted() {
         const sessionUser = this.$session.get("recruiting-report");
@@ -2458,12 +2702,36 @@ export default {
         if (this.$route.query.id) {
             this.id = this.$route.query.id;
             this.getAllByQuery();
+            this.qrScanDialog = false;
         }
         else {
         }
         this.$nextTick(() => {
-            // Focus the name field when component is mounted
-            this.focusNameField();
+            // this.focusNameField();
+            if (this.qrScanDialog && this.$refs.cccdField) {
+                setTimeout(() => {
+                    this.$refs.cccdField.focus();
+                }, 300);
+            }
+        });
+        window.addEventListener('message', (event) => {
+            const allowedOrigins = [
+            'http://gmo021.cansportsvg.com:3043',
+            'https://gmo021.cansportsvg.com',
+            'http://gmo021.cansportsvg.com'
+            ];
+            if (allowedOrigins.includes(event.origin)) {
+                if (event.data && event.data.type === 'SCANNER_DATA_RECEIVED' && event.data.data) {
+                    // Sửa điều kiện: chỉ hỏi xác nhận nếu KHÔNG phải lần đầu (hasScannedOnce) và có thay đổi chưa lưu
+                    if (this.hasUnsavedChanges && this.hasScannedOnce) {
+                        this.pendingQRData = event.data.data;
+                        this.modifyConfirmDialog = true;
+                    } else {
+                        this.parseCCCDQRCode(event.data.data);
+                        this.qrScanDialog = false;
+                    }
+                }
+            }
         });
     }
 }
@@ -2600,5 +2868,13 @@ export default {
     line-height: 2rem;
     letter-spacing: 0.0125em;
     padding: 16px;
+}
+
+.edit-mode {
+    background-color: #fff9c4;
+}
+
+.v-text-field.readonly>>>.v-input__slot {
+    background-color: #f5f5f5;
 }
 </style>

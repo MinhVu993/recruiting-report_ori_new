@@ -129,7 +129,7 @@
                 <template v-slot:[`item.er_age`]="{ item }">
                     {{ Number(item.er_age) }}
                 </template>
-
+                
                 <template v-slot:[`item.er_seniority`]="{ item }">
                     {{ Number(item.er_seniority).toFixed(1) }}
                 </template>
@@ -384,11 +384,15 @@ export default {
     directives: {
         mask
     },
+       head: {
+        title: 'Resignation listing'
+    },
     components: { DsFilter },
     data() {
         return {
             search: '', 
             api: 'http://gmo021.cansportsvg.com/api/vg-recuitingReport/',
+            api_mpr: 'http://gmo021.cansportsvg.com/api/vg-mpr/',
             today: dayjs().format('YYYY-MM-DD'),
             dialog: false,
             saving: false,
@@ -490,9 +494,9 @@ export default {
             // Nếu đang tìm kiếm, sử dụng paginatedData đã được lọc
             if (this.search) {
                 return this.paginatedData.filter(item => 
-                    Object.entries(item).some(([key, value]) => 
-                        this.filterBy(value, this.search, { key })
-                    )
+                Object.entries(item).some(([key, value]) => 
+                this.filterBy(value, this.search, { key })
+                )
                 );
             }
             
@@ -579,9 +583,24 @@ export default {
                 value: dept.deptId
             }));
         },
-       
+        
     },
     methods: {
+    async getResignedCandidatesCount() {
+            try {
+                const res = await this.$axios.get(this.api_mpr + 'countResignedCandidates');
+                if (res.status === 200) {
+                }
+            } catch (error) {
+                console.error('Error fetching resigned candidates count:', error);
+                this.$notify({
+                    title: 'Error',
+                    text: 'Failed to fetch resigned candidates count',
+                    type: 'error'
+                });
+            }
+            return 0;
+        },
         async getReasons() {
             try {
                 const res = await this.$axios.get(this.api + 'getDataReasonResign');
@@ -607,12 +626,12 @@ export default {
         },
         applyFilters(item) {
             if (!item) return true;
-
+            
             // Department filter
             if (this.filters.deptid && item.er_deptid !== this.filters.deptid) {
                 return false;
             }
-
+            
             // Date range filter
             if (this.filters.dateRange && this.filters.dateRange.length === 2) {
                 const itemDate = new Date(item.er_resigndate);
@@ -636,7 +655,7 @@ export default {
                     return false;
                 }
             }
-
+            
             return true;
         },
         normalizeText(text) {
@@ -699,6 +718,7 @@ export default {
                         type: 'success'
                     });
                     await this.getAllData();
+                    await this.getResignedCandidatesCount();
                     this.resetForm();
                     // this.dialog = false;
                 }
@@ -791,7 +811,7 @@ export default {
                         er_bus: data.transportation || [],
                         er_hometown: data.hometowns || [],
                     };
-
+                    
                     // After getting reasons, update reason-related filters
                     await this.getReasons();
                 }
@@ -799,7 +819,7 @@ export default {
                 console.error('Error initializing filters:', error);
             }
         },
-
+        
         async getAllData() {
             this.loading = true;
             try {
@@ -808,13 +828,13 @@ export default {
                     await this.initializeFilters();
                     this.filtersInitialized = true;
                 }
-
+                
                 // Convert client-side filter format to server-side format
                 const serverFilters = {
                     ...this.filters,
                     activeFilters: this.activeFilters
                 };
-
+                
                 const params = {
                     page: this.currentPage,
                     perPage: this.itemsPerPage,
@@ -823,7 +843,7 @@ export default {
                     sortBy: this.tableOptions.sortBy[0] || 'er_resigndate',
                     sortDesc: this.tableOptions.sortDesc[0] || true
                 };
-
+                
                 const response = await this.$axios.post(this.api + 'getResignData_new', params);
                 
                 if (response.status === 200) {
@@ -941,88 +961,88 @@ export default {
             });
         },
         async exportExcel() {
-    try {
-        this.loading = true;
-        // Lấy toàn bộ dữ liệu đã lọc (không phân trang)
-        const response = await this.$axios.post(this.api + 'getResignData_new', {
-            all: true,
-            filters: this.filters,
-            search: this.search
-        });
-
-        let allData = response.data && response.data.data ? response.data.data : [];
-        // Áp dụng filter lại nếu cần (nếu server chưa filter đủ)
-        allData = allData.filter(item => this.applyFilters(item));
-
-        if (!allData.length) {
-            this.$notify({
-                title: 'Warning',
-                text: 'No data to export',
-                type: 'warning'
-            });
-            return;
-        }
-
-        const colWidths = [
-            { wch: 10 }, { wch: 20 }, { wch: 10 }, { wch: 10 }, { wch: 15 }, { wch: 10 },
-            { wch: 25 }, { wch: 15 }, { wch: 8 }, { wch: 12 }, { wch: 15 }, { wch: 10 },
-            { wch: 20 }, { wch: 30 }, { wch: 30 }, { wch: 40 }, { wch: 30 },
-        ];
-        const headers = [
-            'Employee ID', 'Full Name', 'IC no', 'Indate', 'Resignation Date', 'Department', 'Department Name',
-            'Position', 'Age', 'Seniority', 'Transportation', 'Gender',
-            'Hometown', 'Reason', 'Note', 'Address', 'Type resign'
-        ];
-        const data = allData.map(item => [
-            { v: item.er_empid, t: 's', z: '@' },
-            item.er_name,
-            item.er_numberid,
-            dayjs(item.er_indate).format('YYYY-MM-DD'),
-            dayjs(item.er_resigndate).format('YYYY-MM-DD'),
-            item.er_deptid,
-            item.er_deptname,
-            item.er_joblevel,
-            item.er_age,
-            item.er_seniority,
-            item.er_bus,
-            item.er_gender,
-            item.er_hometown,
-            this.getLocalizedReason(item.er_reason),
-            item.er_note,
-            item.er_address,
-            this.getLocalizedTypeResign(item.er_reason)
-        ]);
-        const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
-        ws['!cols'] = colWidths;
-        const wb = XLSX.utils.book_new();
-        XLSX.utils.book_append_sheet(wb, ws, 'Resignation List');
-
-        let filename = 'Resignation_Report';
-        if (this.filters.deptid) filename += `_Dept${this.filters.deptid}`;
-        if (this.filters.reason) filename += `_${this.filters.reason.substring(0, 10)}`;
-        if (this.filters.dateRange && this.filters.dateRange.length === 2) {
-            filename += `_${this.filters.dateRange[0]}_${this.filters.dateRange[1]}`;
-        }
-        filename += `_${this.today}.xlsx`;
-
-        XLSX.writeFile(wb, filename);
-
-        this.$notify({
-            title: 'Success',
-            text: `Exported ${data.length} records successfully`,
-            type: 'success'
-        });
-    } catch (error) {
-        console.error('Export error:', error);
-        this.$notify({
-            title: 'Error',
-            text: 'Failed to export Excel file',
-            type: 'error'
-        });
-    } finally {
-        this.loading = false;
-    }
-},
+            try {
+                this.loading = true;
+                // Lấy toàn bộ dữ liệu đã lọc (không phân trang)
+                const response = await this.$axios.post(this.api + 'getResignData_new', {
+                    all: true,
+                    filters: this.filters,
+                    search: this.search
+                });
+                
+                let allData = response.data && response.data.data ? response.data.data : [];
+                // Áp dụng filter lại nếu cần (nếu server chưa filter đủ)
+                allData = allData.filter(item => this.applyFilters(item));
+                
+                if (!allData.length) {
+                    this.$notify({
+                        title: 'Warning',
+                        text: 'No data to export',
+                        type: 'warning'
+                    });
+                    return;
+                }
+                
+                const colWidths = [
+                { wch: 10 }, { wch: 20 }, { wch: 10 }, { wch: 10 }, { wch: 15 }, { wch: 10 },
+                { wch: 25 }, { wch: 15 }, { wch: 8 }, { wch: 12 }, { wch: 15 }, { wch: 10 },
+                { wch: 20 }, { wch: 30 }, { wch: 30 }, { wch: 40 }, { wch: 30 },
+                ];
+                const headers = [
+                'Employee ID', 'Full Name', 'IC no', 'Indate', 'Resignation Date', 'Department', 'Department Name',
+                'Position', 'Age', 'Seniority', 'Transportation', 'Gender',
+                'Hometown', 'Reason', 'Note', 'Address', 'Type resign'
+                ];
+                const data = allData.map(item => [
+                { v: item.er_empid, t: 's', z: '@' },
+                item.er_name,
+                item.er_numberid,
+                dayjs(item.er_indate).format('YYYY-MM-DD'),
+                dayjs(item.er_resigndate).format('YYYY-MM-DD'),
+                item.er_deptid,
+                item.er_deptname,
+                item.er_joblevel,
+                item.er_age,
+                item.er_seniority,
+                item.er_bus,
+                item.er_gender,
+                item.er_hometown,
+                this.getLocalizedReason(item.er_reason),
+                item.er_note,
+                item.er_address,
+                this.getLocalizedTypeResign(item.er_reason)
+                ]);
+                const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
+                ws['!cols'] = colWidths;
+                const wb = XLSX.utils.book_new();
+                XLSX.utils.book_append_sheet(wb, ws, 'Resignation List');
+                
+                let filename = 'Resignation_Report';
+                if (this.filters.deptid) filename += `_Dept${this.filters.deptid}`;
+                if (this.filters.reason) filename += `_${this.filters.reason.substring(0, 10)}`;
+                if (this.filters.dateRange && this.filters.dateRange.length === 2) {
+                    filename += `_${this.filters.dateRange[0]}_${this.filters.dateRange[1]}`;
+                }
+                filename += `_${this.today}.xlsx`;
+                
+                XLSX.writeFile(wb, filename);
+                
+                this.$notify({
+                    title: 'Success',
+                    text: `Exported ${data.length} records successfully`,
+                    type: 'success'
+                });
+            } catch (error) {
+                console.error('Export error:', error);
+                this.$notify({
+                    title: 'Error',
+                    text: 'Failed to export Excel file',
+                    type: 'error'
+                });
+            } finally {
+                this.loading = false;
+            }
+        },
         clearFilters() {
             this.search = '';
             this.filters = {
@@ -1037,7 +1057,7 @@ export default {
                 this.handleFilterChange();
                 this.$forceUpdate();
             });
-
+            
             this.$notify({
                 title: 'Success',
                 text: this.$t('All filters have been cleared'),
@@ -1064,7 +1084,7 @@ export default {
                     all: true, // Request all records without pagination
                     filters: this.filters
                 });
-
+                
                 if (!response.data || !response.data.data) {
                     this.$notify({
                         title: 'Warning',
@@ -1073,31 +1093,31 @@ export default {
                     });
                     return;
                 }
-
+                
                 // Áp dụng bộ lọc cho tất cả dữ liệu
                 let allFilteredData = response.data.data;
                 
                 // Áp dụng search nếu có
                 if (this.search) {
                     allFilteredData = allFilteredData.filter(item =>
-                        Object.entries(item).some(([key, value]) => {
-                            if (key === 'er_reason') {
-                                return this.normalizeText(this.getLocalizedReason(value))
-                                    .includes(this.normalizeText(this.search));
-                            }
-                            if (key === 'er_type_resign') {
-                                return this.normalizeText(this.getLocalizedTypeResign(item.er_reason))
-                                    .includes(this.normalizeText(this.search));
-                            }
-                            return value && this.normalizeText(String(value))
-                                .includes(this.normalizeText(this.search));
-                        })
+                    Object.entries(item).some(([key, value]) => {
+                        if (key === 'er_reason') {
+                            return this.normalizeText(this.getLocalizedReason(value))
+                            .includes(this.normalizeText(this.search));
+                        }
+                        if (key === 'er_type_resign') {
+                            return this.normalizeText(this.getLocalizedTypeResign(item.er_reason))
+                            .includes(this.normalizeText(this.search));
+                        }
+                        return value && this.normalizeText(String(value))
+                        .includes(this.normalizeText(this.search));
+                    })
                     );
                 }
-
+                
                 // Áp dụng các bộ lọc khác
                 allFilteredData = allFilteredData.filter(item => this.applyFilters(item));
-
+                
                 if (allFilteredData.length === 0) {
                     this.$notify({
                         title: 'Warning',
@@ -1106,7 +1126,7 @@ export default {
                     });
                     return;
                 }
-
+                
                 // Process data for printing
                 const printData = {
                     data: allFilteredData.map(item => ({
@@ -1116,18 +1136,18 @@ export default {
                     })),
                     dateRange: this.formatDateRange || ''
                 };
-
+                
                 // Save to localStorage for print page
                 const printKey = `resign-print-data-${Date.now()}`;
                 localStorage.setItem(printKey, JSON.stringify(printData));
-
+                
                 // Open print window
                 const route = this.$router.resolve({
                     path: '/template-print/resign',
                     query: { key: printKey }
                 });
                 window.open(route.href, '_blank');
-
+                
             } catch (error) {
                 console.error('Print error:', error);
                 this.$notify({
@@ -1194,7 +1214,7 @@ export default {
             const searchTerm = this.normalizeText(search);
             
             if (value === null || value === undefined) return false;
-
+            
             if (item) {
                 const field = item.key || '';
                 
@@ -1209,17 +1229,17 @@ export default {
             }
             return this.normalizeText(String(value)).includes(searchTerm);
         },
-
+        
         normalizeText(text) {
             if (!text) return '';
             return String(text)
-                .toLowerCase()
-                .normalize('NFD')
-                .replace(/[\u0300-\u036f]/g, '')
-                .replace(/[đĐ]/g, 'd')
-                .trim();
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[đĐ]/g, 'd')
+            .trim();
         },
-
+        
         handleSearch() {
             if (this.searchTimeout) {
                 clearTimeout(this.searchTimeout);
@@ -1243,18 +1263,18 @@ export default {
                             const allData = response.data.data;
                             // Apply search filter on all data
                             this.paginatedData = allData.filter(item => 
-                                Object.entries(item).some(([key, value]) => {
-                                    if (key === 'er_reason') {
-                                        return this.normalizeText(this.getLocalizedReason(value))
-                                            .includes(this.normalizeText(this.search));
-                                    }
-                                    if (key === 'er_type_resign') {
-                                        return this.normalizeText(this.getLocalizedTypeResign(item.er_reason))
-                                            .includes(this.normalizeText(this.search));
-                                    }
-                                    return value && this.normalizeText(String(value))
-                                        .includes(this.normalizeText(this.search));
-                                })
+                            Object.entries(item).some(([key, value]) => {
+                                if (key === 'er_reason') {
+                                    return this.normalizeText(this.getLocalizedReason(value))
+                                    .includes(this.normalizeText(this.search));
+                                }
+                                if (key === 'er_type_resign') {
+                                    return this.normalizeText(this.getLocalizedTypeResign(item.er_reason))
+                                    .includes(this.normalizeText(this.search));
+                                }
+                                return value && this.normalizeText(String(value))
+                                .includes(this.normalizeText(this.search));
+                            })
                             );
                             this.totalItems = this.paginatedData.length;
                             this.isSearching = true;
@@ -1284,7 +1304,7 @@ export default {
             }
             this.handleFilterChange();
         },
-
+        
         handleFilterChange() {
             // Reset về trang đầu tiên khi filter thay đổi
             this.currentPage = 1;
@@ -1386,6 +1406,12 @@ export default {
     z-index: 1;
     text-transform: uppercase;
 }
+.v-data-table ::v-deep thead th,
+.v-data-table ::v-deep tbody td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 .v-data-table ::v-deep tbody tr:hover {
     background-color: #f3fd99 !important;
 }
@@ -1404,144 +1430,144 @@ export default {
 <i18n>
     {   "en": {
         "Resignation listing": "Resignation listing",
-            "Search": "Search",
-            "Input resign": "Input resign",
-            "Export to Excel": "Export to Excel",
-            "Empno": "Empno",
-            "Name": "Name",
-            "Dept": "Dept",
-            "Dept name": "Dept Name",
-            "Job level": "Position",
-            "Age": "Age",
-            "Seniority": "Seniority",
-            "Bus": "Transportation",
-            "Gender": "Gender",
-            "Home town": "Home town",
-            "Reasons": "Reasons",
-            "Note": "Note",
-            "Resign date": "Resign date",
-            "Action": "Action",
-            "Input Resignation": "Input Resignation",
-            "Personal Information": "Personal Information",
-            "Full Name": "Full Name",
-            "Work Information": "Work Information",
-            "Position": "Position",
-            "Vehicle": "Transportation",
-            "Resignation Details": "Resignation Details",
-            "Resignation Date": "Resignation Date",
-            "Reason for Resignation": "Reason for Resignation",
-            "Hometown": "Hometown",
-            "Current Address": "Current Address",
-            "Additional Notes": "Additional Notes",
-            "Cancel": "Cancel",
-            "Save": "Save",
-            "Report": "Report",
-            "Resignation Date Range": "Resignation Date Range",
-            "Clear filters": "Clear filters",
-            "IC no": "IC no",
-            "Print": "Print Resignation List",
-            "Numid": "Number id",
-            "In date": "In date",
-            "Employee already exists": "Employee already exists in resignation list",
-            "Toggle Columns": "Show Columns",
-            "Select All": "Select All",
-            "Type resign": "Type of Resignation",
-            "Load More Data": "Load More Data",
-            "Seniority Years": "Seniority (Years)"
-        },
-        "vi": {
-            "Resignation listing": "Danh sách nghỉ việc",
-            "Search": "Tìm kiếm",
-            "Input resign": "Nhập thông tin nghỉ việc",
-            "Export to Excel": "Xuất Excel",
-            "Empno": "Mã NV",
-            "Name": "Họ tên",
-            "Dept": "Bộ phận",
-            "Dept name": "Tên BP",
-            "Job level": "Chức vụ",
-            "Age": "Tuổi",
-            "Seniority": "Thâm niên",
-            "Bus": "Xe đưa rước",
-            "Gender": "Giới tính",
-            "Home town": "Quê quán",
-            "Reasons": "Lý do",
-            "Note": "Ghi chú",
-            "Resign date": "N.thôi việc",
-            "Action": "Thao tác",
-            "Input Resignation": "Nhập thông tin nghỉ việc",
-            "Personal Information": "Thông tin cá nhân",
-            "Full Name": "Họ và tên",
-            "Work Information": "Thông tin công việc",
-            "Position": "Chức vụ",
-            "Vehicle": "Phương tiện",
-            "Resignation Details": "Chi tiết nghỉ việc",
-            "Resignation Date": "Ngày nghỉ việc",
-            "Reason for Resignation": "Lý do",
-            "Hometown": "Quê quán",
-            "Current Address": "Địa chỉ hiện tại",
-            "Additional Notes": "Ghi chú",
-            "Cancel": "Hủy",
-            "Save": "Lưu",
-            "Report": "Báo cáo",
-            "Resignation Date Range": "N.nghỉ việc",
-            "Clear filters": "Xóa lọc",
-            "IC no": "Số CCCD",
-            "Print": "In DS nghỉ việc",
-            "Numid": "Số CCCD",
-            "In date": "Ngày vào",
-            "Employee already exists": "Nhân viên đã có trong danh sách nghỉ việc",
-            "Toggle Columns": "Ẩn/Hiện Cột",
-            "Select All": "Chọn tất cả",
-            "Type resign": "Loại nghỉ việc",
-            "Load More Data": "Tải thêm dữ liệu",
-            "Seniority Years": "Thâm niên (Năm)"
-        },
-        "cn": {
-            "Resignation listing": "离职列表",
-            "Search": "搜索",
-            "Input resign": "输入离职信息",
-            "Export to Excel": "导出Excel",
-            "Empno": "员工编号",
-            "Name": "姓名",
-            "Dept": "部门",
-            "Dept name": "部门名称",
-            "Job level": "职位",
-            "Age": "年龄",
-            "Seniority": "工龄",
-            "Bus": "交通",
-            "Gender": "性别",
-            "Home town": "籍贯",
-            "Reasons": "原因",
-            "Note": "备注",
-            "Resign date": "离职日期",
-            "Action": "操作",
-            "Input Resignation": "输入离职信息",
-            "Personal Information": "个人信息",
-            "Full Name": "全名",
-            "Work Information": "工作信息",
-            "Position": "职位",
-            "Vehicle": "交通工具",
-            "Resignation Details": "离职详情",
-            "Resignation Date": "离职日期",
-            "Reason for Resignation": "离职原因",
-            "Hometown": "籍贯",
-            "Current Address": "现居地址",
-            "Additional Notes": "附加说明",
-            "Cancel": "取消",
-            "Save": "保存",
-            "Report": "报告",
-            "Resignation Date Range": "离职日期范围",
-            "Clear filters": "清除过滤器",
-            "IC no": "身份证号",
-            "Print": "打印离职列表",
-            "Numid": "身份证号",
-            "In date": "入职日期",
-            "Employee already exists": "员工已存在于离职名单中",
-            "Toggle Columns": "显示/隐藏列",
-            "Select All": "全选",
-            "Type resign": "离职类型",
-            "Load More Data": "加载更多数据",
-            "Seniority Years": "工龄（年）"
-        }
+        "Search": "Search",
+        "Input resign": "Input resign",
+        "Export to Excel": "Export to Excel",
+        "Empno": "Empno",
+        "Name": "Name",
+        "Dept": "Dept",
+        "Dept name": "Dept Name",
+        "Job level": "Position",
+        "Age": "Age",
+        "Seniority": "Seniority",
+        "Bus": "Transportation",
+        "Gender": "Gender",
+        "Home town": "Home town",
+        "Reasons": "Reasons",
+        "Note": "Note",
+        "Resign date": "Resign date",
+        "Action": "Action",
+        "Input Resignation": "Input Resignation",
+        "Personal Information": "Personal Information",
+        "Full Name": "Full Name",
+        "Work Information": "Work Information",
+        "Position": "Position",
+        "Vehicle": "Transportation",
+        "Resignation Details": "Resignation Details",
+        "Resignation Date": "Resignation Date",
+        "Reason for Resignation": "Reason for Resignation",
+        "Hometown": "Hometown",
+        "Current Address": "Current Address",
+        "Additional Notes": "Additional Notes",
+        "Cancel": "Cancel",
+        "Save": "Save",
+        "Report": "Report",
+        "Resignation Date Range": "Resignation Date Range",
+        "Clear filters": "Clear filters",
+        "IC no": "IC no",
+        "Print": "Print Resignation List",
+        "Numid": "Number id",
+        "In date": "In date",
+        "Employee already exists": "Employee already exists in resignation list",
+        "Toggle Columns": "Show Columns",
+        "Select All": "Select All",
+        "Type resign": "Type of Resignation",
+        "Load More Data": "Load More Data",
+        "Seniority Years": "Seniority (Years)"
+    },
+    "vi": {
+        "Resignation listing": "Danh sách nghỉ việc",
+        "Search": "Tìm kiếm",
+        "Input resign": "Nhập thông tin nghỉ việc",
+        "Export to Excel": "Xuất Excel",
+        "Empno": "Mã NV",
+        "Name": "Họ tên",
+        "Dept": "Bộ phận",
+        "Dept name": "Tên BP",
+        "Job level": "Chức vụ",
+        "Age": "Tuổi",
+        "Seniority": "Thâm niên",
+        "Bus": "Xe đưa rước",
+        "Gender": "Giới tính",
+        "Home town": "Quê quán",
+        "Reasons": "Lý do",
+        "Note": "Ghi chú",
+        "Resign date": "N.thôi việc",
+        "Action": "Thao tác",
+        "Input Resignation": "Nhập thông tin nghỉ việc",
+        "Personal Information": "Thông tin cá nhân",
+        "Full Name": "Họ và tên",
+        "Work Information": "Thông tin công việc",
+        "Position": "Chức vụ",
+        "Vehicle": "Phương tiện",
+        "Resignation Details": "Chi tiết nghỉ việc",
+        "Resignation Date": "Ngày nghỉ việc",
+        "Reason for Resignation": "Lý do",
+        "Hometown": "Quê quán",
+        "Current Address": "Địa chỉ hiện tại",
+        "Additional Notes": "Ghi chú",
+        "Cancel": "Hủy",
+        "Save": "Lưu",
+        "Report": "Báo cáo",
+        "Resignation Date Range": "N.nghỉ việc",
+        "Clear filters": "Xóa lọc",
+        "IC no": "Số CCCD",
+        "Print": "In DS nghỉ việc",
+        "Numid": "Số CCCD",
+        "In date": "Ngày vào",
+        "Employee already exists": "Nhân viên đã có trong danh sách nghỉ việc",
+        "Toggle Columns": "Ẩn/Hiện Cột",
+        "Select All": "Chọn tất cả",
+        "Type resign": "Loại nghỉ việc",
+        "Load More Data": "Tải thêm dữ liệu",
+        "Seniority Years": "Thâm niên (Năm)"
+    },
+    "cn": {
+        "Resignation listing": "离职列表",
+        "Search": "搜索",
+        "Input resign": "输入离职信息",
+        "Export to Excel": "导出Excel",
+        "Empno": "员工编号",
+        "Name": "姓名",
+        "Dept": "部门",
+        "Dept name": "部门名称",
+        "Job level": "职位",
+        "Age": "年龄",
+        "Seniority": "工龄",
+        "Bus": "交通",
+        "Gender": "性别",
+        "Home town": "籍贯",
+        "Reasons": "原因",
+        "Note": "备注",
+        "Resign date": "离职日期",
+        "Action": "操作",
+        "Input Resignation": "输入离职信息",
+        "Personal Information": "个人信息",
+        "Full Name": "全名",
+        "Work Information": "工作信息",
+        "Position": "职位",
+        "Vehicle": "交通工具",
+        "Resignation Details": "离职详情",
+        "Resignation Date": "离职日期",
+        "Reason for Resignation": "离职原因",
+        "Hometown": "籍贯",
+        "Current Address": "现居地址",
+        "Additional Notes": "附加说明",
+        "Cancel": "取消",
+        "Save": "保存",
+        "Report": "报告",
+        "Resignation Date Range": "离职日期范围",
+        "Clear filters": "清除过滤器",
+        "IC no": "身份证号",
+        "Print": "打印离职列表",
+        "Numid": "身份证号",
+        "In date": "入职日期",
+        "Employee already exists": "员工已存在于离职名单中",
+        "Toggle Columns": "显示/隐藏列",
+        "Select All": "全选",
+        "Type resign": "离职类型",
+        "Load More Data": "加载更多数据",
+        "Seniority Years": "工龄（年）"
     }
+}
 </i18n>

@@ -39,9 +39,9 @@
                   </v-col>
                   
                   <!-- Position Filter -->
-                  <v-col cols="12" sm="6" md="8" lg="9">
+                  <v-col cols="12" sm="6" >
                     <v-chip-group v-model="selectedPositions" multiple show-arrows>
-                      <v-chip v-for="(item, i) in loc_apply" :key="i" filter small outlined color="teal darken-4"
+                      <v-chip v-for="(item, i) in loc_apply" :key="i" filter  outlined label color="teal darken-4"
                       class="font-weight-medium">
                       {{ item }}
                     </v-chip>
@@ -83,7 +83,7 @@
           <!-- Data Table -->
           <v-data-table :headers="headers" :items="filteredReportData" :items-per-page="10" :loading="loading"
           fixed-header class="elevation-1 rounded-lg" :footer-props="{
-            'items-per-page-options': [10, 15, 30, 100],
+         
             'show-current-page': true,
             'show-first-last-page': true
           }">
@@ -103,9 +103,9 @@
           </nuxt-link>
           </template>
           <template v-slot:[`item.position`]="{ item }">
-            <v-chip x-small outlined color="warning" class="font-weight-medium">
-              {{ item.position }}
-            </v-chip>
+            {{ item.position }}
+            <!-- <v-chip x-small outlined color="warning" class="font-weight-medium" label>
+            </v-chip> -->
           </template>
           <template v-slot:[`item.actualVacancies`]="{ item }">
             {{ item.actualVacancies }}
@@ -273,6 +273,9 @@
 import dayjs from "dayjs";
 import * as XLSX from 'xlsx';
 export default {
+   head: {
+        title: 'Recruiting Report'
+    },
   data() {
     return {
       api: 'http://gmo021.cansportsvg.com/api/vg-recuitingReport/',
@@ -282,26 +285,22 @@ export default {
       selectUnit: [], // Add this new property
       itemsDiv: [],
       headers: [
-      { text: this.$t('ID'), value: 'id', },
-      { text: this.$t('Division'), value: 'dem_dept', },
-      { text: this.$t('Dept'), value: 'dem_sub_department', },
-      { text: this.$t('Unit'), value: 'dem_unit', },
-      // { text: this.$t('Note'), value: 'dem_note', },
-      { text: this.$t('Demand'), value: 'demand',  align: 'center' },
-      { text: this.$t('Position'), value: 'position', }, // Update header to singular 'Position'
-      { text: this.$t('Come To Interview'), value: 'comeToInterview',  align: 'center' },
-      { text: this.$t('Acc. By HR'), value: 'accByHR',  align: 'center' },
-      { text: this.$t('Acc. By Dept.'), value: 'accByDept',  align: 'center' },
-      
-      {text: this.$t('Dept. Acc. Rate'), value: 'deptAccRate', align: 'center'},
-      
-      { text: this.$t('Today Enrolled'), value: 'actualEnrollDate',  align: 'center' },
-      
-      { text: this.$t('Employment rate'), value: 'employmentRate',  align: 'center' },
-      { text: this.$t('Offer cycle time Avg'), value: 'offerCycleTimeAvg',  align: 'center' },
-      {text: this.$t('Enrolled cycle time Avg'), value: 'enrolledCycleTimeAvg', align: 'center'},
-      { text: this.$t('Actual Vacancies'), value: 'actualVacancies',  align: 'center' },
-      { text: this.$t('Exp. To Enroll'), value: 'expectedEnrollDate',  align: 'center' }
+      { text: this.$t('ID'), value: 'id' },
+      { text: this.$t('Div'), value: 'dem_dept' },
+      { text: this.$t('Dept'), value: 'dem_sub_department' },
+      { text: this.$t('Unit'), value: 'dem_unit' },
+      { text: this.$t('Demand'), value: 'demand', align: 'center' },
+      { text: this.$t('Position'), value: 'position' },
+      { text: this.$t('Interview'), value: 'comeToInterview', align: 'center' },
+      { text: this.$t('HR Acc'), value: 'accByHR', align: 'center' },
+      { text: this.$t('Dept Acc'), value: 'accByDept', align: 'center' },
+      { text: this.$t('Acc Rate'), value: 'deptAccRate', align: 'center' },
+      { text: this.$t('Enrolled'), value: 'actualEnrollDate', align: 'center' },
+      { text: this.$t('Emp Rate'), value: 'employmentRate', align: 'center' },
+      { text: this.$t('Offer Time'), value: 'offerCycleTimeAvg', align: 'center' },
+      { text: this.$t('Enroll Time'), value: 'enrolledCycleTimeAvg', align: 'center' },
+      { text: this.$t('Vacancies'), value: 'actualVacancies', align: 'center' },
+      { text: this.$t('Exp Enroll'), value: 'expectedEnrollDate', align: 'center' }
       ],
       reportData: [],
       loading: false,
@@ -418,10 +417,7 @@ export default {
       this.filteredItemsDiv.find(d => d.id === id)?.sub_department
       ).filter(Boolean);
       
-      return [...new Set(this.reportData
-      .filter(item =>
-      selectedSubDepts.includes(item.dem_sub_department) &&
-      item.dem_unit
+      return [...new Set(this.reportData .filter(item => selectedSubDepts.includes(item.dem_sub_department) && item.dem_unit
       )
       .map(item => item.dem_unit))].map(unit => ({
         id: unit,
@@ -530,6 +526,8 @@ export default {
       try {
         const res = await this.$axios.get(this.api + 'getDataDeptCode');
         this.item_dept = res.data.dataDeptCode;
+        console.log( this.item_dept);
+        
         // Update how itemsDiv is created to include department information
         this.itemsDiv = res.data.dataDeptCode.map(dept => ({
           id: dept.id,
@@ -711,7 +709,7 @@ export default {
   position: sticky;
   top: 0;
   z-index: 1;
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
 }
 
 .v-data-table ::v-deep tbody tr:not(.total-row):hover{
@@ -747,9 +745,6 @@ export default {
 
 .cursor-pointer {
   cursor: pointer;
-}
-.v-data-table ::v-deep thead th.text-start {
-  /* font-size: 10px; */
 }
 .v-data-table ::v-deep thead th.text-center {
   font-size: 10px;
@@ -789,6 +784,12 @@ export default {
 .demand-link:hover {
   color: #004d40;
   text-decoration: underline;
+}
+.v-data-table ::v-deep thead th,
+.v-data-table ::v-deep tbody td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 </style>

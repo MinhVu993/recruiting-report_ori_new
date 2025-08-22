@@ -23,8 +23,8 @@ export default {
   },
   ssr: false,
   server: {
-    host: process.env.HOST || "gmo021.cansportsvg.com",
-    port: 3041,
+    host: process.env.HOST || "10.13.34.160",
+    port: 3043
   },
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
@@ -36,11 +36,12 @@ export default {
   },
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    titleTemplate: (local) =>
-      local ? `${local} -Recruiting-report` : "Recruiting-report",
-    htmlAttrs: {
-      lang: "en",
-    },
+    // titleTemplate: 
+    // (local) =>
+    //   local ? `${local} -Recruiting-report` : "Recruiting-report",
+    // htmlAttrs: {
+    //   lang: "en",
+    // },
     meta: [
       {
         charset: "utf-8",

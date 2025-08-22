@@ -6,47 +6,40 @@
                     <v-toolbar-title class="d-flex align-center">
                         <v-icon class="mr-3">mdi-file-document-outline</v-icon>
                         <span class="text-h6 font-weight-medium">{{ $t("Demand management") }}</span>
-                    </v-toolbar-title>
-                    <v-spacer></v-spacer>
-                    <v-text-field v-model="search" prepend-inner-icon="mdi-magnify" :label="$t('Search')" single-line
-                    hide-details filled rounded dense class="search-field mx-4" style="max-width: 300px"
-                    clearable></v-text-field>
-                    <v-btn color="error" @click="showDialog = true" class="elevation-1 animate-button"
-                    :loading="loading">
-                    <v-icon left dark>mdi-plus</v-icon>
-                    <span class="text-teal-darken-4">{{ $t("Add demand") }}</span>
-                </v-btn>
-                <v-btn icon class="ml-2" @click="showColumnDialog = true" title="Show/Hide Columns">
-                    <v-icon>mdi-cog-outline</v-icon>
-                </v-btn>
-            </v-app-bar>
-            
-            <v-card-text class="pa-1">
-                <v-col cols="12">
-                    <v-row align="center" justify="start" class="grey lighten-5 pa-1 rounded-lg">
-                        <v-col cols="12" md="2">
-                            <v-autocomplete v-model="selectDept" :items="itemsSelectDept" :label="$t('Department')"
-                            hide-details outlined dense background-color="white" prepend-inner-icon="mdi-domain"
-                            class="rounded-lg" clearable @change="filterData"></v-autocomplete>
-                        </v-col>
-                        <v-col cols="12" md="6">
-                            <p class="font-weight-medium teal--text text--darken-4 mb-1">{{ $t('Position Apply') }}
-                            </p>
-                            <v-chip-group v-model="selectedPositions" show-arrows multiple>
-                                <v-chip v-for="position in itemsPos" :key="position" filter
-                                class="font-weight-medium" outlined color="teal darken-4" :value="position"
-                                :input-value="selectedPositions.includes(position)"
-                                :class="{ 'v-chip--selected': selectedPositions.includes(position) }"
-                                @click="handlePositionSelect(position)">
-                                {{ position }}
-                            </v-chip>
-                        </v-chip-group>
+                        <v-divider vertical dark class="ml-3"></v-divider>
+                        <v-chip-group v-model="selectedPositions" show-arrows multiple class="ml-10 chip-group-search">
+                            <v-chip v-for="pos in itemsPos" :key="pos.en" filter
+                            class="font-weight-medium" outlined label  :value="pos.en">
+                            {{ getLocalizedItem(itemsPos, pos.en) }}
+                        </v-chip>
+                    </v-chip-group>
+                </v-toolbar-title>
+                <v-spacer></v-spacer>
+                <v-text-field v-model="search" prepend-inner-icon="mdi-magnify" :label="$t('Search')" single-line
+                hide-details filled rounded dense class="search-field mx-4" style="max-width: 300px"
+                clearable></v-text-field>
+                <v-btn color="error" @click="showDialog = true" class="elevation-1 animate-button"
+                :loading="loading">
+                <v-icon left dark>mdi-plus</v-icon>
+                <span class="text-teal-darken-4">{{ $t("Add demand") }}</span>
+            </v-btn>
+            <v-btn icon class="ml-2" @click="showColumnDialog = true" title="Show/Hide Columns">
+                <v-icon>mdi-cog-outline</v-icon>
+            </v-btn>
+        </v-app-bar>
+        
+        <v-card-text class="pa-1">
+            <v-col cols="12">
+                <v-row align="center" justify="start" class="grey lighten-5 pa-1 rounded-lg">
+                    <v-col cols="12" md="2">
+                        <v-autocomplete v-model="selectDept" :items="itemsSelectDept" :label="$t('Department')"
+                        hide-details outlined dense background-color="white" prepend-inner-icon="mdi-domain"
+                        clearable @change="filterData"></v-autocomplete>
                     </v-col>
                 </v-row>
             </v-col>
             <v-data-table :headers="visibleHeaders" :items="mappedDemandData" :items-per-page="10" :loading="loading"
             :search="search" class="elevation-1 rounded-lg data-table"  :footer-props="{
-                'items-per-page-options': [10, 15, 30, 100],
                 'show-current-page': true,
                 'show-first-last-page': true
             }" >
@@ -60,42 +53,50 @@
                 </div>
             </template>
             <template v-slot:[`item.dem_fulfilled`]="{ item }">
-                <v-chip
-                x-small
-                :color="item.dem_fulfilled === 'yes' ? 'success' : 'error'"
-                :text-color="item.dem_fulfilled === 'yes' ? 'white' : 'white'"
-                label
-                >
+                <span :style="{
+                    color: item.dem_fulfilled === 'yes' ? '#388e3c' : '#d32f2f',
+                    fontWeight: 'bold'
+                }">
                 {{ item.dem_fulfilled === 'yes' ? $t('Yes') : $t('No') }}
-            </v-chip>
+            </span>
         </template>
         <template v-slot:[`item.dem_fullfilldate`]="{ item }">
-            <v-chip v-if="item.dem_fullfilldate" x-small outlined color="success" class="table-chip" label>
-                {{ item.dem_fullfilldate }}
-            </v-chip>
+            {{ item.dem_fullfilldate }}
+        </template>
+        <template v-slot:[`item.id_code`]="{ item }">
+            <v-btn text color="primary" @click="editItem(item)">
+                {{ item.id_code }}
+            </v-btn>
         </template>
         <template v-slot:[`item.dem_inputdate`]="{ item }">
-            <v-chip x-small outlined color="error" class="table-chip" label>
-                {{ item.dem_inputdate || '' }}
-            </v-chip>
+            {{ item.dem_inputdate || '' }}
         </template>
         <template v-slot:[`item.dem_note`]="{ item }">
             <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                     <v-icon class="note-icon" v-bind="attrs" v-on="on" @click="showNoteDialog(item)">
-                        mdi-information
+                        mdi-information-outline
                     </v-icon>
                 </template>
                 <span>View note</span>
             </v-tooltip>
         </template>
         <template v-slot:[`item.dem_candidates`]="{ item }">
-            <div class="d-flex align-center">
-                <v-chip small color="orange" class="table-chip" label dark
-                @click="showCandidatesDialog(item.dem_candidates)" style="cursor: pointer">
-                {{ getCandidatesCount(item.dem_candidates) }}
-            </v-chip>
+            <div class="d-flex align-center candidates-text-truncate"
+            @click="showCandidatesDialog(item.dem_candidates)"
+            style="cursor: pointer;">
+            {{ getCandidatesCount(item.dem_candidates) }}
         </div>
+    </template>
+    <template v-slot:[`item.dem_unit_name`]="{ item }">
+        {{ item.dem_unit_name }}
+    </template>
+    <template v-slot:[`item.dem_position`]="{ item }">
+        {{ item.dem_position_name }}
+    </template>
+    
+    <template v-slot:[`item.dem_sub_position`]="{ item }">
+        {{ item.dem_sub_position_name }}
     </template>
     <template v-slot:[`item.dem_recruited`]="{ item }">
         <nuxt-link
@@ -105,15 +106,9 @@
     </nuxt-link>
 </template>
 <template v-slot:[`item.dem_cancel_date`]="{ item }">
-    <v-chip
-    x-small
-    color="primary"
-    class="table-chip"
-    label
-    @click="handleCancelDateClick(item)"
-    >
-    {{ formatCancelDate(item.dem_cancel_date) || $t('Set date') }}
-</v-chip>
+    <v-chip x-small color="secondary" text-color="black" class="table-chip" label outlined @click="handleCancelDateClick(item)" :disabled="!!item.dem_cancel_date" >
+        {{ formatCancelDate(item.dem_cancel_date) || $t('Set date') }}
+    </v-chip>
 </template>
 <template #[`footer.prepend`]>
     <v-btn color="success" small dark @click="exportToExcel">
@@ -122,7 +117,7 @@
     </v-btn>
 </template>
 <template #[`header.dem_cancel_date`]>
-   {{ $t('Cancel Date') }}
+    {{ $t('Cancel Date') }}
 </template>
 <template #[`header.dem_dept`]>
     <DsFilter :name="$t('Division')" :in-items="filterItems.dem_dept"
@@ -133,8 +128,11 @@
     @changed="updateFilter('dem_sub_department', $event)" />
 </template>
 <template #[`header.dem_unit`]>
-    <DsFilter :name="$t('Unit')" :in-items="filterItems.dem_unit"
+    <DsFilter :name="$t('Unit code')" :in-items="filterItems.dem_unit"
     @changed="updateFilter('dem_unit', $event)" />
+</template>
+<template #[`header.dem_unit_name`]>
+    {{ $t('Unit name') }}
 </template>
 <template #[`header.dem_position`]>
     <DsFilter :name="$t('Position')" :in-items="filterItems.dem_position"
@@ -145,8 +143,7 @@
     @changed="updateFilter('dem_sub_position', $event)" />
 </template> 
 <template #[`header.dem_amount`]>
-    <DsFilter :name="$t('Amount')" :in-items="filterItems.dem_amount"
-    @changed="updateFilter('dem_amount', $event)" />
+    {{ $t('Amount') }}
 </template>
 <template #[`header.dem_inputdate`]>
     <DsFilter :name="$t('Request date')" :in-items="filterItems.dem_inputdate"
@@ -187,11 +184,22 @@
 <template v-slot:[`header.actions`]="{ header }">
     {{ $t('Action') }}
 </template>
+<template v-slot:[`header.id_code`]="{ header }">
+    {{ $t('ID') }}
+    
+</template>
+<template v-slot:[`header.dem_status`]="slotProps">
+    <DsFilter :name="$t('Status')" :in-items="filterItems.dem_status"
+    @changed="updateFilter('dem_status', $event)" />
+</template>
+<template v-slot:[`item.dem_status`]="{ item }">
+    {{ getStatusText(item) }}
+</template>
 <template v-slot:body.append>
     <tr class="total-row">
         <td colspan="5" class="text-center"> {{$t('Total')}}</td>
         <td v-for="header in headers.slice(5)" :key="header.value">
-            <span v-if="header.value === 'dem_fulfilled'">
+            <span v-if="header.value === 'dem_fulfilled'" class="text-center">
                 {{ $t('Yes') }}: {{ totalSum[header.value].yes }} <br>
                 {{ $t('No') }}: {{ totalSum[header.value].no }}
             </span>
@@ -199,7 +207,7 @@
             'dem_sub_department', 'dem_unit', 'dem_position',
             'dem_sub_position', 'dem_inputdate', 'dem_fulfilled', 
             'dem_fullfilldate', 'dem_inputdate', 'dem_note', 
-            'dem_pause_start_at', 'dem_pause_end_at', 'actions'].includes(header.value)">
+            'dem_pause_start_at', 'dem_pause_end_at', 'actions','dem_status'].includes(header.value)" class="text-center">
             {{ totalSum[header.value] || 0 }}
         </span>
     </td>
@@ -229,41 +237,59 @@
                         <div class="text-subtitle-1 font-weight-bold mb-3 primary--text">{{ $t("Basic Information") }}
                         </div>
                         <v-row>
-                            <v-col cols="12" md="3">
-                                <v-text-field v-model="demand.id" :label="$t('ID')" outlined dense hide-details prepend-inner-icon="mdi-identifier" disabled></v-text-field>
+                            <v-col cols="12" md="2">
+                                <!-- <v-text-field v-model="demand.id" :label="$t('ID')" outlined dense hide-details prepend-inner-icon="mdi-identifier" disabled></v-text-field> -->
+                                <v-text-field v-model="demand.id_code" :rules="[rules.required]" :label="$t('ID')" outlined dense hide-details></v-text-field>
                             </v-col>
                             <v-col cols="12" md="3">
                                 <v-autocomplete v-model="demand.department" :items="itemsSelectDept"
-                                :label="$t('Division') + '*'" :rules="[rules.required]" outlined dense
-                                hide-details class="mb-3" prepend-inner-icon="mdi-domain" clearable></v-autocomplete>
+                                :label="$t('Division') " :rules="[rules.required]" outlined dense
+                                hide-details  clearable></v-autocomplete>
                             </v-col>
                             <v-col cols="12" md="3">
                                 <v-autocomplete v-model="demand.sub_department" :items="filteredUnits"
-                                :label="$t('Department') + '*'" :rules="[rules.required]" outlined dense
-                                hide-details class="mb-3" prepend-inner-icon="mdi-domain" clearable></v-autocomplete>
+                                :label="$t('Department') " :rules="[rules.required]" outlined dense
+                                hide-details  clearable></v-autocomplete>
                             </v-col>
-                            <v-col cols="12" md="3">
+                            <v-col cols="12" md="4">
                                 <v-autocomplete v-model="demand.sub_division" :items="itemsDiv"
-                                :label="$t('Unit') + '*'" :rules="[rules.required]" outlined dense
-                                hide-details class="mb-3"  prepend-inner-icon="mdi-domain" clearable></v-autocomplete>
+                                :label="$t('Unit') " :rules="[rules.required]" outlined dense
+                                hide-details   clearable></v-autocomplete>
                             </v-col>
                             <v-col cols="12" md="4">
-                                <v-autocomplete v-model="demand.position" :items="itemsPos"
-                                :label="$t('Position') + '*'" :rules="[rules.required]" outlined dense
-                                hide-details class="mb-3"
-                                prepend-inner-icon="mdi-account-tie" clearable></v-autocomplete>
+                                <v-autocomplete 
+                                v-model="demand.position"
+                                :items="localizedItemsPos"
+                                item-text="text"
+                                item-value="en"
+                                :label="$t('Position')" 
+                                :rules="[rules.required]" 
+                                outlined dense hide-details clearable
+                                ></v-autocomplete>
+                                
+                                
                             </v-col>
                             <v-col cols="12" md="4">
-                                <v-autocomplete v-model="demand.sub_position" :items="getSubPositionItems"
-                                :label="$t('Sub Position') + '*'" outlined dense hide-details="auto"
-                                prepend-inner-icon="mdi-account-details"
+                                <v-autocomplete
+                                v-model="demand.sub_position"
+                                :items="localizedSubPositionItems"
+                                item-text="text"
+                                item-value="en"
+                                :label="$t('Sub Position')"
+                                outlined
+                                dense
+                                hide-details="auto"
                                 :disabled="!['Staff', 'Staff (lang)', 'Translator'].includes(demand.position)"
-                                :hint="getSubPositionHint" persistent-hint clearable></v-autocomplete>
+                                :hint="getSubPositionHint"
+                                persistent-hint
+                                clearable
+                                ></v-autocomplete>
+                                
                             </v-col>
                             <v-col cols="12" md="4">
-                                <v-text-field v-model="demand.quantity" :label="$t('Quantity') + '*'"
+                                <v-text-field v-model="demand.quantity" :label="$t('Quantity') "
                                 :rules="[rules.required, rules.number]" outlined dense hide-details
-                                type="number" min="1" prepend-inner-icon="mdi-numeric" clearable></v-text-field>
+                                type="number" min="1"  clearable></v-text-field>
                             </v-col>
                         </v-row>
                     </v-col>
@@ -290,7 +316,7 @@
                             <v-menu v-model="date" :close-on-content-click="false"
                             transition="scale-transition" max-width="290px">
                             <template v-slot:activator="{ on, attrs }">
-                                <v-text-field v-model="fromDate" :label="$t('On hold start') + '*'" readonly
+                                <v-text-field v-model="fromDate" :label="$t('On hold start') " readonly
                                 outlined dense hide-details v-bind="attrs" v-on="on"
                                 prepend-inner-icon="mdi-calendar-start" clearable
                                 @click:clear="fromDate = ''"></v-text-field>
@@ -316,7 +342,7 @@
                     <v-menu v-model="s_fullfiledate" :close-on-content-click="false"
                     transition="scale-transition" max-width="290px">
                     <template v-slot:activator="{ on, attrs }">
-                        <v-text-field v-model="fullfilldate" :label="$t('Full fill date')" readonly
+                        <v-text-field v-model="fullfilldate" :label="$t('Full filled date')" readonly
                         outlined dense hide-details v-bind="attrs" v-on="on"
                         prepend-inner-icon="mdi-calendar-plus" clearable
                         @click:clear="fullfilldate = ''"></v-text-field>
@@ -329,10 +355,10 @@
     </v-col>
     <!-- Note Section -->
     <v-col cols="12">
-        <div class="text-subtitle-1 font-weight-bold mb-3 primary--text">{{ $t("Additional Information")}}
-        </div>
-        <v-textarea v-model="demand.content" :label="$t('Content') + '*'" outlined
-        hide-details="auto" rows="3" counter prepend-inner-icon="mdi-text-box" clearable></v-textarea>
+        <!-- <div class="text-subtitle-1 font-weight-bold mb-3 primary--text">{{ $t("Additional Information")}}
+        </div> -->
+        <v-textarea v-model="demand.content" :label="$t('Content') " outlined auto-grow
+        hide-details="auto" rows="3" clearable></v-textarea>
     </v-col>
 </v-row>
 </v-form>
@@ -522,10 +548,14 @@ import * as XLSX from 'xlsx';
 import DSFilter from '@/components/DsFilter.vue'
 export default {
     components: { DSFilter },
+    head: {
+        title: 'Demand Management'
+    },
     data() {
         return {
             api: 'http://gmo021.cansportsvg.com/api/vg-recuitingReport/',
             demand: {
+                id_code: '',
                 department: '',
                 sub_department: '',
                 sub_division: '',
@@ -535,28 +565,58 @@ export default {
                 content: ''
             },
             // itemsDept: [],
-            itemsPos: ['All', 'Worker', 'Staff', 'Staff (lang)', 'Leader', 'Translator', 'Engineer'],
-            itemsSub_staff: ['HR Assistant', 'Prod assistant', 'Maintenace', 'Technical', 'Officer'],
-            itemsSub_Pos: ['HR Assistant', 'Prod assistant', 'Maintenace', 'Technical', 'Officer'],
-            itemsSub_Pos_cn: ['Chinese 2 Skills', 'Chinese 4 Skills', 'English 2 Skills', 'English 4 Skills'],
+            itemsPos: [
+            { vi: 'Tất cả', en: 'All', cn: '所有' },
+            { vi: 'Công nhân', en: 'Worker', cn: '工人' },
+            { vi: 'Nhân viên', en: 'Staff', cn: '科员' },
+            { vi: 'Nhân viên (ngôn ngữ)', en: 'Staff (lang)', cn: '语言科员' },
+            { vi: 'Cán bộ', en: 'Leader', cn: '干部' },
+            { vi: 'Phiên dịch', en: 'Translator', cn: '翻译' },
+            { vi: 'Kỹ sư', en: 'Engineer', cn: '工程师' }
+            ],
+            
+            itemsSub_staff: [
+            { vi: 'Trợ lý nhân sự', en: 'HR Assistant', cn: '人力助理' },
+            { vi: 'Trợ lý sản xuất', en: 'Prod assistant', cn: '生产助理' },
+            { vi: 'Bảo trì', en: 'Maintenance', cn: '维护' },
+            { vi: 'Kỹ thuật', en: 'Technical', cn: '技术' },
+            { vi: 'Nhân viên', en: 'Officer', cn: '科员' }
+            ], 
+            
+            itemsSub_Pos: [  
+            { vi: 'Trợ lý nhân sự', en: 'HR Assistant', cn: '人力助理' },
+            { vi: 'Trợ lý sản xuất', en: 'Prod assistant', cn: '生产助理' },
+            { vi: 'Bảo trì', en: 'Maintenance', cn: '维护' },
+            { vi: 'Kỹ thuật', en: 'Technical', cn: '技术' },
+            { vi: 'Nhân viên', en: 'Officer', cn: '科员' }
+            ],
+            
+            itemsSub_Pos_cn: [
+            { vi: 'Tiếng Trung 2 kỹ năng', en: 'Chinese 2 Skills', cn: '中文2技能' },
+            { vi: 'Tiếng Trung 4 kỹ năng', en: 'Chinese 4 Skills', cn: '中文4技能' },
+            { vi: 'Tiếng Anh 2 kỹ năng', en: 'English 2 Skills', cn: '英文2技能' },
+            { vi: 'Tiếng Anh 4 kỹ năng', en: 'English 4 Skills', cn: '英文4技能' }
+            ],
             headers: [
-            { text: 'ID', value: 'id' },
-            { text: 'Division', value: 'dem_dept'},
-            { text: 'Dept', value: 'dem_sub_department' },
-            { text: 'Unit', value: 'dem_unit' },
+            { text: 'ID', value: 'id_code' },
+            // { text: 'Division', value: 'dem_dept'},
+            // { text: 'Dept', value: 'dem_sub_department' },
+            { text: 'Unit code', value: 'dem_unit' },
+            { text: 'Unit name', value: 'dem_unit_name' },
             { text: 'Position', value: 'dem_position' },
             { text: 'Sub Position', value: 'dem_sub_position' },
-            { text: 'Amount', value: 'dem_amount' },
+            { text: 'Amount', value: 'dem_amount',align:"center" },
             { text: 'Request date', value: 'dem_inputdate' },
-            { text: 'Cancel date', value: 'dem_cancel_date' },
-            { text: 'Recruited', value: 'dem_recruited' },
-            { text: 'Full filled', value: 'dem_fulfilled' },
-            { text: 'Full filled date', value: 'dem_fullfilldate' },
-            { text: 'Still in need', value: 'stocknumber' },
+            { text: 'Status', value: 'dem_status' },
+            { text: 'Recruited', value: 'dem_recruited', align:"center"},
+            { text: 'Full filled', value: 'dem_fulfilled',  },
+            { text: 'Full filled date', value: 'dem_fullfilldate',},
+            { text: 'Still in need', value: 'stocknumber', align:"center" },
+            { text: 'Candidates', value: 'dem_candidates', align:"center"},
             { text: 'Note', value: 'dem_note', sortable: false },
-            { text: 'Candidates', value: 'dem_candidates' },
             { text: 'On hold start', value: 'dem_pause_start_at' },
             { text: 'On hold end', value: 'dem_pause_end_at' },
+            { text: 'Cancel date', value: 'dem_cancel_date' },
             { text: 'Action', value: 'actions', }
             ],
             
@@ -618,7 +678,8 @@ export default {
                 dem_candidates: [],
                 dem_pause_start_at: [],
                 dem_pause_end_at: [],
-                dem_cancel_date: [] // Add this new filter item
+                dem_cancel_date: [], // Add this new filter item
+                dem_status:[]
             },
             showColumnDialog: false,
             selectedColumns: [], // Will store selected column values
@@ -630,9 +691,24 @@ export default {
             selectedCancelDate: '',
             cancelReason: '',
             selectedDemand: null,
+            dataNameDeptCode:[],
         }
     },
     computed: {
+        localizedItemsPos() {
+            const locale = this.$i18n.locale;
+            return this.itemsPos.map(item => ({
+                ...item,
+                text: item[locale] || item.en
+            }));
+        },
+        localizedSubPositionItems() {
+            const locale = this.$i18n.locale;
+            return this.getSubPositionItems.map(item => ({
+                ...item,
+                text: item[locale] || item.en
+            }));
+        },
         displayedNote() {
             if (!this.selectedNote) return '';
             if (typeof this.selectedNote === 'string') return this.selectedNote;
@@ -646,6 +722,9 @@ export default {
             
             this.mappedDemandData.forEach(item => {
                 Object.keys(totals).forEach(key => {
+                    if (key === 'dem_status') {
+                        return;
+                    }
                     if (key === 'dem_candidates') {
                         totals[key] += this.getCandidatesCount(item[key]);
                     } else if (key === 'dem_fulfilled') {
@@ -668,6 +747,7 @@ export default {
         mappedDemandData() {
             let filteredData = [...this.demandData];
             
+            
             // Apply filters
             Object.entries(this.filters).forEach(([key, values]) => {
                 if (values && values.length > 0) {
@@ -678,6 +758,9 @@ export default {
                         if (key === 'dem_candidates') {
                             const count = this.getCandidatesCount(item[key]);
                             return values.includes(count.toString());
+                        }
+                        if (key === 'dem_status') {
+                            return values.includes(this.getStatusText(item));
                         }
                         else if (['dem_amount', 'stocknumber'].includes(key)) {
                             return values.includes(item[key].toString());
@@ -692,27 +775,26 @@ export default {
                 (item.dem_dept) === deptId
                 );
             }
-            if (this.selectedPositions.length > 0) {
-                if (this.selectedPositions.includes('All')) {
-                    this.selectedPositions = ['All'];
-                    
-                } else {
-                    filteredData = filteredData.filter(item =>
-                    this.selectedPositions.includes(item.dem_position)
-                    );
-                }
+            if (this.selectedPositions.length > 0 && !this.selectedPositions.includes('All')) {
+                filteredData = filteredData.filter(item =>
+                this.selectedPositions.includes(item.dem_position)
+                );
             }
+            // Nếu có 'All' thì không lọc theo vị trí, tức lấy toàn bộ dữ liệu filteredData mà thôi
+            
+            
             return filteredData.map(item => ({
                 ...item,
-                // dem_dept_raw: item.dem_dept, 
-                // dem_dept: this.getDepartmentName(item.dem_dept) // Map the department name for display
+                dem_unit_name: this.getUnitName(item.dem_unit),
+                dem_position_name: this.getLocalizedItem(this.itemsPos, item.dem_position),
+                dem_sub_position_name: this.getSubPositionLocalizedName(item.dem_position, item.dem_sub_position)
             }));
         },
         getSubPositionItems() {
             switch (this.demand.position) {
                 case 'Staff':
                 return this.itemsSub_staff;
-                case 'Staff (lang)':
+                case 'Staff (lang)' || 'Staff':
                 return this.itemsSub_Pos;
                 case 'Translator':
                 return this.itemsSub_Pos_cn;
@@ -757,6 +839,67 @@ export default {
         
     },
     methods: {
+        getStatusText(item) {
+            const locale = this.$i18n.locale;
+            let statusKey = 'closed'; // Mặc định là "結案"
+            
+            if (item.dem_pause_start_at && item.dem_pause_start_at.trim() !== '' &&
+            (!item.dem_pause_end_at || item.dem_pause_end_at.trim() === '')) {
+                statusKey = 'on_hold'; // 暫停招募
+            }
+            else if ((!item.dem_cancel_date || item.dem_cancel_date.trim() === '') &&
+            (item.dem_fulfilled?.toLowerCase() === 'no')) {
+                statusKey = 'recruiting'; // 招募中
+            }
+            const statusLabels = {
+                en: {
+                    on_hold: 'On Hold',
+                    recruiting: 'Recruiting',
+                    closed: 'Closed'
+                },
+                vi: {
+                    on_hold: 'Tạm dừng tuyển dụng',
+                    recruiting: 'Đang tuyển',
+                    closed: 'Đã kết thúc'
+                },
+                cn: {
+                    on_hold: '暫停招募',
+                    recruiting: '招募中',
+                    closed: '結案'
+                }
+            };
+            
+            return (statusLabels[locale] && statusLabels[locale][statusKey]) || statusLabels['en'][statusKey];
+        },
+        getLocalizedItem(arr, value) {
+            const currentLocale = this.$i18n.locale;
+            const item = arr.find(i => i.en === value || i.vi === value || i.cn === value);
+            if (item) {
+                return item[currentLocale] || item.en; 
+            }
+            return value; 
+        },
+        getSubPositionLocalizedName(position, subPosition) {
+            const currentLocale = this.$i18n.locale;
+            if (position === 'Translator') {
+                const item = this.itemsSub_Pos_cn.find(i => i.en === subPosition || i.vi === subPosition || i.cn === subPosition);
+                return item ? item[currentLocale] || item.en : subPosition;
+            } else if (['Staff', 'Staff (lang)'].includes(position)) {
+                const item = this.itemsSub_Pos.find(i => i.en === subPosition || i.vi === subPosition || i.cn === subPosition);
+                return item ? item[currentLocale] || item.en : subPosition;
+            }
+            return subPosition;
+        },
+        // get all data dataDeptCode
+        async getDataNameDeptCode() {
+            try {
+                const res = await this.$axios.get(this.api + 'getDataNameDeptCode');
+                this.dataNameDeptCode = res.data.dataNameDeptCode;
+            } catch (error) {
+                console.error("Error fetching department data:", error);
+            }
+        },
+        
         async helpTrans(target) {
             if (!this.selectedNote) return;
             
@@ -847,10 +990,7 @@ export default {
         countFulfilled(data, value) {
             return data.filter(item => item.dem_fulfilled === value).length;
         },
-        // getDepartmentName(deptId) {
-        //     const department = this.dept.find(d => d.id === parseInt(deptId));
-        //     return department ? department.department : deptId;
-        // },
+        
         getDepartmentId(deptName) {
             const department = this.dept.find(d => d.department === deptName);
             return department ? department.id : null;
@@ -864,13 +1004,29 @@ export default {
                 return 0;
             }
         },
+        getUnitName(demUnit) {
+            const unit = this.dataNameDeptCode.find(item => item.dept_code === demUnit);
+            if (unit) {
+                try {
+                    const nameObj = JSON.parse(unit.name);
+                    const currentLocale = this.$i18n.locale;
+                    return nameObj[currentLocale]; 
+                } catch (error) {
+                    console.error("JSON parse error:", error);
+                    return ""; 
+                }
+            }
+            return ""; 
+        },
         async fetchDemand() {
             this.loading = true;
             try {
                 const res = await this.$axios.get(this.api + 'getAllDemandData');
                 this.demandData = res.data;
                 this.originalDemandData = [...res.data];
-                
+                this.originalDemandData.forEach(item => {
+                    item.dem_unit_name = this.getUnitName(item.dem_unit);
+                });
                 this.updateFilterItems(); // Update filter items after fetching data
             } catch (err) {
                 console.log(err);
@@ -880,6 +1036,7 @@ export default {
         },
         async editItem(item) {
             this.id = item.id;
+            this.demand.id_code = item.id_code;
             this.demand.department = (item.dem_dept);
             await this.$nextTick();
             
@@ -888,6 +1045,7 @@ export default {
             this.demand = {
                 ...this.demand,
                 id: item.id,
+                id_code: item.id_code,
                 position: item.dem_position,
                 sub_position: item.dem_sub_position,
                 quantity: item.dem_amount,
@@ -956,19 +1114,14 @@ export default {
                         });
                     }
                     
-                    // Khởi tạo unit nếu chưa tồn tại
                     const deptData = deptMap.get(item.department);
                     if (!deptData.units.has(item.sub_department)) {
                         deptData.units.set(item.sub_department, new Set());
                     }
-                    
-                    // Chỉ thêm sub_division khi end_date là null
                     if (!item.end_date && item.sub_division) {
                         deptData.units.get(item.sub_department).add(item.sub_division);
                     }
                 });
-                
-                // Chuyển đổi cấu trúc dữ liệu để sử dụng
                 this.departmentData = Array.from(deptMap.values()).map(dept => ({
                     department: dept.department,
                     units: Array.from(dept.units.entries()).map(([unitName, subUnits]) => ({
@@ -998,6 +1151,7 @@ export default {
         resetForm() {
             // Reset demand object
             this.demand = {
+                id_code: '',
                 department: '',
                 sub_department: '',
                 sub_division: '',
@@ -1031,9 +1185,9 @@ export default {
                 });
                 return;
             }
-            
             let data = {
                 id: this.id,
+                id_code: this.demand.id_code,
                 dem_dept:this.demand.department,
                 dem_sub_department: this.demand.sub_department,
                 dem_unit: this.demand.sub_division,
@@ -1071,59 +1225,89 @@ export default {
         },
         filterData() {
             if (!this.selectDept) {
-            // Reset to original data if no department selected
-            this.demandData = [...this.originalDemandData];
-            
-        } else {
-            // Filter by selected department
-            this.demandData = this.originalDemandData.filter(item => {
-                return item.dem_dept === this.selectDept;
-            });
-        }
+                // Reset to original data if no department selected
+                this.demandData = [...this.originalDemandData];
+                
+            } else {
+                // Filter by selected department
+                this.demandData = this.originalDemandData.filter(item => {
+                    return item.dem_dept === this.selectDept;
+                });
+            }
         },
-        handlePositionSelect(position) {
-            if (position === 'All') {
+        handlePositionSelect(positionEn) {
+            const allPosWithoutAll = this.itemsPos.filter(pos => pos.en !== 'All').map(pos => pos.en);
+            
+            if (positionEn === 'All') {
                 this.selectedPositions = ['All'];
             } else {
-                this.selectedPositions = this.selectedPositions.filter(p => p !== 'All');
-                
-                if (this.selectedPositions.includes(position)) {
-                    this.selectedPositions = this.selectedPositions.filter(p => p !== position);
-                } else {
-                    this.selectedPositions.push(position);
+                let newSelection = [...this.selectedPositions];
+                if (newSelection.includes('All')) {
+                    newSelection = [];
                 }
+                
+                if (newSelection.includes(positionEn)) {
+                    newSelection = newSelection.filter(p => p !== positionEn);
+                    if (newSelection.length === 0) {
+                        newSelection = ['All'];
+                    }
+                } else {
+                    newSelection.push(positionEn);
+                    const allSelected = allPosWithoutAll.every(pos => newSelection.includes(pos));
+                    if (allSelected) {
+                        newSelection = ['All'];
+                    }
+                }
+                this.selectedPositions = newSelection;
             }
         },
         exportToExcel() {
+            // Lấy dữ liệu đã lọc và đã map (đã có trường tiếng Việt/Anh/Trung phù hợp)
             const exportData = this.mappedDemandData.map(item => ({
-                'ID': item.id,
-                'Division': item.dem_dept,
-                'Dept': item.dem_sub_department,
-                'Unit': item.dem_unit,
-                'Position': item.dem_position,
-                'Sub Position': item.dem_sub_position,
-                'Amount': item.dem_amount,
-                'Request Date': item.dem_inputdate,
-                'Cancel Date': item.dem_cancel_date ? (() => {
-                  try {
-                    const cancelData = JSON.parse(item.dem_cancel_date);
-                    return `${cancelData.date || ''} ${cancelData.reason ? `(${cancelData.reason})` : ''}`;
-                  } catch (e) {
-                    return item.dem_cancel_date;
-                  }
+                'ID': item.id_code,
+                'Mã đơn vị': item.dem_unit,
+                'Tên đơn vị': item.dem_unit_name,            // dùng đã map trong computed
+                'Vị trí': item.dem_position_name,             // map có dịch
+                'Vị trí phụ': item.dem_sub_position_name,     // map có dịch
+                'Số lượng': item.dem_amount,
+                'Ngày yêu cầu': item.dem_inputdate,
+                'Đã tuyển': item.dem_recruited,
+                'Hoàn thành': item.dem_fulfilled,
+                'Ngày hoàn thành': item.dem_fullfilldate,
+                'Trạng Thái': this.getStatusText(item), 
+                'Còn thiếu': item.stocknumber,
+                'Ứng viên': this.getCandidatesCount(item.dem_candidates),
+                'Ghi chú': item.dem_note,
+                'Tạm dừng bắt đầu': item.dem_pause_start_at,
+                'Tạm dừng kết thúc': item.dem_pause_end_at,
+                'Ngày hủy': item.dem_cancel_date ? (() => {
+                    try {
+                        const cancelData = JSON.parse(item.dem_cancel_date);
+                        return `${cancelData.date || ''} ${cancelData.reason ? `(${cancelData.reason})` : ''}`;
+                    } catch (e) {
+                        return item.dem_cancel_date;
+                    }
                 })() : '',
-                'Recruited': item.dem_recruited,
-                'Fulfilled': item.dem_fulfilled,
-                'Fulfilled Date': item.dem_fullfilldate,
-                'Still in Need': item.stocknumber,
-                'Candidates': this.getCandidatesCount(item.dem_candidates),
-                'Note': item.dem_note,
-                'On hold start': item.dem_pause_start_at,
-                'On hold end': item.dem_pause_end_at
             }));
             
-            const ws = XLSX.utils.json_to_sheet(exportData);
+            // Tiêu đề 2 dòng: dòng 1 tiếng Việt, dòng 2 tiếng Trung theo thứ tự cột
+            const headersVI = ['ID',  'Mã đơn vị', 'Tên đơn vị', 'Vị trí', 'Vị trí phụ', 'Số lượng', 'Ngày yêu cầu', 'Đã tuyển', 'Hoàn thành', 'Ngày hoàn thành', 'Trạng Thái', 'Còn thiếu', 'Ứng viên', 'Ghi chú', 'Tạm dừng bắt đầu', 'Tạm dừng kết thúc', 'Ngày hủy'];
             
+            const headersCN = ['人員增補單編號', '單位代號', '單位名稱', '職位', '子職位', '需求人數', '申請日', '入職人數', '已招滿', '招滿日', '招募狀態', '待招募', '應徵者', '備註', '暫停起始日', '暫停結束日', '取消日'];
+            
+            
+            // Tạo sheet trống và thêm 2 dòng tiêu đề
+            const ws = XLSX.utils.aoa_to_sheet([]);
+            XLSX.utils.sheet_add_aoa(ws, [headersVI], { origin: 'A1' });
+            XLSX.utils.sheet_add_aoa(ws, [headersCN], { origin: 'A2' });
+            
+            // Map dữ liệu thành mảng mảng theo thứ tự tiêu đề dòng 1
+            const dataRows = exportData.map(row => headersVI.map(header => row[header] || ''));
+            
+            // Ghi dữ liệu bắt đầu từ dòng 3
+            XLSX.utils.sheet_add_aoa(ws, dataRows, { origin: 'A3' });
+            
+            // Tạo workbook mới, append sheet, xuất file
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, 'Demand Report');
             
@@ -1213,11 +1397,17 @@ export default {
                 if (!this.filterItems.dem_pause_end_at.includes(item.dem_pause_end_at)) {
                     this.filterItems.dem_pause_end_at.push(item.dem_pause_end_at);
                 }
+                const statusText = this.getStatusText(item);
+                if (!this.filterItems.dem_status.includes(statusText)) {
+                    this.filterItems.dem_status.push(statusText);
+                }
+                
                 
                 const candidatesCount = this.getCandidatesCount(item.dem_candidates).toString();
                 if (!this.filterItems.dem_candidates.includes(candidatesCount)) {
                     this.filterItems.dem_candidates.push(candidatesCount);
                 }
+                
                 
                 // Add this new block to handle dem_cancel_date
                 if (item.dem_cancel_date) {
@@ -1368,6 +1558,16 @@ export default {
         },
     },
     watch: {
+        '$i18n.locale': {
+            handler(newLocale) {
+                this.filterItems.dem_status = [];
+                this.updateFilterItems();
+                if (this.filters.dem_status) {
+                    this.$delete(this.filters, 'dem_status');
+                }
+            },
+            immediate: false
+        },
         'demand.department': {
             handler(newDept) {
                 const dept = this.departmentData.find(d => d.department === newDept);
@@ -1391,7 +1591,8 @@ export default {
                 }
             },
             immediate: true
-        }
+        },
+        
     },
     created() {
         this.selectedColumns = this.headers
@@ -1400,6 +1601,7 @@ export default {
     },
     async mounted() {
         await this.getAllDept();
+        await this.getDataNameDeptCode();
         if (this.$route.query.id) {
             await this.handleDemandFromReport();
         } else {
@@ -1416,12 +1618,12 @@ export default {
             "Demand management": "Demand Management",
             "Search": "Search",
             "Add demand": "Add Demand",
-            "Department": "Department",
+            "Department": "Dept",
             "Position Apply": "Position Apply",
-            "Division": "Division",
-            "Unit": "Unit", 
+            "Division": "Div",
+            "Unit code": "Unit code", 
             "Position": "Position",
-            "Sub Position": "Sub Position",
+            "Sub Position": "S.Position",
             "Amount": "Amount",
             "Request date": "Request Date",
             "Recruited": "Recruited",
@@ -1476,7 +1678,12 @@ export default {
             "Update": "Update",
             "Cancel date updated successfully": "Cancel date updated successfully",
             "Failed to update cancel date": "Failed to update cancel date",
-            "Set date": "Set date"
+            "Set date": "Set date",
+            "Quantity": "Quantity",
+            "Unit name":"Unit name",
+            "Status": "Status",
+            "ID":"ID code",
+            "Yes":"Yes"
         },
         "vi": {
             "Total": "Tổng",
@@ -1486,13 +1693,13 @@ export default {
             "Department": "Bộ phận",
             "Position Apply": "Vị trí ứng tuyển",
             "Division": "Cấp sở",
-            "Unit": "Đơn vị",
+            "Unit code": "Mã đơn vị",
             "Position": "Vị trí",
             "Sub Position": "Vị trí phụ",
             "Amount": "Số lượng",
             "Request date": "Ngày yêu cầu",
             "Recruited": "Đã tuyển",
-            "Full filled": "Hoàn thành",
+            "Full filled": "Đã tuyển đủ",
             "Full filled date": "Ngày hoàn thành",
             "Still in need": "Còn thiếu",
             "Note": "Ghi chú",
@@ -1543,7 +1750,14 @@ export default {
             "Update": "Cập nhật",
             "Cancel date updated successfully": "Cập nhật ngày hủy thành công",
             "Failed to update cancel date": "Cập nhật ngày hủy thất bại",
-            "Set date": "Đặt ngày"
+            "Set date": "Đặt ngày",
+            "Quantity": "Số lượng",
+            "Unit name": "Tên đơn vị",
+            "Status": "Trạng thái",
+            "ID": "Mã đơn",
+            "Yes": "Tuyển đủ",
+            "No": "Đang tuyển"
+            
             
         },
         "cn": {
@@ -1554,19 +1768,19 @@ export default {
             "Department": "部",
             "Position Apply": "申请职位",
             "Division": "處", 
-            "Unit": "单位",
-            "Position": "职位",
-            "Sub Position": "子职位",
-            "Amount": "数量",
-            "Request date": "申请日期",
-            "Recruited": "已招聘",
-            "Full filled": "已完成",
-            "Full filled date": "完成日期",
-            "Still in need": "仍需要",
-            "Note": "备注",
-            "Candidates": "候选人",
-            "On hold start": "开始日期",
-            "On hold end": "结束日期",
+            "Unit code": "單位代號",
+            "Position": "職位",
+            "Sub Position": "子職位",
+            "Amount": "需求人數",
+            "Request date": "申請日",
+            "Recruited": "入職人數",
+            "Full filled": "已招滿",
+            "Full filled date": "招滿日",
+            "Still in need": "待招募",
+            "Note": "備註",
+            "Candidates": "應徵者",
+            "On hold start": "暫停起始日",
+            "On hold end": "暫停結束日",
             "Edit demand": "编辑需求",
             "Basic Information": "基本信息",
             "Time Period": "时间段",
@@ -1606,12 +1820,18 @@ export default {
             "Translation failed": "翻译失败",
             "Error loading note": "加载注释时出错",
             "Cancel Demand": "取消需求",
-            "Cancel Date": "取消日期",
+            "Cancel Date": "取消日",
             "Cancel Reason": "取消原因",
             "Update": "更新",
             "Cancel date updated successfully": "取消日期更新成功",
             "Failed to update cancel date": "更新取消日期失败",
-            "Set date": "设置日期"
+            "Set date": "设置日期",
+            "Quantity": "数量",
+            "Unit name":"單位名稱",
+            "Status":"招募狀態",
+            "ID":"人員增補單編號",
+            "Yes": "已招满",
+            "No": "正在招聘"
         }
     }
 </i18n>
@@ -1689,7 +1909,7 @@ export default {
 
 .note-content {
     white-space: pre-wrap;
-    font-size: 14px;
+    /* font-size: 14px; */
     line-height: 1.6;
     padding: 16px;
     background: #ffffff;
@@ -1714,7 +1934,7 @@ export default {
 
 .candidates-content {
     white-space: pre-wrap;
-    font-size: 14px;
+    /* font-size: 14px; */
     line-height: 1.6;
     padding: 16px;
     background: #ffffff;
@@ -1767,10 +1987,9 @@ export default {
     position: sticky;
     top: 0;
     z-index: 1;
-    text-transform: uppercase;
 }
 .v-data-table ::v-deep thead th.text-start {
-    font-size: 11.3px;
+    /* font-size: 11.3px; */
     white-space: nowrap; /* Ensure text does not wrap */
     overflow: hidden; /* Hide overflow text */
     text-overflow: ellipsis; /* Add ellipsis for overflow text */
@@ -1784,7 +2003,7 @@ export default {
 
 .total-row td {
     color: white !important;
-    font-size: 1.1em !important;
+    /* font-size: 1.1em !important; */
     border-top: 2px solid #004D40 !important; /* teal darken-3 for border */
     border-bottom: none !important;
     text-align: left !important;
@@ -1807,5 +2026,24 @@ export default {
 .v-btn-toggle {
     border: 1px solid #e0e0e0;
     border-radius: 4px;
+}
+.v-data-table ::v-deep thead th,
+.v-data-table ::v-deep tbody td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.chip-group-search .v-chip:hover {
+    background-color: #f0f4ff; /* màu nền khi hover */
+    color: #ffe600; /* màu chữ khi hover */
+    border-color: #ffe600; /* viền khi hover */
+    cursor: pointer;
+}
+
+/* Chip khi được chọn */
+.chip-group-search .v-chip.v-chip--active {
+    background-color: #0180ff !important; /* màu nền khi chọn */
+    color: white !important; /* chữ trắng khi chọn */
+    border-color: #0180ff;
 }
 </style>

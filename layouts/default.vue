@@ -69,7 +69,8 @@
 </template>
 <script>
 import auth from '~/components/auth';
-import AuthComp from "../../../@global-component/auth-comp";
+// import AuthComp from "../../../@global-component/auth-comp";
+import AuthComp from 'D:/source/@global-component/auth-comp.vue';
 export default {
     components: {
         auth,
@@ -82,7 +83,8 @@ export default {
             activeUser: {
                 empno: null,
             },
-            items: [{
+            items: [
+            {
                     icon: 'mdi-clipboard-text-outline', // Better represents requirements/demands
                     title: {
                         en: 'Demand',
@@ -91,7 +93,7 @@ export default {
                     },
                     to: '/demand',
                 },
-              
+                 
                 {
                     icon: 'mdi-account-plus-outline', // Keep for adding new candidate
                     title: {
@@ -162,8 +164,6 @@ export default {
     },
     methods: {
         setUser(user) {
-            console.log("setUser triggered", user);
-            console.log(user);
             this.$session.set("recruiting-report", {
                 username: user.username,
                 dept: user.dept,

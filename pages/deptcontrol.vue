@@ -10,16 +10,16 @@
                     <v-spacer></v-spacer>
                     <v-col cols="2">
                         <v-text-field v-model="search" append-icon="mdi-magnify" :label="$t('Search')" outlined dense
-                            hide-details clearable class="search-field" color="teal" dark></v-text-field>
+                        hide-details clearable class="search-field" color="teal" dark></v-text-field>
                     </v-col>
                     <v-btn color="warning" dark @click="triggerFileInput">
                         <v-icon left>mdi-file-upload</v-icon>
                         {{ $t("Import") }}
                     </v-btn>
                     <v-file-input label="File input" outlined dense ref="fileInput" style="display: none"
-                        accept=".xlsx,.xls,.csv"></v-file-input>
+                    accept=".xlsx,.xls,.csv"></v-file-input>
                 </v-app-bar>
-                <v-card-text class="pa-6">
+                <v-card-text class="pa-1">
                     <v-row>
                         <v-col cols="12" md="4">
                             <v-card class="form-card" elevation="2">
@@ -32,189 +32,190 @@
                                     <v-row>
                                         <v-col cols="12" md="4">
                                             <v-text-field v-model="dept" :label="$t('Department')" outlined dense
-                                                :rules="[v => !!v || $t('Required')]" hide-details="auto"
-                                                clearable></v-text-field>
+                                            :rules="[v => !!v || $t('Required')]" hide-details="auto"
+                                            clearable></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="4">
                                             <v-text-field v-model="subDept" :label="$t('Dept unit')" outlined dense
-                                              hide-details
-                                                clearable></v-text-field>
+                                            hide-details clearable></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="4">
                                             <v-text-field v-model="description" :label="$t('Division')" outlined dense
-                                             hide-details clearable></v-text-field>
-                                        </v-col>
-                                        <v-col cols="12" md="4">
-                                            <v-menu v-model="Sdate" :close-on-content-click="true"
-                                                transition="scale-transition">
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-text-field v-model="startDate" :label="$t('Start date')" readonly
-                                                        v-bind="attrs" v-on="on" outlined dense hide-details
-                                                        prepend-inner-icon="mdi-calendar"></v-text-field>
-                                                </template>
-                                                <v-date-picker v-model="startDate" @input="Sdate = false"
-                                                    header-color="teal"
-                                                    :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale"></v-date-picker>
-                                            </v-menu>
-                                        </v-col>
-                                        <v-col cols="12" md="4">
-                                            <v-menu v-model="Edate" :close-on-content-click="true"
-                                                transition="scale-transition">
-                                                <template v-slot:activator="{ on, attrs }">
-                                                    <v-text-field v-model="endDate" :label="$t('End date')" readonly
-                                                        v-bind="attrs" v-on="on" outlined dense hide-details
-                                                        prepend-inner-icon="mdi-calendar"></v-text-field>
-                                                </template>
-                                                <v-date-picker v-model="endDate" @input="Edate = false"
-                                                    header-color="teal"
-                                                    :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale"></v-date-picker>
-                                            </v-menu>
-                                        </v-col>
-                                        <!-- <v-col cols="12" md="4">
-                                            <v-select v-model="fid" :items="['D', 'I', 'O']" :label="$t('Fac. definition')"
-                                                outlined dense hide-details
-                                                clearable></v-select>
-                                        </v-col> -->
-                                        <!-- group code -->
-                                        <!-- <v-col cols="12" md="6">
-                                            <v-text-field v-model="group_code" :label="$t('Group code')" outlined dense
-                                                hide-details clearable></v-text-field>
+                                            hide-details clearable></v-text-field>
                                         </v-col>
                                         <v-col cols="12" md="6">
-                                            <v-text-field v-model="group_name" :label="$t('Group name')" outlined dense
-                                             hide-details clearable></v-text-field>
-                                        </v-col> -->
-                                        <v-col cols="12">
-                                            <!-- <div class="subtitle-1 mb-2">{{ $t("Dept name") }}</div> -->
-                                            <v-card-title class="headline primary--text py-3 px-1">
-                                                <v-icon left color="primary">mdi-office-building</v-icon>
-                                                {{ $t("Dept name") }}
-                                            </v-card-title>
-                                            <v-row>
-                                                <v-col cols="12" sm="12">
-                                                    <v-text-field v-model="nameVi" :label="$t('Vietnamese name')"
-                                                        outlined dense prepend-inner-icon="mdi-translate" hide-details
-                                                        clearable></v-text-field>
-                                                </v-col>
-                                                <!-- <v-col cols="12" sm="12">
-                                                    <v-text-field v-model="nameEn" :label="$t('English name')" outlined
-                                                        dense prepend-inner-icon="mdi-translate" hide-details
-                                                        clearable></v-text-field>
-                                                </v-col>
-                                                <v-col cols="12" sm="12">
-                                                    <v-text-field v-model="nameCn" :label="$t('Chinese name')" outlined
-                                                        dense prepend-inner-icon="mdi-translate" hide-details
-                                                        clearable></v-text-field>
-                                                </v-col> -->
-                                            </v-row>
+                                            <v-menu v-model="Sdate" :close-on-content-click="true"
+                                            transition="scale-transition">
+                                            <template v-slot:activator="{ on, attrs }">
+                                                <v-text-field v-model="startDate" :label="$t('Start date')" readonly
+                                                v-bind="attrs" v-on="on" outlined dense hide-details
+                                                prepend-inner-icon="mdi-calendar"></v-text-field>
+                                            </template>
+                                            <v-date-picker v-model="startDate" @input="Sdate = false"
+                                            header-color="teal"
+                                            :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale"></v-date-picker>
+                                        </v-menu>
+                                    </v-col>
+                                    <v-col cols="12" md="6">
+                                        <v-menu v-model="Edate" :close-on-content-click="true"
+                                        transition="scale-transition">
+                                        <template v-slot:activator="{ on, attrs }">
+                                            <v-text-field v-model="endDate" :label="$t('End date')" readonly
+                                            v-bind="attrs" v-on="on" outlined dense hide-details
+                                            prepend-inner-icon="mdi-calendar"></v-text-field>
+                                        </template>
+                                        <v-date-picker v-model="endDate" @input="Edate = false"
+                                        header-color="teal"
+                                        :locale="$i18n.locale == 'cn' ? 'zh' : $i18n.locale"></v-date-picker>
+                                    </v-menu>
+                                </v-col>
+                                <!-- <v-col cols="12" md="4">
+                                    <v-select v-model="fid" :items="['D', 'I', 'O']" :label="$t('Fac. definition')"
+                                    outlined dense hide-details
+                                    clearable></v-select>
+                                </v-col> -->
+                                <!-- group code -->
+                                <!-- <v-col cols="12" md="6">
+                                    <v-text-field v-model="group_code" :label="$t('Group code')" outlined dense
+                                    hide-details clearable></v-text-field>
+                                </v-col>
+                                <v-col cols="12" md="6">
+                                    <v-text-field v-model="group_name" :label="$t('Group name')" outlined dense
+                                    hide-details clearable></v-text-field>
+                                </v-col> -->
+                                <v-col cols="12">
+                                    <!-- <div class="subtitle-1 mb-2">{{ $t("Dept name") }}</div> -->
+                                    <v-card-title class="headline primary--text py-3 px-1">
+                                        <v-icon left color="primary">mdi-office-building</v-icon>
+                                        {{ $t("Dept name") }}
+                                    </v-card-title>
+                                    <v-row>
+                                        <v-col cols="12" sm="12">
+                                            <v-text-field v-model="nameVi" :label="$t('Vietnamese name')"
+                                            outlined dense prepend-inner-icon="mdi-translate" hide-details
+                                            clearable></v-text-field>
                                         </v-col>
+                                        <!-- <v-col cols="12" sm="12">
+                                            <v-text-field v-model="nameEn" :label="$t('English name')" outlined
+                                            dense prepend-inner-icon="mdi-translate" hide-details
+                                            clearable></v-text-field>
+                                        </v-col>
+                                        <v-col cols="12" sm="12">
+                                            <v-text-field v-model="nameCn" :label="$t('Chinese name')" outlined
+                                            dense prepend-inner-icon="mdi-translate" hide-details
+                                            clearable></v-text-field>
+                                        </v-col> -->
                                     </v-row>
-                                </v-card-text>
-                                <v-divider class="mx-4"></v-divider>
-                                <v-card-actions class="py-3 px-4">
-                                    <v-btn color="error" @click="clearForm" elevation="2">
-                                        <v-icon left>mdi-close</v-icon>
-                                        {{ $t("CLEAR") }}
-                                    </v-btn>
-                                    <v-spacer></v-spacer>
-                                    <v-btn color="primary" :loading="saving" @click="saveDept" elevation="2">
-                                        <v-icon left>mdi-content-save</v-icon>
-                                        {{ $t("SAVE") }}
-                                    </v-btn>
-                                </v-card-actions>
-                            </v-card>
-                        </v-col>
-                        <v-col cols="12" md="8">
-                            <v-card class="table-card" elevation="2">
-                                <v-data-table :headers="headers" :items="filteredDeptData" :items-per-page="10"
-                                    class="elevation-0 custom-table" :loading="loading"
-                                    loading-text="Loading departments..." fixed-header>
-                                    <template v-slot:loading>
-                                        <v-skeleton-loader v-for="n in 3" :key="n"
-                                            type="list-item-two-line"></v-skeleton-loader>
-                                    </template>
-                                    <template v-slot:[`item.actions`]="{ item }">
-                                        <v-icon color="error" class="action-icon" @click="editDept(item)">
-                                            mdi-square-edit-outline
-                                        </v-icon>
-                                    </template>
-                                    <template v-slot:[`header.department`]="{ header }">
-                                        {{ $t("Division") }}
-                                    </template>
-                                    <template v-slot:[`header.name`]="{ header }">
-                                        {{ $t("Name") }}
-                                    </template>
-                                    <template v-slot:[`header.sub_department`]="{ header }">
-                                        {{ $t("Department") }}
-                                    </template>
-                                    <template v-slot:[`header.sub_division`]="{ header }">
-                                        {{ $t("Unit") }}
-                                    </template>
-                                    <template v-slot:[`header.start_date`]="{ header }">
-                                        {{ $t("Start date") }}
-                                    </template>
-                                    <template v-slot:[`header.end_date`]="{ header }">
-                                        {{ $t("End date") }}
-                                    </template>
-                                    <template v-slot:[`header.fid`]="{ header }">
-                                        {{ $t("Fac. definition") }}
-                                    </template>
-                                    <template v-slot:[`header.group_code`]="{ header }">
-                                        {{ $t("Group code") }}
-                                    </template>
-                                    <template v-slot:[`header.group_name`]="{ header }">
-                                        {{ $t("Group name") }}
-                                    </template>
-                                    <template v-slot:[`header.created_at`]="{ header }">
-                                        {{ $t("Created date") }}
-                                    </template>
-                                    <template v-slot:[`header.actions`]="{ header }">
-                                        {{ $t("Actions") }}
-                                    </template>
-                                    <template v-slot:[`item.name`]="{ item }">
-                                        <!-- {{ getLocalizedName(item.name) }} -->
-                                          {{ item.name}}
-                                    </template>
-                                    <template v-slot:[`item.created_at`]="{ item }">
-                                        {{ formatDate(item.created_at) }}
-                                    </template>
-                                    <template #[`footer.prepend`]>
-                                        <v-btn color="success" dark class="ml-3" small>
-                                            <export-excel worksheet="Dept control" :data="exporFullData()"
-                                                :name="`Dept_control_${today}`">
-                                                <v-icon left>mdi-file-excel</v-icon>
-                                                {{ $t("Export data") }}
-                                            </export-excel>
-                                        </v-btn>
-                                    </template>
-                                </v-data-table>
-                            </v-card>
-                        </v-col>
-                    </v-row>
-                </v-card-text>
+                                </v-col>
+                            </v-row>
+                        </v-card-text>
+                        <v-divider class="mx-4"></v-divider>
+                        <v-card-actions class="py-3 px-4">
+                            <v-btn color="error" @click="clearForm" elevation="2">
+                                <v-icon left>mdi-close</v-icon>
+                                {{ $t("CLEAR") }}
+                            </v-btn>
+                            <v-spacer></v-spacer>
+                            <v-btn color="primary" :loading="saving" @click="saveDept" elevation="2">
+                                <v-icon left>mdi-content-save</v-icon>
+                                {{ $t("SAVE") }}
+                            </v-btn>
+                        </v-card-actions>
+                    </v-card>
+                </v-col>
+                <v-col cols="12" md="8">
+                    <v-card class="table-card" elevation="2">
+                        <v-data-table :headers="headers" :items="filteredDeptData" :items-per-page="10"
+                        class="elevation-0 custom-table" :loading="loading"
+                        loading-text="Loading departments..." fixed-header>
+                        <template v-slot:loading>
+                            <v-skeleton-loader v-for="n in 3" :key="n"
+                            type="list-item-two-line"></v-skeleton-loader>
+                        </template>
+                        <template v-slot:[`item.actions`]="{ item }">
+                            <v-icon color="error" class="action-icon" @click="editDept(item)">
+                                mdi-square-edit-outline
+                            </v-icon>
+                        </template>
+                        <template v-slot:[`header.department`]="{ header }">
+                            {{ $t("Division") }}
+                        </template>
+                        <template v-slot:[`header.name_map`]="{ header }">
+                            {{ $t("Name") }}
+                        </template>
+                        <template v-slot:[`header.sub_department`]="{ header }">
+                            {{ $t("Department") }}
+                        </template>
+                        <template v-slot:[`header.sub_division`]="{ header }">
+                            {{ $t("Unit") }}
+                        </template>
+                        <template v-slot:[`header.start_date`]="{ header }">
+                            {{ $t("Start date") }}
+                        </template>
+                        <template v-slot:[`header.end_date`]="{ header }">
+                            {{ $t("End date") }}
+                        </template>
+                        <template v-slot:[`header.fid`]="{ header }">
+                            {{ $t("Fac. definition") }}
+                        </template>
+                        <template v-slot:[`header.group_code`]="{ header }">
+                            {{ $t("Group code") }}
+                        </template>
+                        <template v-slot:[`header.group_name`]="{ header }">
+                            {{ $t("Group name") }}
+                        </template>
+                        <template v-slot:[`header.created_at`]="{ header }">
+                            {{ $t("Created date") }}
+                        </template>
+                        <template v-slot:[`header.actions`]="{ header }">
+                            {{ $t("Actions") }}
+                        </template>
+                        <template v-slot:[`item.name_map`]="{ item }">
+                             {{ getNameMapByDeptCode(item.sub_division) }}
+                        </template>
+                        <template v-slot:[`item.created_at`]="{ item }">
+                            {{ formatDate(item.created_at) }}
+                        </template>
+                        <template #[`footer.prepend`]>
+                            <v-btn color="success" dark class="ml-3" small>
+                                <export-excel worksheet="Dept control" :data="exporFullData()"
+                                :name="`Dept_control_${today}`">
+                                <v-icon left>mdi-file-excel</v-icon>
+                                {{ $t("Export data") }}
+                            </export-excel>
+                        </v-btn>
+                    </template>
+                </v-data-table>
             </v-card>
         </v-col>
     </v-row>
+</v-card-text>
+</v-card>
+</v-col>
+</v-row>
 </template>
 <script>
 export default {
+       head: {
+        title: 'Department Listing'
+    },
     data() {
         return {
             api: 'http://gmo021.cansportsvg.com/api/vg-recuitingReport/',
             today: new Date().toISOString().slice(0, 10),
             headers: [
-                // { text: 'ID', value: 'id', sortable: true },
-                { text: 'Division', value: 'department', sortable: true, align: 'center' },
-                { text: 'Department', value: 'sub_department', sortable: true, align: 'center' },
-                { text: 'Unit', value: 'sub_division', sortable: true, align: 'center' },
-                { text: 'Name', value: 'name', sortable: true, align: 'center' },
-                // { text: 'Nike definition', value: 'fid', sortable: true, align: 'center' },
-                // { text: 'Group code', value: 'group_code', sortable: true, align: 'center' },
-                // { text: 'Group name', value: 'group_name', sortable: true, align: 'center' },
-                { text: 'Start date', value: 'start_date', sortable: true, align: 'center' },
-                { text: 'End date', value: 'end_date', sortable: true, align: 'center' },
-                { text: 'Created date', value: 'created_at', sortable: true, align: 'center' },
-                { text: 'Actions', value: 'actions', sortable: false, align: 'center' },
+            // { text: 'ID', value: 'id', sortable: true },
+            { text: 'Division', value: 'department', sortable: true, align: 'center' },
+            { text: 'Department', value: 'sub_department', sortable: true, align: 'center' },
+            { text: 'Unit', value: 'sub_division', sortable: true, align: 'center' },
+            { text: 'Name', value: 'name_map', sortable: true, align: 'center' },
+            // { text: 'Nike definition', value: 'fid', sortable: true, align: 'center' },
+            // { text: 'Group code', value: 'group_code', sortable: true, align: 'center' },
+            // { text: 'Group name', value: 'group_name', sortable: true, align: 'center' },
+            { text: 'Start date', value: 'start_date', sortable: true, align: 'center' },
+            { text: 'End date', value: 'end_date', sortable: true, align: 'center' },
+            { text: 'Created date', value: 'created_at', sortable: true, align: 'center' },
+            { text: 'Actions', value: 'actions', sortable: false, align: 'center' },
             ],
             deptData: [],
             dialogNewDept: false,
@@ -235,6 +236,7 @@ export default {
             fid: '',
             group_name: '',
             group_code: '',
+            dataNameDeptCode:[]
         }
     },
     computed: {
@@ -243,16 +245,36 @@ export default {
         },
         filteredDeptData() {
             if (!this.search) return this.deptData;
-
+            
             return this.deptData.filter(item => {
                 const searchTerm = this.search.toLowerCase();
                 return Object.values(item).some(value =>
-                    String(value).toLowerCase().includes(searchTerm)
+                String(value).toLowerCase().includes(searchTerm)
                 );
             });
         }
     },
     methods: {
+        getNameMapByDeptCode(deptCode) {
+            const currentLocale = this.$i18n.locale;
+            const item = this.dataNameDeptCode.find(d => d.dept_code === deptCode);
+            if (!item) return "";
+            try {
+                const nameObj = JSON.parse(item.name);
+                return nameObj[currentLocale];
+            } catch {
+                return "";
+            }
+        },
+        async getDataNameDeptCode() {
+            try {
+                const res = await this.$axios.get(this.api + 'getDataNameDeptCode');
+                this.dataNameDeptCode = res.data.dataNameDeptCode;
+                
+            } catch (error) {
+                console.error("Error fetching department data:", error);
+            }
+        },
         triggerFileInput() {
             const inputElement = this.$refs.fileInput.$el.querySelector('input');
             if (inputElement) {
@@ -263,17 +285,17 @@ export default {
         async handleFileImport(event) {
             const file = event.target.files[0];
             if (!file) return;
-
+            
             const formData = new FormData();
             formData.append('file', file);
-
+            
             try {
                 const response = await this.$axios.post(this.api + 'importDeptCode', formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
-
+                
                 if (response.data.success) {
                     this.$notify({
                         title: 'Success',
@@ -296,19 +318,10 @@ export default {
                     type: 'error'
                 });
             }
-
+            
             event.target.value = '';
         },
-        getLocalizedName(name) {
-            if (!name) return '';
-            try {
-                const nameObj = typeof name === 'string' ? JSON.parse(name) : name;
-                return nameObj[this.currentLocale] || nameObj.vi || nameObj.en || nameObj.cn || '';
-            } catch (e) {
-                console.error('Error parsing name:', e);
-                return '';
-            }
-        },
+   
         formatDate(dateStr) {
             if (!dateStr) return '';
             return dateStr.split(' ')[0]; 
@@ -378,13 +391,13 @@ export default {
                         this.clearForm();
                     }
                 });
-
+                
             } catch (error) {
                 console.log(error);
             } finally {
                 this.saving = false;
             }
-
+            
         },
         clearForm() {
             this.dept = '';
@@ -407,9 +420,9 @@ export default {
                     'Department': item.sub_department,
                     'Unit': item.sub_division,
                     'Name': (item.name),
-                   // 'Nike definition': item.fid,
-                  //  'Group code': item.group_code,
-                  //  'Group name': item.group_name,
+                    // 'Nike definition': item.fid,
+                    //  'Group code': item.group_code,
+                    //  'Group name': item.group_name,
                     'Start date': item.start_date,
                     'End date': item.end_date,
                     'Created date': this.formatDate(item.created_at)
@@ -420,6 +433,7 @@ export default {
     },
     async mounted() {
         await this.getAllDept();
+        await this.getDataNameDeptCode();
     }
 }
 </script>
@@ -503,39 +517,45 @@ export default {
 .pulse-icon {
     animation: pulse 2s infinite;
 }
+.v-data-table ::v-deep thead th,
+.v-data-table ::v-deep tbody td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 @keyframes pulse {
     0% {
         transform: scale(1);
     }
-
+    
     50% {
         transform: scale(1.1);
     }
-
+    
     100% {
         transform: scale(1);
     }
 }
 
 @keyframes shake {
-
+    
     10%,
     90% {
         transform: translate3d(-1px, 0, 0);
     }
-
+    
     20%,
     80% {
         transform: translate3d(2px, 0, 0);
     }
-
+    
     30%,
     50%,
     70% {
         transform: translate3d(-4px, 0, 0);
     }
-
+    
     40%,
     60% {
         transform: translate3d(4px, 0, 0);

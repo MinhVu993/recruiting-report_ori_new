@@ -410,6 +410,9 @@
 import dayjs from "dayjs";
 import * as XLSX from 'xlsx';
 export default {
+     head: {
+        title: 'Intern Management'
+    },
     data() {
         return {
             api: 'http://gmo021.cansportsvg.com/api/vg-recuitingReport/',
@@ -1144,15 +1147,15 @@ export default {
 }
 
 /* Hoặc Cách 2: Cho Vue 2 */
-/deep/ .v-data-table {
+ .v-data-table {
     border: 1px solid #e0e0e0 !important;
 }
 
-/deep/ .v-data-table__wrapper {
+ .v-data-table__wrapper {
     overflow-y: auto !important;
 }
 
-/deep/ .v-data-table thead th {
+ .v-data-table thead th {
     font-weight: 600 !important;
     color: #004D40 !important;
     background: white !important;
@@ -1162,15 +1165,15 @@ export default {
     text-transform: uppercase !important;
 }
 
-/deep/ .v-data-table tbody tr:hover {
+ .v-data-table tbody tr:hover {
     background-color: #f3fd99 !important;
 }
 
-/deep/ .v-data-table tbody tr:nth-child(even) {
+ .v-data-table tbody tr:nth-child(even) {
     background-color: #f5f5f5;
 }
 
-/deep/ .v-data-table tbody tr.v-data-table__selected {
+ .v-data-table tbody tr.v-data-table__selected {
     background-color: #e3f2fd !important;
 }
 
