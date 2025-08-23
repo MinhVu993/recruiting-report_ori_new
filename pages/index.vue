@@ -252,7 +252,7 @@
 </template>
 <template v-slot:[`item.candidate_name`]="{ item }">
     <nuxt-link
-    :to="{ path: '../create-candidate', query: { id: item.id, emp: item.candidate_name } }"
+    :to="{ path: '../create-candidate', query: { id: item.id } }"
     class="candidate-link">
     {{ item.candidate_name }}
 </nuxt-link>
@@ -421,7 +421,6 @@ export default {
             { text: this.$t('Actually date'), value: "act_en_date",  },
             { text: this.$t('Empno HRM'), value: "newEmpno",  },
             { text: this.$t('Note'), value: "note",  },
-            // { text: this.$t('Action'), value: "action",  },
             ],
             selectedItems: [],
             selectAll: false,

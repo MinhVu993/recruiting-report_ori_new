@@ -1420,11 +1420,17 @@ export default {
         loc_apply: {
             handler(newVal) {
                 if (newVal) {
-                    const matchingPosition = this.item_position.find(pos =>
-                    this.positionMapping[newVal]?.includes(pos.name[this.$i18n.locale] || pos.name)
-                    );
+                    const possibleNames = this.positionMapping[newVal] || [];
+                    const matchingPosition = this.item_position.find(pos => {
+                        // Tìm trong tất cả tên ngôn ngữ nếu có trùng => trả về true
+                        return possibleNames.some(name =>
+                        Object.values(pos.name).includes(name)
+                        );
+                    });
                     if (matchingPosition) {
                         this.position = matchingPosition;
+                    } else {
+                        this.position = null; // hoặc để nguyên
                     }
                 }
             },
@@ -2520,7 +2526,6 @@ export default {
                 this.time_trial = 6;
                 return;
             }
-            
             // Nếu có mã học vấn, xét theo trình độ học vấn
             if (this.edu?.code) {
                 const eduCode = parseInt(this.edu.code);
