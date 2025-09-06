@@ -8,15 +8,15 @@
                             <img width="75px;" :src="`./logo.png`" class="img-fluid mx-auto mt-1" alt="" ref="logoImage" />
                         </td>
                         <td rowspan="3" class="text-center align-middle text-header_title">
-                            BẢNG GHI NHẬN TUYỂN CHỌN (NHÂN VIÊN / CÁN BỘ）
+                            BẢNG GHI NHẬN TUYỂN CHỌN (NHÂN VIÊN/CÁN BỘ/KỸ SƯ）                                                                                                                                          
                             <br />
-                                  甄選紀錄表（非工人)
+                                  甄選紀錄表（非工人）
                         </td>
                         <td>
                             Ngày thiết lập (sửa đổi) <br />
                             制(修)訂日期
                         </td>
-                        <td>23.03.2024</td>
+                        <td>14.08.2025</td>
                     </tr>
                     <tr>
                         <td>
@@ -36,7 +36,7 @@
                         </td>
                         <td class="colum3 align-middle">
                             Phiên bản 版本<br />
-                            6
+                            7
                         </td>
                         <td class="colum3 align-middle">
                             Trang 頁次 <br />
@@ -78,23 +78,47 @@
                     </tr>
                     <tr>
                         <td colspan="6" style="text-align: left;">
-                            Học lực 教育程度: {{ candidate.eduText }}
-                            
+                            <!-- Học lực 教育程度: {{ candidate.eduText }} -->
+                             Học lực 教育程度:
+                                    <div style="display: flex; justify-content: left; gap: 10px; margin-top: 5px;">
+                                        <label><input type="checkbox" readonly @click.prevent style="margin: 2px;" :checked="candidate.edu === '1'">Dưới 12 (高中以下)   </label>
+                                        <label><input type="checkbox" readonly @click.prevent style="margin: 2px;" :checked="candidate.edu === '2'">12/12 (高中)  </label>
+                                        <label><input type="checkbox" readonly @click.prevent style="margin: 2px;" :checked="candidate.edu === '3'">Trung cấp (中專)  </label>
+                                        <label><input type="checkbox" readonly @click.prevent style="margin: 2px;" :checked="candidate.edu === '4'">Cao đẳng (大專)</label>
+                                    </div>
+                                     <div style="display: flex; justify-content: left; gap: 20px; margin-top: 5px;">
+                                        <label><input type="checkbox" readonly @click.prevent style="margin: 2px;" :checked="candidate.edu === '5'">Đại học (大學)    </label>
+                                        <label><input type="checkbox" readonly @click.prevent style="margin: 2px;" :checked="candidate.edu === '6'">Thạc sĩ trở lên (研究所以上)    </label>
+                                    </div>
                         </td>
                         <td colspan="6" style="text-align: left;">
                             Kinh nghiệm công việc 工作經驗: &nbsp;&nbsp; {{ extractNumber(candidate.work_exp) }} năm 年
                             <br />Kinh nghiệm việc bán thời gian 兼職工作經驗 &nbsp;&nbsp; {{ extractNumber(candidate.work_exp_pt) }} năm 年
+                             <br />Tất cả kinh nghiệm làm việc以下皆為全職工作經驗: 
+                               <div style="display: flex; justify-content: left; gap: 40px; margin-top: 5px;">
+                                      <label><input type="checkbox" readonly @click.prevent style="margin: 3px;" >Không  (無經驗) </label>
+                                      <label><input type="checkbox" readonly @click.prevent style="margin: 3px;" >Dưới 1 năm (一年以下) </label>
+                                      <label><input type="checkbox" readonly @click.prevent style="margin: 3px;" >Từ 1 đến dưới 2 năm (一年至二年以下) </label>
+                               </div>
+                               <div style="display: flex; justify-content: left; gap: 40px; margin-top: 5px;">
+                                      <label><input type="checkbox" readonly @click.prevent style="margin: 3px;" >Từ 2 đến dưới 3 năm (二年至 三年以下)  </label>
+                                      <label><input type="checkbox" readonly @click.prevent style="margin: 3px;" >Trên 3 năm (三年以上)  </label>
+                               </div>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="12" style="text-align: left;">
                             Thông qua kênh tuyển dụng nào biết được thông tin công ty đang tuyển dụng透過什麼樣的招募管道知道志寧公司的招募資訊:
                             <div style="display: flex; justify-content: left; gap: 40px; margin-top: 5px;">
-                                <label><input type="checkbox" readonly @click.prevent style="margin: 8px;" :checked="candidate.recru_source === ''">Tìm việc nhanh 人力銀行網站</label>
+                                <label><input type="checkbox" readonly @click.prevent style="margin: 8px;" :checked="candidate.recru_source === ''">Website tìm việc 人力銀行網站 </label>
                                 <label><input type="checkbox" readonly @click.prevent style="margin: 8px;" :checked="candidate.recru_source === '7'">Website công ty 志寧公司網站</label>
                                 <label><input type="checkbox" readonly @click.prevent style="margin: 8px;" :checked="candidate.recru_source === '4'">Bạn bè giới thiệu 親友介紹</label>
                                 <label><input type="checkbox" readonly @click.prevent style="margin: 8px;" :checked="candidate.recru_source === '1'">Băng rôn tuyển dụng 招募布條</label>
                                 <label><input type="checkbox" readonly @click.prevent style="margin: 8px;" :checked="candidate.recru_source === '2'">Tờ rơi tuyển dụng 招募傳單</label>
+                            </div>
+                            <div style="display: flex; justify-content: left; gap: 50px; margin-top: 5px;">
+                                 <label><input type="checkbox" readonly @click.prevent style="margin: 8px;" :checked="candidate.recru_source === ''">Phương tiện truyền thông xã hội：Tik tok 社群媒體：抖音</label>
+                                <label><input type="checkbox" readonly @click.prevent style="margin: 8px;" :checked="candidate.recru_source === '9'">Phương tiện truyền thông xã hội：Facebook社群媒體: 臉書</label>
                             </div>
                             <div style="display: flex; justify-content: left; gap: 50px; margin-top: 5px;">
                                 <label><input type="checkbox" readonly @click.prevent style="margin: 8px;" :checked="candidate.recru_source === '3'">Phát thanh văn phòng xã 村辦公室廣播</label>
@@ -131,16 +155,18 @@
                             <br />(Thi viết kết quả HR điền <br />紙筆測驗結果HR填寫)
                         </td>
                         <td colspan="5" style="border: 1px solid #000; padding: 0; height: 80px;">
-                            <div style="border-bottom: 1px solid #000; padding: 5px; height: 60%; box-sizing: border-box;">
-                                <div style="margin-bottom: 5px;">
-                                    <label style="white-space: nowrap; margin-right: 10px;">
-                                        <input type="checkbox" readonly @click.prevent style="margin: 8px;">Lưu loát 精通
-                                    </label>
+                            <div style="border-bottom: 1px solid #000; padding: 3px; height: 60%; box-sizing: border-box;">
+                                <div style="display: flex; justify-content: start; gap: 10px; font-size: 14px;">
                                     <label style="white-space: nowrap;">
-                                        <input type="checkbox" readonly @click.prevent style="margin: 8px;">Khá尚可
+                                        <input type="checkbox" readonly @click.prevent style="margin: 2px;">
+                                        <span>Nghe-Nói-Đọc-Viết<br/>聽-說-讀-寫測驗</span>
+                                    </label>
+                                    <label style="white-space: nowrap; margin-left:50px;">
+                                        <input type="checkbox" readonly @click.prevent style="margin: 2px; " >
+                                        <span>Nghe-Nói<br/>聽-說測驗</span>
                                     </label>
                                 </div>
-                                <div style="margin-top: 5px; text-align: left;">
+                                <div style="margin-top: 2px; text-align: left; font-size: 14px;">
                                     Tiếng Hoa/中文測驗分數:
                                 </div>
                             </div>
@@ -566,7 +592,7 @@
     Trợ cấp đi lại:
     <br />交通補助:
 </td>
-<td rowspan="1" style="text-align: left; vertical-align: top; padding: 8px; width: 20%;">
+<td rowspan="1" style="text-align: left, vertical-align: top; padding: 8px; width: 20%;">
     Tổng lương thử việc:
     <br />試用期全薪:
 </td>
@@ -599,9 +625,7 @@
             <br/>
             <br/>
             <br/>
-            <br/>
-            <br/>
-            <br/>
+          
         </td>
         <td colspan="2" style="text-align: center;">Khu quản lý
             <br />管理處
@@ -610,9 +634,7 @@
             <br/>
             <br/>
             <br/>
-            <br/>
-            <br/>
-            <br/>
+          
         </td>
         <td colspan="2" style="text-align: center;">Bộ phận Tài Nguyên Nhân Lực
             <br />人力資源部:
@@ -621,9 +643,7 @@
             <br/>
             <br/>
             <br/>
-            <br/>
-            <br/>
-            <br/>
+         
         </td>
         <td colspan="2" style="text-align: center;">Chủ Quản Cấp Sở
             <br />處級主管:
@@ -632,9 +652,7 @@
             <br/>
             <br/>
             <br/>
-            <br/>
-            <br/>
-            <br/>
+          
         </td>
         <td colspan="2" style="text-align: center;">Chủ Quản Bộ Phận
             <br />部級主管
@@ -643,9 +661,7 @@
             <br/>
             <br/>
             <br/>
-            <br/>
-            <br/>
-            <br/>
+           
         </td>
         <td colspan="2" style="text-align: center;">Chủ Quản Đơn Vị
             <br />單位主管
@@ -654,9 +670,7 @@
             <br/>
             <br/>
             <br/>
-            <br/>
-            <br/>
-            <br/>
+          
         </td>
     </tr>
     <tr>
@@ -732,6 +746,36 @@ export default {
         }
     },
     methods: {
+        // Normalize various edu codes/strings from API into the checkbox values '1'..'6'
+        normalizeEdu(val) {
+            if (val === null || val === undefined) return '';
+            const s = String(val).trim();
+            // direct already-normalized values
+            if (['1','2','3','4','5','6'].includes(s)) return s;
+            // map known API codes to checkbox values
+            const map = {
+                '001': '1', // Tiểu/THCS/Dưới 12 -> Dưới 12
+                '002': '1',
+                '003': '1',
+                '004': '2', // Tốt nghiệp 12 -> 12/12
+                '005': '2',
+                '006': '3', // Trung học CN -> Trung cấp
+                '007': '4', // Cao đẳng
+                '008': '5', // Đại học
+                '009': '6', // Thạc sĩ
+                '10':  '6'  // Tiến sĩ -> Thạc sĩ trở lên
+            };
+            if (map[s]) return map[s];
+            // fallback heuristics
+            const lower = s.toLowerCase();
+            if (lower.includes('đại') || lower.includes('dai') || lower.includes('university')) return '5';
+            if (lower.includes('thạc') || lower.includes('masters') || lower.includes('master') || lower.includes('tiến')) return '6';
+            if (lower.includes('cao đẳng') || lower.includes('cao dang')) return '4';
+            if (lower.includes('trung') || lower.includes('chuyên')) return '3';
+            if (lower.includes('12') || lower.includes('tốt') ) return '2';
+            if (lower.length) return '1';
+            return '';
+        },
         async fetchCandidateData(ids) {
             try {
                 const idArray = typeof ids === 'string' ? ids.split(',') : [ids];
@@ -757,8 +801,9 @@ export default {
                                 work_exp_pt: candidateData?.work_exp_pt || '',
                                 ex_company: candidateData?.ex_company || '',
                                 ex_position: candidateData?.ex_position || '',
-                                edu: candidateData?.edu || '',
-                                eduText: this.educationLevels[candidateData?.edu] || '',
+                                // normalize edu so template checkboxes (:checked="candidate.edu === '1'") work
+                                edu: this.normalizeEdu(candidateData?.edu),
+                                eduText: this.educationLevels[candidateData?.edu] || this.educationLevels[candidateData?.edu?.toString().padStart(3,'0')] || '',
                                 hr_ac_qu: candidateData?.hr_ac_qu || '',
                                 dp_ac_qu: candidateData?.dp_ac_qu || '',
                                 hr_iv_date: candidateData?.hr_iv_date || '',
@@ -811,7 +856,7 @@ export default {
         },
         
         calculateTotalExperience() {
-            let workExp = this.candidates[0]?.work_exp || '0';
+            let workExp = this.candidates[0]?.work_exp;
             let erSeniority = this.resignData[0]?.er_seniority || 0;
             const exCompany = this.candidates[0]?.ex_company || '';
             

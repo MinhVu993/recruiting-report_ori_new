@@ -28,7 +28,7 @@
                         Ngày thiết lập (sửa đổi) <br />
                         (修)訂日期
                     </td>
-                    <td>15.04.2024</td>
+                    <td>14.08.2025</td>
                 </tr>
                 <tr>
                     <td>
@@ -48,7 +48,7 @@
                     </td>
                     <td class="colum3 align-middle">
                         Phiên bản 版本<br />
-                        2
+                        4
                     </td>
                     <td class="colum3 align-middle">
                         Trang 頁次 <br />
@@ -120,13 +120,13 @@ export default {
     computed: {
         formattedData() {
             return this.printData.map(item => {
-                const deptName = item.name ? JSON.parse(item.name) : {};
+                const deptName = item.name;
                 const dutyName = item.duty_name ? JSON.parse(item.duty_name) : {};
                 
                 return {
                     empno: item.newEmpno,
                     name: item.candidate_name,
-                    dept_name: deptName.vi || '',
+                    dept_name: deptName,
                     duty: dutyName.vi || '',
                     note: ''
                 };
@@ -161,7 +161,6 @@ export default {
                     act_en_date: this.$route.query.data,
                 });
                 this.printData = res.data;
-                
             } catch (error) {
                 console.error("Error fetching data:", error);
             }
@@ -274,7 +273,7 @@ body {
 }
 
 .text-header_title {
-    font-size: 18px !important;
+    font-size: 16.5px !important;
     font-family: "Times New Roman", Times, serif !important;
     width: 31%;
     padding: 15px !important;
@@ -400,18 +399,17 @@ img.img-fluid {
 /* Cập nhật style cho bảng chữ ký */
 .signature-table {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 5px;
     border-collapse: collapse;
 }
 
 .signature-space {
-    height: 150px;
+     height: 40px; 
     border: none !important;
 }
 
 .signature-note {
     text-align: left;
-    padding: 10px;
     white-space: nowrap;
 }
 

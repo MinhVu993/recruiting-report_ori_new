@@ -897,7 +897,7 @@ export default {
                 return acc;
             }, {});
             const deptMap = this.dept.reduce((acc, item) => {
-                acc[item.sub_division] = JSON.parse(item.name).vi || item.sub_division;
+                acc[item.sub_division] = (item.name);
                 return acc;
             }, {});
             return data.map((item, index) => {
@@ -925,7 +925,7 @@ export default {
                 return acc;
             }, {});
             const deptMap = this.dept.reduce((acc, item) => {
-                acc[item.sub_division] = JSON.parse(item.name).vi || item.sub_division;
+                acc[item.sub_division] = (item.name);
                 return acc;
             }, {});
             return data.map((item, index) => {
