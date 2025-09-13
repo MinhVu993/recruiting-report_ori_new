@@ -66,6 +66,12 @@
     "chunkName": "pages/template-print/3"
   },
   {
+    "name": "template-print-3_ori",
+    "path": "/template-print/3_ori",
+    "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\3_ori.vue",
+    "chunkName": "pages/template-print/3_ori"
+  },
+  {
     "name": "template-print-4",
     "path": "/template-print/4",
     "component": "D:\\\\source\\\\recruiting-report_ori_new\\\\pages\\\\template-print\\\\4.vue",

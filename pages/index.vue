@@ -2013,7 +2013,7 @@ export default {
                 "Prod assistant": "生產助理",
                 "Maintenance": "維修",
                 "Technical": "技術",
-                "Officer": "科员"
+                "Officer": "課員"
             }
         }
     }

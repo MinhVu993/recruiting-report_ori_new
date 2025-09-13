@@ -15,6 +15,7 @@ const _e4c8ceee = () => interopDefault(import('..\\pages\\template-print\\1.vue'
 const _1ff0b13e = () => interopDefault(import('..\\pages\\template-print\\2-cn.vue' /* webpackChunkName: "pages/template-print/2-cn" */))
 const _3acd7f26 = () => interopDefault(import('..\\pages\\template-print\\2-sf.vue' /* webpackChunkName: "pages/template-print/2-sf" */))
 const _e49070ea = () => interopDefault(import('..\\pages\\template-print\\3.vue' /* webpackChunkName: "pages/template-print/3" */))
+const _412188b2 = () => interopDefault(import('..\\pages\\template-print\\3_ori.vue' /* webpackChunkName: "pages/template-print/3_ori" */))
 const _e47441e8 = () => interopDefault(import('..\\pages\\template-print\\4.vue' /* webpackChunkName: "pages/template-print/4" */))
 const _e45812e6 = () => interopDefault(import('..\\pages\\template-print\\5.vue' /* webpackChunkName: "pages/template-print/5" */))
 const _27417c5d = () => interopDefault(import('..\\pages\\template-print\\bqt.vue' /* webpackChunkName: "pages/template-print/bqt" */))
@@ -77,6 +78,10 @@ export const routerOptions = {
     path: "/template-print/3",
     component: _e49070ea,
     name: "template-print-3"
+  }, {
+    path: "/template-print/3_ori",
+    component: _412188b2,
+    name: "template-print-3_ori"
   }, {
     path: "/template-print/4",
     component: _e47441e8,

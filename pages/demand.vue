@@ -568,8 +568,8 @@ export default {
             itemsPos: [
             { vi: 'Tất cả', en: 'All', cn: '所有' },
             { vi: 'Công nhân', en: 'Worker', cn: '工人' },
-            { vi: 'Nhân viên', en: 'Staff', cn: '科员' },
-            { vi: 'Nhân viên (ngôn ngữ)', en: 'Staff (lang)', cn: '语言科员' },
+            { vi: 'Nhân viên', en: 'Staff', cn: '課員' },
+            { vi: 'Nhân viên (ngôn ngữ)', en: 'Staff (lang)', cn: '语言課員' },
             { vi: 'Cán bộ', en: 'Leader', cn: '干部' },
             { vi: 'Phiên dịch', en: 'Translator', cn: '翻译' },
             { vi: 'Kỹ sư', en: 'Engineer', cn: '工程师' }
@@ -580,7 +580,7 @@ export default {
             { vi: 'Trợ lý sản xuất', en: 'Prod assistant', cn: '生产助理' },
             { vi: 'Bảo trì', en: 'Maintenance', cn: '维护' },
             { vi: 'Kỹ thuật', en: 'Technical', cn: '技术' },
-            { vi: 'Nhân viên', en: 'Officer', cn: '科员' }
+            { vi: 'Nhân viên', en: 'Officer', cn: '課員' }
             ], 
             
             itemsSub_Pos: [  
@@ -588,7 +588,7 @@ export default {
             { vi: 'Trợ lý sản xuất', en: 'Prod assistant', cn: '生产助理' },
             { vi: 'Bảo trì', en: 'Maintenance', cn: '维护' },
             { vi: 'Kỹ thuật', en: 'Technical', cn: '技术' },
-            { vi: 'Nhân viên', en: 'Officer', cn: '科员' }
+            { vi: 'Nhân viên', en: 'Officer', cn: '課員' }
             ],
             
             itemsSub_Pos_cn: [

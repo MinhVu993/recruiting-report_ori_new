@@ -8,104 +8,165 @@
         </div>
         <div v-else-if="processedCandidates.length === 0" class="no-data-message">
             <v-alert
-                type="warning"
-                prominent
-                border="left"
-                colored-border
-                color="warning"
-                class="mb-0"
+            type="warning"
+            prominent
+            border="left"
+            colored-border
+            color="warning"
+            class="mb-0"
             >
-                Không tìm thấy dữ liệu nghỉ việc cho các nhân viên được chọn!
-            </v-alert>
-        </div>
-        <div v-else>
-            <!-- Loop through all candidates -->
-            <div v-for="(candidate, index) in processedCandidates" :key="index" :class="{'page-break': index > 0}" ref="printContent">
-                <table class="table table-bordered no-bottom-border" style="margin-bottom: 0">
+            Không tìm thấy dữ liệu nghỉ việc cho các nhân viên được chọn!
+        </v-alert>
+    </div>
+    <div class="page-container" v-else>
+        <div ref="printContent" class="print-page"  v-for="(candidate, index) in processedCandidates" :key="index">
+            <!-- Thông tin cá nhân -->
+            <table class="table table-bordered main-table">
+                <thead>
                     <tr>
-                        <td rowspan="2" class="align-middle text-header" style="width: 12%">
-                            <img width="75px;" :src="`./logo.png`" class="img-fluid mx-auto mt-1" alt="" ref="logoImage" />
+                        <td class="logo-cell">
+                            <img width="75px" :src="`./logo.png`" class="img-fluid mx-auto mt-1" alt="" ref="logoImage"/>
                         </td>
-                        <td rowspan="3" class="text-center align-middle text-header_title">
-                            BẢNG GHI NHẬN TRỞ LẠI CÔNG TY
-                            <br />
-                            回廠紀錄
+                        <td class="title-cell" colspan="5">
+                            員工離職回廠紀錄與工作承諾書 <br />
+                            BẢN CAM KẾT VỀ VIỆC NHÂN VIÊN NGHỈ VIỆC QUAY TRỞ LẠI CÔNG TY LÀM VIỆC
                         </td>
                     </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th colspan="6" class="section-title">THÔNG TIN CÁ NHÂN 個人基本資料:</th>
+                    </tr>
+                    <tr>
+                        <td class="label" style="text-align: center;">Họ tên  <br />姓名</td>
+                        <td style="text-align: center;"> {{ candidate.name }}</td>
+                        <td style="text-align: center;" class="label">CCCD  <br />身分證號</td>
+                        <td style="text-align: center;"> {{ candidate.cccd }}</td>
+                        <td style="text-align: center;" class="label">Số lần vào công ty  <br />進廠次數</td>
+                        <td style="text-align: center;">{{ candidate.times_in_company }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;" class="label">Ngày vào công ty  <br />原入廠日</td>
+                        <td style="text-align: center;">{{ formatDate(candidate.join_date) }}</td>
+                        <td style="text-align: center;" class="label">Mã CNV cũ  <br />原員工編號</td>
+                        <td style="text-align: center;">{{ candidate.emp_id }}</td>
+                        <td style="text-align: center;" class="label">Bộ phận cũ  <br />原任職單位</td>
+                        <td style="text-align: center;">{{ candidate.dept_name }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;" class="label">Ngày thôi việc  <br />原離廠日</td>
+                        <td style="text-align: center;">{{ formatDate(candidate.resign_date) }}</td>
+                        <td style="text-align: center;" class="label">Loại thôi việc  <br />離職類型</td>
+                        <td style="text-align: center;">{{ displayErType(candidate.er_type_resign) }}</td>
+                        <td style="text-align: center;" class="label">Lý do thôi việc  <br />離職原因</td>
+                        <td style="text-align: center;"><template v-if="candidate.resign_reason_text">{{ candidate.resign_reason_text }}</template></td>
+                    </tr>
+                    
+                    <!-- Khen thưởng -->
+                    <tr>
+                        <td colspan="6" class="section-title">KHEN THƯỞNG VÀ XỬ PHẠT 獎勵與處分</td>
+                    </tr>
+                    <tr>
+                        <td rowspan="2" style="text-align: center;">Khen thưởng  <br />獎勵</td>
+                        <td style="text-align: center;" >Ghi công lớn (lần) <br/>
+                            大功（次）
+                        </td>
+                        <td style="text-align: center;">Ghi công nhỏ (lần)  <br/>
+                            小功（次）
+                        </td>
+                        <td style="text-align: center;" colspan="2">Khen thưởng (lần) <br/>
+                            嘉獎（次）
+                        </td>
+                        <td style="text-align: center;" colspan="2">Loại khác (lần) <br/>
+                            其他（次）
+                        </td>
+                        
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td colspan="2"></td>
+                    </tr>
+                    <tr>
+                        <td style="text-align: center;" rowspan="2" >Xử phạt  <br />處分</td>
+                        <td style="text-align: center;">Khiển trách bằng miệng (lần) <br/>
+                            口頭警告（次）
+                        </td>
+                        <td style="text-align: center;">Khiển trách bằng văn bản (lần) <br/>
+                            書面警告（次）
+                        </td>
+                        <td style="text-align: center;" colspan="2">Kéo dài thời hạn nâng lương 6 tháng hoặc  hạ chức (lần) <br/>
+                            延後六個月調薪或調（次）
+                        </td>
+                        <td style="text-align: center;" colspan="2">Loại khác (lần) <br/>
+                            其他（次）
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td colspan="2"></td>
+                        <td colspan="2"></td>
+                    </tr>
+                    
+                    <!-- Xác nhận -->
+                    <tr>
+                        <th colspan="6" class="section-title">
+                            XÁC NHẬN CỦA CHỦ QUẢN CŨ CÓ PHỎNG VẤN KHÔNG: 原單位主管是否進行面試
+                        </th>
+                    </tr>
+                    <tr>
+                        <td colspan="5" class="checkbox-col">
+                            <div class="checkbox-wrapper">
+                                <label class="checkbox-item"><input type="checkbox" readonly @click.prevent /> Có nhận vào bộ phận cũ 是, 回原單位就職</label>
+                                <label class="checkbox-item"><input type="checkbox" readonly @click.prevent /> Chuyển bộ phận khác 否, 轉介其他單位</label>
+                                <label class="checkbox-item reason-label"><input type="checkbox" readonly @click.prevent /> Lý do khác 否, 請列出具體原因  <span class="line"></span></label>
+                            </div>
+                        </td>
+                        <td style="vertical-align: top; text-align: center;">Ký tên 簽名</td>
+                    </tr>
+                    
+                    <!-- Cam kết -->
+                    <tr>
+                        <td colspan="5" class="label" style="min-width: 400px; max-width: 600px;">
+                            Nội dung tự kiểm điểm và cam kết 反思與承諾
+                        </td>
+                        <td style="text-align: center; min-width: 200px; max-width: 300px;">
+                            Vâng, tôi đã hiểu 我已經明白了 <br/>
+                            (đánh dấu sau khi xác nhận)（確認後打勾）
+                        </td>
+                         <!-- <td colspan="5" class="label" >
+                            Nội dung tự kiểm điểm và cam kết 反思與承諾
+                        </td>
+                        <td style="text-align: center; ">
+                            Vâng, tôi đã hiểu 我已經明白了 <br/>
+                            (đánh dấu sau khi xác nhận)（確認後打勾）
+                        </td> -->
+                    </tr>
+                    <tr>
+                        <td colspan="5">1. Tôi hiểu hành vi của mình ảnh hưởng đến công việc và quyền lợi.<br />我已經知道自己的行為會影響工作表現和待遇。</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">2. Tôi hiểu thái độ làm việc ảnh hưởng đến đồng nghiệp và nhóm.<br />我已經知道自己的工作態度會影響團隊和同事。</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td colspan="5">3. Lần này công ty cho tôi cơ hội quay lại, tôi cam kết tuân thủ quy định công ty và hoàn thành công việc do chủ quản
+                            giao. <br/>這次公司給我機會回來工作，我承諾遵守公司規定並完成主管交代的工作。</td>
+                            <td></td>
+                        </tr>
+                        <tr class="final-note">
+                            <td colspan="6" style="text-align: left; padding: 12px 8px; min-height: 120px; vertical-align: bottom;">
+                                Chữ ký xác nhận của nhân viên 員工簽名確認 <br />
+                                Ngày ký 簽署日期 <br /><br /><br /><br />
+                                Người ghi biên bản / phỏng vấn ký tên <br /> 面談／紀錄人員簽名 <br /><br /><br />
+                            </td>
+                        </tr>
+                    </tbody>
                 </table>
-                <table class="table table-bordered no-interior-borders" style="margin-top: 10px;">
-                    <tr>
-                        <td colspan="12" style="text-align: left;"><strong>1. HỌ VÀ TÊN 姓名: {{ candidate.name }}</strong></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="text-align: left;">Số lần vào công ty 進廠次數: </td>
-                        <td colspan="3" style="text-align: left;">{{ candidate.times_in_company }} lần/次</td>
-                        <td colspan="6" style="text-align: left;"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="text-align: left;">Số thẻ 工號:</td>
-                        <td colspan="3" style="text-align: left;">{{ candidate.emp_id }}</td>
-                        <td colspan="3" style="text-align: left;">Ngày vào công ty 進廠日</td>
-                        <td colspan="3" style="text-align: left;">{{ formatDate(candidate.join_date) }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="3" style="text-align: left;">Bộ phận 部門:</td>
-                        <td colspan="3" style="text-align: left;">{{ candidate.dept_name }}</td>
-                        <td colspan="3" style="text-align: left;">Ngày thôi việc 離職日</td>
-                        <td colspan="3" style="text-align: left;">{{ formatDate(candidate.resign_date) }}</td>
-                    </tr>
-                    <tr>
-                        <td colspan="12" style="text-align: left;">LÝ DO THÔI VIỆC 離職原因：{{ candidate.resign_type }} 
-                            <template v-if="candidate.resign_reason_text">({{ candidate.resign_reason_text }})</template>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="12" style="text-align: left;"><strong>2. XÁC NHẬN CỦA CHỦ QUẢN CŨ CÓ PHỎNG VẤN KHÔNG:
-                                原單位主管是否進行面試</strong></td>
-                    </tr>
-                    <tr>
-                        <td colspan="6" style="text-align: left; width: 50%;">Lý do 理由:
-                            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 5px;">
-                                <label>
-                                    <input type="checkbox" readonly @click.prevent v-model="candidate.return_to_old_dept" style="margin: 5px;">
-                                    Có nhận vào bộ phận cũ 是,回原單位就職
-                                </label>
-                                <label>
-                                    <input type="checkbox" readonly @click.prevent v-model="candidate.transfer_to_other_dept" style="margin: 5px;">
-                                    Chuyển bộ phận khác 否, 轉介其他單位
-                                </label>
-                                <label>
-                                    <input type="checkbox" readonly @click.prevent v-model="candidate.has_other_reason"
-                                        style="margin: 5px; padding-bottom: 10px;">
-                                    Lý do khác其他理由:
-                                    <span v-if="candidate.has_other_reason" class="underline-input" style="width: 200px;">
-
-                                    </span>
-                                    <span v-else class="underline-input" style="width: 200px;"></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td colspan="6" style="text-align: center; width: 50%;">KÝ TÊN 簽名
-                            <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 5px;">
-                                <div style="height: 20px;"></div>
-                                <div style="height: 20px;"></div>
-                                <div style="height: 20px;"></div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="12" style="text-align: right; padding-bottom: 120px; padding-top: 50px;">
-                            <div style="text-align: center; padding-left: 340px;">
-                                <strong>CANSPORTS, NGÀY日 {{ currentDay }} THÁNG月 {{ currentMonth }} NĂM年 {{ currentYear }}
-                                    <br />
-                                    BỘ PHẬN TÀI NGUYÊN NHÂN LỰC
-                                    <br />
-                                    人力資源部
-                                </strong>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                <div class="page-break"></div>
             </div>
         </div>
     </div>
@@ -120,7 +181,7 @@ export default {
             candidates: [],
             formData: {
                 name: '',
-                times_in_company: 0,
+                times_in_company: '',
                 emp_id: '',
                 join_date: '',
                 dept_name: '',
@@ -133,6 +194,8 @@ export default {
                 other_reason: '',
                 resign_type: '', // Add resign_type to formData
                 resign_reason_text: '', // Add this new property
+                cccd: '',
+                er_type_resign: ''
             },
             reasons:[],
             loading: true,
@@ -143,10 +206,10 @@ export default {
             processedCandidates: [], // Add this new property
         };
     },
-
+    
     computed: {
     },
-
+    
     async mounted() {
         await this.getReasons();
         const ids = this.$route.query.ids;
@@ -155,20 +218,29 @@ export default {
                 this.loading = true;
                 const idArray = ids.split(',');
                 const responses = await Promise.all(
-                    idArray.map(id => this.$axios.get(`${this.api}getDataById/${id}`))
+                idArray.map(id => this.$axios.get(`${this.api}getDataById/${id}`))
                 );
-
+                
                 // Extract actual data from responses
                 this.candidates = responses.map(response => response.data);
                 const processedData = [];
                 
                 for (const candidate of this.candidates) {
-                    const resignData = await this.$axios.post(
-                        this.api + 'GetDataByCCCDResign',
-                        { emp_id: candidate.emp_id }
+                    // Try with emp_id first
+                    let resignData = await this.$axios.post(
+                    this.api + 'GetDataByCCCDResign',
+                    { emp_id: candidate.emp_id }
                     );
-
-                    // Only process candidate if they have resignation data
+                    
+                    // If no data found with emp_id, try with emp_id_old
+                    if (!resignData.data || resignData.data.length === 0) {
+                        resignData = await this.$axios.post(
+                        this.api + 'GetDataByCCCDResign',
+                        { emp_id: candidate.emp_id_old }
+                        );
+                    }
+                    
+                    // Process candidate if we found resignation data with either ID
                     if (resignData.data && resignData.data.length > 0) {
                         const processedCandidate = await this.processCandidate(candidate);
                         if (processedCandidate) {
@@ -178,13 +250,14 @@ export default {
                 }
                 
                 this.processedCandidates = processedData;
-
-                if (processedData.length === 0) {
-                    setTimeout(() => {
-                        window.close();
-                    }, 10000); // Close window after 3 seconds
-                }
-
+                console.log(this.processedCandidates);
+                
+                // if (processedData.length === 0) {
+                //     setTimeout(() => {
+                //         window.close();
+                //     }, 10000); // Close window after 3 seconds
+                // }
+                
             } catch (error) {
                 console.error('Error loading data:', error);
                 this.error = 'Failed to load data: ' + (error.message || 'Unknown error');
@@ -193,7 +266,7 @@ export default {
             }
         }
     },
-
+    
     methods: {
         async getReasons() {
             try {
@@ -216,76 +289,33 @@ export default {
             if (isNaN(date)) return dateString;
             return new Intl.DateTimeFormat('vi-VN').format(date);
         },
-
-        async loadFormData() {
-            this.loading = true;
-            this.error = null;
-
+        async processCandidate(candidateData) {
             try {
-                const ids = this.$route.query.ids;
-                if (!ids) {
-                    this.error = "Invalid request: No ID provided";
-                    return;
-                }
-                const idArray = typeof ids === 'string' ? ids.split(',') : [ids];
-                const res = await Promise.all(
-                    idArray.map(id => this.$axios.get(`${this.api}getDataById/${id}`))
+                // Try with emp_id first
+                let resignData = await this.$axios.post(
+                this.api + 'GetDataByCCCDResign',
+                { emp_id: candidateData.emp_id }
                 );
-                this.candidates = res.data
-                let resignData = null;
-
-
-                if (candidateData.emp_id) {
-                    const resignResponse = await this.$axios.post(
-                        this.api + 'GetDataByCCCDResign',
-                        { emp_id: candidateData.emp_id }
-                    );
-                    if (resignResponse.data && resignResponse.data.length > 0) {
-                        resignData = resignResponse.data[0];
-                    }
-                }
-                const timesResponse = await this.$axios.get(
-                    `${this.api}checkCccd/${candidateData.emp_id}`
-                );
-                this.formData = {
-                    ...this.formData,
-                    name: resignData ? resignData.er_name : candidateData.candidate_name,
-                    times_in_company: timesResponse.data.count || 0,
-                    emp_id: resignData ? resignData.er_empid : candidateData.newEmpno,
-                    join_date: resignData ? resignData.er_indate : candidateData.act_en_date,
-                    department: resignData ? resignData.er_deptid : candidateData.tmp_departid,
-                    dept_name: resignData ? resignData.er_deptname : this.getDepartmentName(candidateData.tmp_departid),
-                    resign_date: resignData ? resignData.er_resigndate : '',
-                    resign_reason: resignData ? resignData.er_type_resign : '',
-                    resign_note: resignData ? resignData.er_note : ''
-                };
-
-            } catch (error) {
-                console.error("Error loading form data:", error);
-                this.error = "Failed to load data: " + (error.message || "Unknown error");
-            } finally {
-                this.loading = false;
-            }
-        },
-
-                async processCandidate(candidateData) {
-            try {
-                const resignData = await this.$axios.post(
+                
+                // If no data found, try with emp_id_old
+                if (!resignData.data || resignData.data.length === 0) {
+                    resignData = await this.$axios.post(
                     this.api + 'GetDataByCCCDResign',
-                    { emp_id: candidateData.emp_id }
-                );
-        
+                    { emp_id: candidateData.emp_id_old }
+                    );
+                }
+                
                 // Lấy record có er_resigndate lớn nhất
                 const resignInfo = resignData.data && resignData.data.length > 0 
-                    ? resignData.data.reduce((latest, current) => {
-                        const latestDate = new Date(latest.er_resigndate);
-                        const currentDate = new Date(current.er_resigndate);
-                        return currentDate > latestDate ? current : latest;
-                    }, resignData.data[0])
-                    : null;
-        
+                ? resignData.data.reduce((latest, current) => {
+                    const latestDate = new Date(latest.er_resigndate);
+                    const currentDate = new Date(current.er_resigndate);
+                    return currentDate > latestDate ? current : latest;
+                }, resignData.data[0])
+                : null;
+                
                 const resignType = resignInfo?.er_type_resign ? JSON.parse(resignInfo.er_type_resign) : null;
-        
+                
                 let reasonText = '';
                 if (resignInfo?.er_reason && this.reasons.length > 0) {
                     const matchingReason = this.reasons.find(r => r.id.toString() === resignInfo.er_reason);
@@ -298,11 +328,18 @@ export default {
                         }
                     }
                 }
-        
-                const timesResponse = await this.$axios.get(
-                    `${this.api}checkCccd/${candidateData.emp_id}`
+                
+                // Try to get times_in_company with emp_id first
+                let timesResponse = await this.$axios.get(
+                `${this.api}checkCccd/${candidateData.emp_id}`
                 );
-        
+                
+                // If no data found or count is 0, try with emp_id_old
+                if (!timesResponse.data || timesResponse.data.count === 0) {
+                    timesResponse = await this.$axios.get(
+                    `${this.api}checkCccd/${candidateData.emp_id_old}`
+                    );
+                }
                 return {
                     name: resignInfo ? resignInfo.er_name : candidateData.candidate_name,
                     times_in_company: timesResponse.data.count || 0,
@@ -317,177 +354,163 @@ export default {
                     return_to_old_dept: false,
                     transfer_to_other_dept: false,
                     has_other_reason: false,
-                    other_reason: ''
+                    other_reason: '',
+                    cccd: resignInfo ? resignInfo.er_numberid : '',
+                    er_type_resign: resignInfo ? resignInfo.er_type_resign : ''
                 };
             } catch (error) {
                 console.error('Error processing candidate:', error);
                 return null;
             }
         },
-
+        
         printDocument() {
             window.print();
-        }
+        },
+        displayErType(value) {
+            try {
+                if (!value) return '';
+                // If already an object
+                if (typeof value === 'object') {
+                    return value.vi || '';
+                }
+                // If it's a JSON string, parse it
+                if (typeof value === 'string') {
+                    const parsed = JSON.parse(value);
+                    return (parsed && parsed.vi) ? parsed.vi : value;
+                }
+                return value;
+            } catch (e) {
+                // If parsing fails, return original value
+                return value;
+            }
+        },
     }
 };
 </script>
 
 <style>
-/* CSS for the entire page */
 body {
-    font-family: "Times New Roman", Times, serif !important;
-}
-
-.text-header_title {
-    font-size: 18px !important;
-    font-family: "Times New Roman", Times, serif !important;
-    width: 31%;
-    padding: 10px !important;
-    font-weight: bold;
-}
-
-.text-header {
-    font-size: 16px !important;
-    padding: 1px !important;
-    line-height: 1.4;
-}
-
-.colum3 {
-    width: 12%;
-    padding: 5px !important;
-    font-size: 15px !important;
+    font-family: "Times New Roman", Times, serif;
 }
 
 .table {
     width: 100%;
-    max-width: 100%;
-    background-color: transparent;
-    border-collapse: collapse !important;
-    margin: 0;
+    border-collapse: collapse;
+    background: transparent;
+    
 }
 
 .table td,
 .table th {
-    text-align: center;
-    padding: 3px;
+    border: 1px solid #000;
+    /* text-align: left; */
+    padding: 5px;
     vertical-align: middle;
-    background-color: transparent;
 }
 
-.table-bordered {
-    border: 1px solid #333;
+.table.no-border td,
+.table.no-border th {
+    border: none !important;
 }
 
-/* First table styles */
-.no-bottom-border {
-    margin-bottom: 15px !important;
+.logo-cell {
+    width: 12%;
+    text-align: center;
+    vertical-align: middle;
+}
+.title-cell {
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+}
+.section-title {
+    font-weight: bold;
+    background: #f0f0f0;
+    text-align: left;
+}
+.label {
+    text-align: left;
+    width: 16.66%;
+}
+.label_khen_thuong {
+    text-align: left;
+    width: 20%;
+}
+.checkbox-col {
+    margin-bottom: 10px;
+    text-align: left;
+    padding: 5px;
 }
 
-/* Second table styles */
-.no-interior-borders {
-    margin-top: 0 !important;
+.checkbox-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
-/* Remove interior borders */
-.no-interior-borders td,
-.no-interior-borders th {
+.checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+}
+
+.checkbox-item input[type="checkbox"] {
+    margin: 0;
+    width: 16px;
+    height: 16px;
+}
+
+/* Ensure uniform row heights in the main table */
+.main-table td,
+.main-table th {
+    min-height: 40px; /* minimum height for each cell */
+    height: 40px;     /* fixed visual height to align rows */
+    line-height: 1.2;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+/* Make sure rowspan cells keep consistent sizing */
+.main-table tr > .label {
+    vertical-align: middle;
+}
+.reason-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.reason-label .line {
+    flex: 1; /* Tự giãn chiếm hết chiều ngang */
+    border-bottom: 1px solid #000; /* Gạch ngang */
+    height: 1em;
+}
+
+/* Thead border customization */
+.main-table thead td,
+.main-table thead th {
     border: none;
 }
 
-/* First table should keep interior borders */
-.no-bottom-border td,
-.no-bottom-border th {
-    border: 1px solid #333;
-}
-
-.align-middle {
-    vertical-align: middle !important;
-}
-
-/* Style for logo */
-img.img-fluid {
-    padding: 3px;
-    max-width: 100px;
-    margin: 0 auto;
-    display: block;
-}
-
-/* Ensure no margin between tables */
-.table {
-    margin-bottom: 0 !important;
-}
-
-/* Adjust border for table cells */
-.no-bottom-border tr:last-child td {
-    border-bottom: 1px solid #333 !important;
-}
-
-/* Ensure all borders are 1px thick */
-.table-bordered {
-    border: 1px solid #333;
-}
-
-/* Underline input style */
-.underline-input {
-    display: inline-block;
-    width: 850px;
-    height: 1px;
+.main-table thead tr:last-child td,
+.main-table thead tr:last-child th {
     border-bottom: 1px solid #000;
 }
 
-/* Loading and error states */
-.loading-indicator,
-.error-message {
-    text-align: center;
-    padding: 20px;
-    font-size: 16px;
-    margin: 20px;
+/* Keep other table borders */
+.main-table tbody td,
+.main-table tbody th,
+.main-table tfoot td {
+    border: 1px solid #000;
 }
 
-.error-message {
-    color: #d9534f;
-    border: 1px solid #d9534f;
-    border-radius: 4px;
-    background-color: #f9f2f2;
-}
-
-/* Print media query to hide elements */
 @media print {
-    .no-print {
-        display: none !important;
-    }
-
-    /* Adjust margins for print layout */
-    .table {
-        margin: 0 !important;
-    }
-
-    .no-bottom-border {
-        margin-bottom: 10px !important;
-    }
-
-    /* Set print margins to 0.1 inches */
-    @page {
-        margin: 0.1in;
-    }
-
-    /* Scale content to 86% */
-    [ref="printContent"] {
-        transform: scale(0.86);
-        transform-origin: top left;
-    }
-
-    /* Add page break styling */
     .page-break {
-        page-break-before: always;
+        page-break-after: always;
     }
-}
-
-.no-data-message {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 200px;
-    padding: 20px;
 }
 </style>
